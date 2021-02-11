@@ -1,0 +1,43 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgba(238, 175, 40, 0.932);
+
+  &__img {
+    width: 158px;
+    height: 26px;
+    margin-top: 3px;
+  }
+
+  &__list {
+    display: flex;
+    list-style: none;
+    margin-top: 15px;
+  }
+  &__list li {
+    padding-right: 50px;
+    font-weight: 500;
+    color: white;
+    @include for-size(tablet) {
+      flex-direction: column;
+    }
+
+    @include for-size(desktop) {
+      color: red;
+    }
+    @include for-size(tablet) {
+      color: hotpink;
+    }
+    @include for-size(phone) {
+      color: yellow;
+    }
+  }
+
+  &__button {
+    border-radius: 35px;
+    padding: 10px 5px;
+    border: none;
+  }
+}
