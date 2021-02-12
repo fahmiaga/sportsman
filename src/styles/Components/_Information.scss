@@ -1,0 +1,86 @@
+.information {
+    margin: 0px;
+    display: flex;
+    // justify-content:space-evenly;
+}
+.information__left {
+    display: flex;
+    // justify-content: left;
+    flex-wrap: wrap;
+    width: 250px;
+    padding-right: 0px;
+    border: 0px;
+}
+.information__left__uppictcontainer {
+    margin-right: 5px;
+    padding: 0px;
+}
+.information__left__downpictcontainer {
+    margin-right: 5px;
+    padding: 0px;
+}
+.left-up-pict {
+    width: 250px;
+    height: 200px;
+}
+.left-down-pict {
+    width: 250px;
+    height: 200px;
+}
+
+.information__right {
+    // margin-left: -28px;
+    display: flex;
+    // flex-direction: row;
+    // flex-wrap: wrap;
+    justify-content: right;
+    width: 100%;
+    margin-right: 0px;
+}
+.information__right__text {
+    // width:500px;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: left;
+    background-color: #F3F3F3;
+    margin: 0px 5px;
+    height:405px;
+    h1 {
+        margin: 10px 10px;
+    }
+    p {
+        margin-top: 30px;
+        margin-left:10px;
+        margin-right: 10px;
+    }
+}
+
+.information__right__pictcontainer {
+    width: 800px;
+}
+.right-pict {
+    width: 750px;
+    height:405px;
+    
+}
+.leafletmap {
+    margin-top: 70px;
+}
+.map {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text__container {
+    background-color: white;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+.leaflet-container {
+    width: 70%;
+    height: 50vh;
+    margin: auto;
+  }
+  
