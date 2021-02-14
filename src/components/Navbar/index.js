@@ -1,14 +1,12 @@
-import React, { Children, Fragment, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "react-modal";
 import jwt_decode from "jwt-decode";
 import _ from "lodash";
-
-import { postSignUp, postSignIn } from "../../redux/Action/userAction.js";
-import SearchMovie from "../Search/index";
-import logo from "../../assets/images/movie.png";
-import "../../assets/css/navbar.css";
-import ProfileMenu from "./ProfileMenu";
+import { postSignUp, postSignIn } from "../../redux/Action/userAction";
+import logo from "../../assets/Images/Logo.png";
+import "../../styles/navbar.css";
+import ProfileMenu from "../ModalAuth/index";
 
 export const MODAL_LOGIN = 1;
 export const MODAL_SIGNUP = 2;
@@ -41,14 +39,12 @@ export default function Layout({ children }) {
   if (token && !_.isEmpty(token)) decoded = jwt_decode(token);
 
   return (
-    <Fragment>
+    <>
       <div className="main-container">
         <div className="logo">
           <a href="/">
             <img src={logo} alt="" />
           </a>
-          <div className="logo-name">Milan TV</div>
-          <SearchMovie />
         </div>
         <div>
           {decoded ? (
@@ -78,7 +74,7 @@ export default function Layout({ children }) {
       >
         {renderWhichModal()}
       </Modal>
-    </Fragment>
+    </>
   );
 
   function renderWhichModal() {
@@ -130,7 +126,6 @@ export default function Layout({ children }) {
           <div className="home-signup">
             <div className="title-wrap">
               <img className="logo-signup" src={logo} alt="logo" />
-              <div>MilanTV</div>
             </div>
             <form onSubmit={handleLogin} className="home-login-form">
               <div>Full Name</div>
