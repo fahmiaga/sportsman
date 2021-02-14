@@ -1,4 +1,9 @@
+
+.information-body {
+    margin-top: 15px;
+}
 .information {
+    margin-top: 20px;
     margin: 0px;
     display: flex;
     // justify-content:space-evenly;
@@ -45,7 +50,13 @@
     background-color: #F3F3F3;
     margin: 0px 5px;
     height:405px;
+    font-size: 18px;
+    font-family: Montserrat;
     h1 {
+        font-family: Montserrat;
+        line-height: 40px;
+        font-weight: 700;
+        font-size: 31px;
         margin: 10px 10px;
     }
     p {
@@ -77,6 +88,18 @@
     width: 50%;
     margin: auto;
     text-align: center;
+    font-family: Montserrat;
+    size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    h1 {
+        font-family: Montserrat;
+        size: 48px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
 }
 .leaflet-container {
     width: 70%;

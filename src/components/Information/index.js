@@ -7,7 +7,7 @@ import LeafletMap from "../../components/LeafletMap";
 
 function information() {
 	return (
-		<div>
+		<div className="information-body">
 			<div className="information">
 				<div className="information__left">
 					<div className="information__left__uppictcontainer">
