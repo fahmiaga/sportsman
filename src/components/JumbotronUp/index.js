@@ -1,31 +1,45 @@
 import React from "react";
-import { Jumbotron, Button, Container } from "reactstrap";
+import { Jumbotron, Container } from "reactstrap";
+import Navbar from "../Navbar";
 
-import background from "../../assets/jumbotron-nav.jpg";
+import background from "../../assets/jumbotron-nav.png";
 
 function JumbotronUp() {
   return (
     <div>
       <Jumbotron
+        className="background"
         style={{
           backgroundImage: `url(${background})`,
+          marginBottom: `0`,
+          borderRadius: `0`,
         }}
-        className="background"
       >
-        <h1 className="display-3">Track every aspect of your workouts.</h1>
-        <p className="lead">
-          <Button color="primary">Learn More</Button>
-        </p>
+        <Navbar />
+        <h1 className="background__text">
+          Track every aspect of your workouts.{" "}
+        </h1>
+        <button className="background__button">Ready to Sweat</button>
       </Jumbotron>
-      <Jumbotron fluid>
-        <Container fluid>
-          <h1 className="display-3">Fluid jumbotron</h1>
-          <p className="lead">
-            This is a modified jumbotron that occupies the entire horizontal
-            space of its parent.
-          </p>
-        </Container>
-      </Jumbotron>
+
+      <div>
+        <Jumbotron
+          style={{
+            backgroundColor: `rgba(54, 54, 54, 1)`,
+            marginBottom: `0`,
+            borderRadius: `0`,
+          }}
+        >
+          <Container className="body__text">
+            <h1>It all starts with the best tracking</h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+              posuere sit amet erat nec ullamcorper. Nunc luctus maximus erat a
+              imperdiet.
+            </p>
+          </Container>
+        </Jumbotron>
+      </div>
     </div>
   );
 }
