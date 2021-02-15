@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import logo from "../../assets/Images/Logo.png";
-import ModalAuth from '../ModalAuth/index';
 
 function Navbar() {
 
