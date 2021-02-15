@@ -3,22 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import Modal from "react-modal";
 import jwt_decode from "jwt-decode";
 import _ from "lodash";
-import { postSignUp, postSignIn } from "../../redux/Action/userAction";
+import { postSignIn } from "../../redux/Action/userAction";
 import logo from "../../assets/Images/Logo.png";
 import "../../styles/navbar.css";
 import MenuUser from "../MenuUser/index";
 
-export const MODAL_LOGIN = 1;
-export const MODAL_SIGNUP = 2;
 
-export default function Layout({ children }) {
+export const MODAL_LOGIN = 1;
+
+
+export default function Modals({ children }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [whichModal, setWhichModal] = useState(null);
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
 
   const [userSignIn, setUserSignIn] = useState({
     name: "",
@@ -29,7 +25,7 @@ export default function Layout({ children }) {
   const firstname = "yoshi";
   const lastname = "dio";
 
-  const { signUp, signIn, jwtToken } = useSelector((state) => state.users);
+  const { signIn, jwtToken } = useSelector((state) => state.users);
 
   const dispatch = useDispatch();
 
@@ -83,31 +79,11 @@ export default function Layout({ children }) {
       setIsModalOpen(false);
     };
 
-    const handleChange = (event) => {
-      setUserData({
-        ...userData,
-        [event.target.name]: event.target.value,
-      });
-    };
-
     const handleSignIn = (event) => {
       setUserSignIn({
         ...userSignIn,
         [event.target.name]: event.target.value,
       });
-    };
-
-    const submitSignUp = (event) => {
-      event.preventDefault();
-      const body = {
-        username: userData.name,
-        email: userData.email,
-        password: userData.password,
-        first_name: firstname,
-        last_name: lastname,
-      };
-      dispatch(postSignUp(body));
-      setWhichModal(MODAL_LOGIN);
     };
 
     const sumbitSignIn = (event) => {
@@ -120,53 +96,8 @@ export default function Layout({ children }) {
       setIsModalOpen(false);
     };
 
-    switch (whichModal) {
-      case MODAL_SIGNUP:
-        return (
-          <div className="home-signup">
-            <div className="title-wrap">
-              <img className="logo-signup" src={logo} alt="logo" />
-            </div>
-            <form onSubmit={handleLogin} className="home-login-form">
-              <div>Full Name</div>
-              <input
-                className="form-input"
-                type="text"
-                placeholder="Full Name"
-                name="name"
-                onChange={(event) => handleChange(event)}
-              />
-              <div>Email</div>
-              <input
-                className="form-input"
-                type="email"
-                placeholder="Email"
-                name="email"
-                onChange={(event) => handleChange(event)}
-              />
-              <div>Password</div>
-              <input
-                className="form-input"
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={(event) => handleChange(event)}
-              />
-              <button
-                onClick={submitSignUp}
-                type="submit"
-                className="home-login-button"
-              >
-                Sign Up
-              </button>
-              <div className="redirect">
-                Already have an account?
-                <span onClick={() => setWhichModal(MODAL_LOGIN)}>Log In</span>
-              </div>
-            </form>
-          </div>
-        );
-      case MODAL_LOGIN:
+    if (whichModal == MODAL_LOGIN) {
+       
         return (
           <div className="home-signup">
             <h1>SIGN IN</h1>
@@ -202,8 +133,6 @@ export default function Layout({ children }) {
             </form>
           </div>
         );
-      default:
-        break;
     }
   }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/main.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -14,8 +14,6 @@ let store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
-import "./styles/main.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>

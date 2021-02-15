@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
-import _ from "lodash";
-import logo from "../../assets/Images/Logo.png";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "react-modal";
 import jwt_decode from "jwt-decode";
+import _ from "lodash";
 import { postSignUp, postSignIn } from "../../redux/Action/userAction";
+import logo from "../../assets/Images/Logo.png";
 import "../../styles/navbar.css";
 import MenuUser from "../MenuUser/index";
 
 export const MODAL_LOGIN = 1;
 export const MODAL_SIGNUP = 2;
 
-export default function Navbar({ children }) {
-
+export default function Layout({ children }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [whichModal, setWhichModal] = useState(null);
   const [userData, setUserData] = useState({
@@ -27,6 +26,9 @@ export default function Navbar({ children }) {
     token: "",
   });
 
+  const firstname = "yoshi";
+  const lastname = "dio";
+
   const { signUp, signIn, jwtToken } = useSelector((state) => state.users);
 
   const dispatch = useDispatch();
@@ -36,37 +38,15 @@ export default function Navbar({ children }) {
   let decoded;
   if (token && !_.isEmpty(token)) decoded = jwt_decode(token);
 
-  const [scrollY, setScrollY] = useState(0);
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-  });
-
-  const handleScroll = () => {
-    setScrollY(window.setScrollY);
-  };
-
   return (
     <>
-    <nav className={`layout ${scrollY > 20 ? "layout--white" : ""}`}>
-      <div className="layout__logo">
-        <a href="/">
-          <img src={logo} alt="logo" className="layout__img" />
-        </a>
-
-        <input type="checkbox" className="menu-btn" id="menu-btn" />
-        <label htmlFor="menu-btn" className="menu-icon">
-          <span className="menu-icon__line"></span>
-        </label>
-        <ul className="layout__list">
-          <li>
-            <a href="feature">Feature</a>
-          </li>
-          <li>
-            <a href="about">About</a>
-          </li>
-        </ul>
-      </div>
-      <div>
+      <div className="main-container">
+        <div className="logo">
+          <a href="/">
+            <img src={logo} alt="" />
+          </a>
+        </div>
+        <div>
           {decoded ? (
             <MenuUser />
           ) : (
@@ -75,13 +55,15 @@ export default function Navbar({ children }) {
                 setIsModalOpen(true);
                 setWhichModal(MODAL_SIGNUP);
               }}
-              className="layout__button"
+              className="navbar-button"
             >
-              Ready To Sweat?
+              Sign Up
             </button>
           )}
         </div>
-        <main>{children}</main>
+      </div>
+
+      <main>{children}</main>
 
       <Modal
         isOpen={isModalOpen}
@@ -92,7 +74,6 @@ export default function Navbar({ children }) {
       >
         {renderWhichModal()}
       </Modal>
-    </nav>
     </>
   );
 
@@ -122,6 +103,8 @@ export default function Navbar({ children }) {
         username: userData.name,
         email: userData.email,
         password: userData.password,
+        first_name: firstname,
+        last_name: lastname,
       };
       dispatch(postSignUp(body));
       setWhichModal(MODAL_LOGIN);

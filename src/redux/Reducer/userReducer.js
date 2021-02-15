@@ -2,7 +2,6 @@ const initialState = {
     signUp: null,
     signIn: null,
     jwtToken: "",
-    uploadImg: null,
   };
   
   const userReducer = (state = initialState, action) => {
