@@ -22,9 +22,6 @@ export default function Modals({ children }) {
     token: "",
   });
 
-  const firstname = "yoshi";
-  const lastname = "dio";
-
   const { signIn, jwtToken } = useSelector((state) => state.users);
 
   const dispatch = useDispatch();
@@ -36,7 +33,7 @@ export default function Modals({ children }) {
 
   return (
     <>
-      <div className="main-container">
+      {/* <div className="main-container">
         <div className="logo">
           <a href="/">
             <img src={logo} alt="" />
@@ -57,7 +54,7 @@ export default function Modals({ children }) {
             </button>
           )}
         </div>
-      </div>
+      </div> */}
 
       <main>{children}</main>
 
@@ -96,7 +93,7 @@ export default function Modals({ children }) {
       setIsModalOpen(false);
     };
 
-    if (whichModal == MODAL_LOGIN) {
+    if (whichModal === MODAL_LOGIN) {
        
         return (
           <div className="home-signup">

@@ -11,23 +11,21 @@ import MenuUser from "../MenuUser/index";
 export const MODAL_LOGIN = 1;
 export const MODAL_SIGNUP = 2;
 
-export default function Layout({ children }) {
+export default function ModalAuth({children, isOpen}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [whichModal, setWhichModal] = useState(null);
   const [userData, setUserData] = useState({
     name: "",
     email: "",
     password: "",
+    gender:"",
   });
 
   const [userSignIn, setUserSignIn] = useState({
-    name: "",
+    email: "",
     password: "",
     token: "",
   });
-
-  const firstname = "yoshi";
-  const lastname = "dio";
 
   const { signUp, signIn, jwtToken } = useSelector((state) => state.users);
 
@@ -66,7 +64,7 @@ export default function Layout({ children }) {
       <main>{children}</main>
 
       <Modal
-        isOpen={isModalOpen}
+        isOpen={isOpen}
         onRequestClose={() => setIsModalOpen(false)}
         className="modal-container"
         overlayClassName="modal-overlay-center"
@@ -103,8 +101,7 @@ export default function Layout({ children }) {
         username: userData.name,
         email: userData.email,
         password: userData.password,
-        first_name: firstname,
-        last_name: lastname,
+        gender: userData.gender,
       };
       dispatch(postSignUp(body));
       setWhichModal(MODAL_LOGIN);
@@ -150,6 +147,14 @@ export default function Layout({ children }) {
                 type="password"
                 placeholder="Password"
                 name="password"
+                onChange={(event) => handleChange(event)}
+              />
+              <div>Gender</div>
+              <input
+                className="form-input"
+                type="dropdown"
+                placeholder="gender"
+                name="gender"
                 onChange={(event) => handleChange(event)}
               />
               <button

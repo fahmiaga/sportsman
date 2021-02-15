@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "react-modal";
-import jwt_decode from "jwt-decode";
 import _ from "lodash";
 import { postSignUp, postSignIn } from "../../redux/Action/userAction";
 import logo from "../../assets/Images/Logo.png";
 import "../../styles/navbar.css";
 import MenuUser from "../MenuUser/index";
 
-export const MODAL_LOGIN = 1;
+
 export const MODAL_SIGNUP = 2;
 
 export default function Layout({ children }) {
@@ -18,25 +17,13 @@ export default function Layout({ children }) {
     name: "",
     email: "",
     password: "",
+    gender: "",
   });
 
-  const [userSignIn, setUserSignIn] = useState({
-    name: "",
-    password: "",
-    token: "",
-  });
 
-  const firstname = "yoshi";
-  const lastname = "dio";
-
-  const { signUp, signIn, jwtToken } = useSelector((state) => state.users);
+  const { signUp } = useSelector((state) => state.users);
 
   const dispatch = useDispatch();
-
-  const token = localStorage.getItem("token");
-
-  let decoded;
-  if (token && !_.isEmpty(token)) decoded = jwt_decode(token);
 
   return (
     <>
@@ -47,9 +34,6 @@ export default function Layout({ children }) {
           </a>
         </div>
         <div>
-          {decoded ? (
-            <MenuUser />
-          ) : (
             <button
               onClick={() => {
                 setIsModalOpen(true);
@@ -59,7 +43,6 @@ export default function Layout({ children }) {
             >
               Sign Up
             </button>
-          )}
         </div>
       </div>
 
@@ -90,38 +73,19 @@ export default function Layout({ children }) {
       });
     };
 
-    const handleSignIn = (event) => {
-      setUserSignIn({
-        ...userSignIn,
-        [event.target.name]: event.target.value,
-      });
-    };
-
     const submitSignUp = (event) => {
       event.preventDefault();
       const body = {
         username: userData.name,
         email: userData.email,
         password: userData.password,
-        first_name: firstname,
-        last_name: lastname,
+        gender: userData.gender,
       };
       dispatch(postSignUp(body));
       setWhichModal(MODAL_LOGIN);
     };
 
-    const sumbitSignIn = (event) => {
-      event.preventDefault();
-      const body = {
-        username: userSignIn.name,
-        password: userSignIn.password,
-      };
-      dispatch(postSignIn(body));
-      setIsModalOpen(false);
-    };
-
-    switch (whichModal) {
-      case MODAL_SIGNUP:
+    if (whichModal === MODAL_SIGNUP) {
         return (
           <div className="home-signup">
             <div className="title-wrap">
@@ -166,44 +130,6 @@ export default function Layout({ children }) {
             </form>
           </div>
         );
-      case MODAL_LOGIN:
-        return (
-          <div className="home-signup">
-            <h1>SIGN IN</h1>
-            <form onSubmit={handleLogin} className="home-login-form">
-              <div>username</div>
-              <input
-                className="form-input"
-                type="text"
-                placeholder="username"
-                name="name"
-                onChange={(event) => handleSignIn(event)}
-              />
-              <div>Password</div>
-              <input
-                className="form-input"
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={(event) => handleSignIn(event)}
-              />
-              <button
-                onClick={sumbitSignIn}
-                type="submit"
-                className="home-login-button"
-              >
-                Sign In
-              </button>
-              <div className="redirect">
-                <span onClick={() => setWhichModal(MODAL_SIGNUP)}>
-                  Create an account
-                </span>
-              </div>
-            </form>
-          </div>
-        );
-      default:
-        break;
     }
   }
 }
