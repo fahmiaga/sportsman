@@ -6,18 +6,18 @@ import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 
 function App() {
-	return (
-		<div>
-			<BrowserRouter>
-				<Switch>
-					<Route exact path="/" component={LandingPage} />
-					<Route path="/login" component={LoginPage} />
-					<Route path="/register" component={RegisterPage} />
-				</Switch>
-			</BrowserRouter>
-			<Footer />
-		</div>
-	);
+  return (
+    <div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
+        </Switch>
+      </BrowserRouter>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
