@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/Images/Logo.png";
+import {useHistory} from 'react-router-dom';
 
 function Navbar() {
-
   const [scrollY, setScrollY] = useState(0);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -12,7 +12,14 @@ function Navbar() {
     setScrollY(window.setScrollY);
   };
 
+  const history = useHistory();
+
+  const handleSignIn = () => {
+    history.push('/login')
+  };
+
   return (
+    <>
     <nav className={`layout ${scrollY > 20 ? "layout--white" : ""}`}>
       <div className="layout__logo">
         <a href="/">
@@ -32,8 +39,10 @@ function Navbar() {
           </li>
         </ul>
       </div>
-      <button className="layout__button">Ready To Sweat?</button>
+
+      <button onClick={handleSignIn} className="layout__button">Ready To Sweat?</button>
     </nav>
+    </>
   );
 }
 
