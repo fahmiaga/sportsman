@@ -4,8 +4,12 @@
 @import "./Base/Reset";
 
 @import "./Screens/Profile";
+@import "./Screens/Features";
+@import "./Screens/Dashboard";
+@import "./Screens/About";
 
-@import "./Components/Navbar";
+@import "./Components/Navbar1";
+@import "./Components/Navbar2";
 @import "./Components/JumbotronUp";
 @import "./Components/JumbotronDown";
 @import "./Components/Information";
