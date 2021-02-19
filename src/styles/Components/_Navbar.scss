@@ -1,0 +1,115 @@
+.layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 9px;
+  height: 70px;
+  width: 100%;
+  transition: "background .3s ease";
+  z-index: 99;
+
+  &--white {
+    background-color: white;
+    box-shadow: 0 0 5px 1px rgba($color: #000000, $alpha: 0.1);
+    transition: "background .3s ease";
+  }
+
+  &__logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    right: 80px;
+  }
+  &__img {
+    height: 35px;
+    margin-top: 3px;
+  }
+
+  &__list {
+    display: flex;
+    list-style: none;
+    margin-top: 15px;
+  }
+  &__list li {
+    padding-right: 50px;
+    font-weight: 500;
+
+    a {
+      color: white;
+      margin: 0.2rem;
+      padding: 1rem 0.5rem;
+      @include for-size(tablet) {
+        flex-direction: column;
+      }
+
+      @include for-size(desktop) {
+        color: red;
+      }
+      @include for-size(tablet) {
+        color: hotpink;
+      }
+      @include for-size(phone) {
+        color: yellow;
+      }
+    }
+
+    a:hover {
+      background: burlywood;
+      text-decoration: none;
+    }
+  }
+
+  &__button {
+    border-radius: 35px;
+    padding: 15px;
+    margin-left: 20px;
+    border: white solid 2px;
+    background: none;
+    color: white;
+    font-weight: 700;
+  }
+  &__button:hover {
+    background: rgba(255, 166, 0, 0.486);
+  }
+}
+
+.menu-btn {
+  display: none;
+}
+
+.menu-icon {
+  position: relative;
+  padding: 26px 10px;
+  cursor: pointer;
+  z-index: 1;
+  display: none;
+
+  &__line {
+    display: block;
+    position: relative;
+    background: black;
+    height: 2px;
+    width: 20px;
+    border-radius: 4px;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      border-radius: 4px;
+      background: black;
+      transition: background 0.8s ease;
+    }
+    &::before {
+      transform: translateY(-5px);
+    }
+    &::after {
+      transform: translateY(5px);
+    }
+  }
+}
