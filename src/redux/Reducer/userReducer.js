@@ -1,30 +1,31 @@
+import {SIGN_IN, SIGN_UP, SET_TOKEN} from "../Action/actionTypes";
+
 const initialState = {
-    signUp: null,
-    signIn: null,
+    signUp: "",
+    signIn: "",
     jwtToken: "",
   };
   
   const userReducer = (state = initialState, action) => {
-    const { type, payload } = action;
-    switch (type) {
-      case "POST_SIGNUP":
+    switch (action.type) {
+      case SIGN_UP:
         return {
           ...state,
-          signUp: payload,
+          signUp: action.payload,
         };
-      case "POST_SIGNIN":
+      case SIGN_IN:
         return {
           ...state,
-          signIn: payload,
+          signIn: action.payload,
         };
-      case "SET_TOKEN":
+      case SET_TOKEN:
         return {
           ...state,
-          jwtToken: payload,
+          jwtToken: action.payload,
         };
   
       default:
-        return state;
+        return state
     }
   };
   

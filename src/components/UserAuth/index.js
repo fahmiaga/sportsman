@@ -1,32 +1,58 @@
-// import React, { useState } from "react";
+// import React, { Children, Fragment, useState } from "react";
 // import { useSelector, useDispatch } from "react-redux";
 // import Modal from "react-modal";
 // import jwt_decode from "jwt-decode";
 // import _ from "lodash";
+
 // import { postSignUp, postSignIn } from "../../redux/Action/userAction";
-// import logo from "../../assets/Images/Logo.png";
-// import "../../styles/navbar.css";
-// import MenuUser from "../MenuUser/index";
+// import SearchMovie from "../Search/index";
+// import logo from "../../assets/images/movie.png";
+// import "../../assets/css/navbar.css";
+// import ProfileMenu from "./ProfileMenu";
 
 // export const MODAL_LOGIN = 1;
 // export const MODAL_SIGNUP = 2;
 
-// export default function ModalAuth({
-//   children,
-//   isOpen,
-//   onRequestClose
-// }) {
+// export default function Layout({ children }) {
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [whichModal, setWhichModal] = useState(null);
+//   const [userData, setUserData] = useState({
+//     name: "",
+//     email: "",
+//     password: "",
+//   });
+
+//   const [userSignIn, setUserSignIn] = useState({
+//     name: "",
+//     password: "",
+//     token: "",
+//   });
+
+//   const firstname = "yoshi";
+//   const lastname = "dio";
+
+//   const { signUp, signIn, jwtToken } = useSelector((state) => state.users);
+
+//   const dispatch = useDispatch();
+
+//   const token = localStorage.getItem("token");
+
+//   let decoded;
+//   if (token && !_.isEmpty(token)) decoded = jwt_decode(token);
+
 //   return (
-//     <>
+//     <Fragment>
 //       <div className="main-container">
 //         <div className="logo">
 //           <a href="/">
 //             <img src={logo} alt="" />
 //           </a>
+//           <div className="logo-name">Milan TV</div>
+//           <SearchMovie />
 //         </div>
 //         <div>
 //           {decoded ? (
-//             <MenuUser />
+//             <ProfileMenu />
 //           ) : (
 //             <button
 //               onClick={() => {
@@ -44,15 +70,15 @@
 //       <main>{children}</main>
 
 //       <Modal
-//         isOpen={isOpen}
-//         onRequestClose={onRequestClose}
+//         isOpen={isModalOpen}
+//         onRequestClose={() => setIsModalOpen(false)}
 //         className="modal-container"
 //         overlayClassName="modal-overlay-center"
 //         contentLabel="Sign In"
 //       >
 //         {renderWhichModal()}
 //       </Modal>
-//     </>
+//     </Fragment>
 //   );
 
 //   function renderWhichModal() {
@@ -81,7 +107,8 @@
 //         username: userData.name,
 //         email: userData.email,
 //         password: userData.password,
-//         gender: userData.gender,
+//         first_name: firstname,
+//         last_name: lastname,
 //       };
 //       dispatch(postSignUp(body));
 //       setWhichModal(MODAL_LOGIN);
@@ -103,6 +130,7 @@
 //           <div className="home-signup">
 //             <div className="title-wrap">
 //               <img className="logo-signup" src={logo} alt="logo" />
+//               <div>MilanTV</div>
 //             </div>
 //             <form onSubmit={handleLogin} className="home-login-form">
 //               <div>Full Name</div>
@@ -127,14 +155,6 @@
 //                 type="password"
 //                 placeholder="Password"
 //                 name="password"
-//                 onChange={(event) => handleChange(event)}
-//               />
-//               <div>Gender</div>
-//               <input
-//                 className="form-input"
-//                 type="dropdown"
-//                 placeholder="gender"
-//                 name="gender"
 //                 onChange={(event) => handleChange(event)}
 //               />
 //               <button
