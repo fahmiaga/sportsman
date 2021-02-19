@@ -2,16 +2,20 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import {SIGN_IN, SIGN_UP, SET_TOKEN} from "./actionTypes";
 
+export const signUp = (payload) => {
+  return {
+    type: SIGN_UP,
+    payload
+  }
+}
 
 export const postSignUp = (body) => (dispatch) => {
   axios.post(`https://sportsmanapp.herokuapp.com/register`, body)
-        .then((res) => {
-          const decoded = jwt_decode(res.data.token);
-        dispatch({
-          type: SIGN_UP,
-          payload: decoded,
-          token: localStorage.setItem("token", decoded),
-          })
+       .then((res) => {
+          console.log("ini res =>",res)
+          const decoded = jwt_decode(res.data.data.token);
+          dispatch(signIn(decoded))
+          // token: localStorage.setItem("token", decoded)
         })
         .catch(err => {
           console.log(err)
@@ -31,7 +35,7 @@ export const postSignIn = (body) => (dispatch) => {
           console.log("ini res =>",res)
           const decoded = jwt_decode(res.data.data.token);
           dispatch(signIn(decoded))
-          token: localStorage.setItem("token", decoded)
+          // token: localStorage.setItem("token", decoded)
         })
         .catch(err => {
           console.log(err)

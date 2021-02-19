@@ -48,17 +48,17 @@ const RegisterPage = () => {
           <div className="login-container">
               <h2>Register</h2>
                
-          <div class="form__group field">
+          <div className="form__group field">
               <input type="input" class="form__field" placeholder="Name" name="name" id='name' required onChange={handleChange}/>
               <label for="name" class="form__label">Name</label>
           </div>
 
-          <div class="form__group field">
+          <div className="form__group field">
               <input type="emailt" class="form__field" placeholder="Email" name="email" id='email' required onChange={handleChange}/>
               <label for="email" class="form__label">Email</label>
           </div>
 
-          <div class="form__group field">
+          <div className="form__group field">
               <input type="password" class="form__field" placeholder="Pasword" name="password" id='password' required onChange={handleChange}/>
               <label for="password" class="form__label">Password</label>
           </div>
