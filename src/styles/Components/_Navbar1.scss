@@ -4,16 +4,24 @@
   justify-content: space-around;
   align-items: center;
   position: fixed;
-  top: 9px;
+  top: 0;
+  left: 0;
   height: 70px;
   width: 100%;
   transition: "background .3s ease";
-  z-index: 99;
+  z-index: 999;
 
-  &--white {
-    background-color: white;
+  &--orange {
+    background-color: rgba(242, 105, 49, 1);
     box-shadow: 0 0 5px 1px rgba($color: #000000, $alpha: 0.1);
-    transition: "background .3s ease";
+    transition: "background .9s ease";
+    z-index: 1000;
+  }
+  &--white {
+    background-color: rgb(252, 252, 252);
+    box-shadow: 0 0 5px 1px rgba($color: #000000, $alpha: 0.1);
+    transition: "background .9s ease";
+    z-index: 1000;
   }
 
   &__logo {
@@ -36,24 +44,21 @@
   &__list li {
     padding-right: 50px;
     font-weight: 500;
+    color: white;
+    margin: 0.2rem;
+    cursor: pointer;
+    @include for-size(tablet) {
+      flex-direction: column;
+    }
 
-    a {
-      color: white;
-      margin: 0.2rem;
-      padding: 1rem 0.5rem;
-      @include for-size(tablet) {
-        flex-direction: column;
-      }
-
-      @include for-size(desktop) {
-        color: red;
-      }
-      @include for-size(tablet) {
-        color: hotpink;
-      }
-      @include for-size(phone) {
-        color: yellow;
-      }
+    @include for-size(desktop) {
+      color: red;
+    }
+    @include for-size(tablet) {
+      color: hotpink;
+    }
+    @include for-size(phone) {
+      color: yellow;
     }
 
     a:hover {
@@ -64,7 +69,7 @@
 
   &__button {
     border-radius: 35px;
-    padding: 15px;
+    padding: 10px 20px;
     margin-left: 20px;
     border: white solid 2px;
     background: none;

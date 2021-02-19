@@ -1,7 +1,7 @@
 import React from "react";
 import { Jumbotron, Container } from "reactstrap";
-import Navbar from "../Navbar";
-import background from "../../assets/jumbotron-nav.png";
+import Navbar from "../Navbar1";
+import background from "../../assets/img/jumbotron/jumbotron-nav.png";
 
 function JumbotronUp() {
   return (

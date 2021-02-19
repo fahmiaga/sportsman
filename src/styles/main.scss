@@ -3,7 +3,14 @@
 @import "./Base/Mixin";
 @import "./Base/Reset";
 
-@import "./Components/Navbar";
+@import "./Screens/Profile";
+@import "./Screens/Features";
+@import "./Screens/Dashboard";
+@import "./Screens/About";
+@import "./Screens/Contactus";
+
+@import "./Components/Navbar1";
+@import "./Components/Navbar2";
 @import "./Components/JumbotronUp";
 @import "./Components/JumbotronDown";
 @import "./Components/Information";

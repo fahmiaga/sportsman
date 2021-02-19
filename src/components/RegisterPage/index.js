@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {postSignUp} from '../../redux/Action/userAction';
 
 const RegisterPage = () => {
-
+	
     const history = useHistory();
     const dispatch = useDispatch();
     const data = useSelector(state => state.users.signUp);
