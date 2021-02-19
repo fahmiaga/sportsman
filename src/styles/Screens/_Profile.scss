@@ -3,24 +3,23 @@
   background-color: grey;
   height: 60vh;
   padding: 100px;
+  display: flex;
   &__name {
     display: flex;
-    flex-direction: row;
-    max-width: 1080px;
     margin: 0 auto;
   }
   &__picture {
     margin-right: 31px;
+    position: relative;
+    right: 20px;
     clip-path: polygon(32% 0%, 84% 15%, 100% 59%, 73% 100%, 18% 89%, 0% 42%);
     > img {
       width: 160px;
-      height: 160px;
     }
   }
   &__container {
-    max-width: 980px;
     display: flex;
-    justify-content: space-between;
+    // align-items: center;
   }
   &__bio h2 {
     font-weight: 700;
@@ -52,32 +51,16 @@
     padding-bottom: 10px;
     color: white;
   }
-  &__setting {
+  &__progress {
     display: flex;
-    justify-content: space-around;
-    max-width: 980px;
-    margin: 20px auto;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-  &__edit {
-    border-radius: 8px;
-    &--input {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      border-top: 1px solid var(--color-grey-200);
-    }
-    &--label {
-      width: 100%;
-    }
+    flex-direction: row;
   }
 }
 
 .edit {
   display: flex;
   flex-direction: row;
-  margin: 50px 200px;
+  margin: 50px 150px;
   &__list ul {
     padding: 0;
   }
@@ -89,14 +72,16 @@
     border-radius: 4px;
     margin-left: 50px;
     padding: 20px;
-    -webkit-box-shadow: 1px 1px 14px 1px #000000;
-    box-shadow: 1px 1px 14px 1px #000000;
+    width: 800px;
+
+    // -webkit-box-shadow: 1px 1px 14px 1px #000000;
+    // box-shadow: 1px 1px 14px 1px #000000;
     &__one {
       border-bottom: 1px solid grey;
     }
     &__two {
       display: grid;
-      grid-template-columns: 1fr 2fr 2fr;
+      grid-template-columns: 1.5fr 2fr 2fr;
       border-bottom: 1px solid grey;
       padding: 15px;
       > div {
@@ -108,14 +93,28 @@
     }
     &__three {
       display: grid;
-      grid-template-columns: 1fr 2fr 2fr;
+      grid-template-columns: 1.5fr 2fr 2fr;
       padding: 15px;
+      &__label {
+        padding-left: 10px;
+      }
     }
     &__four {
       margin-top: 20px;
     }
+    &__five {
+      display: grid;
+      grid-template-columns: 5.3fr 2fr 2fr;
+      padding: 15px;
+      margin-top: 10px;
+      &__text {
+      border: none;
+      background: transparent;
+      border-bottom: 2px solid #9b9b9b;
+      }
+    }
     &__button {
-      margin: auto 400px;
+      margin: auto 200px;
       color: white;
       font-weight: 500;
       margin-top: 15px;
@@ -127,61 +126,21 @@
   }
 }
 
-.form__group {
-  position: relative;
-  padding: 15px 0 0;
-  width: 50%;
-}
-
-.form__field {
-  border: 0;
-  border-bottom: 2px solid #9b9b9b;
-  font-size: 1.3rem;
-  color: #fff;
-  padding: 7px 0;
-  background: transparent;
-  transition: border-color 0.2s;
-
-  &::placeholder {
-    color: transparent;
+.form {
+  &__label {
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid #9b9b9b;
   }
-
-  &:placeholder-shown ~ .form__label {
-    font-size: 1.3rem;
-    cursor: text;
-    top: 20px;
-  }
-}
-
-.form__label {
-  position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  font-size: 1rem;
-  color: #9b9b9b;
-}
-
-.form__field:focus {
-  ~ .form__label {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 1rem;
-    color: #9b9b9b;
-    font-weight: 700;
-  }
-  padding-bottom: 6px;
-  font-weight: 700;
-  border-width: 3px;
-  border-image: linear-gradient(to right, #9b9b9b, #fff);
-  border-image-slice: 1;
-}
-/* reset input */
-.form__field {
-  &:required,
-  &:invalid {
-    box-shadow: none;
+  &__weight {
+    display: flex;
+    >input, select {
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid #9b9b9b;
+    }
+    >select {
+      background: #e2e2e2;
+    }
   }
 }

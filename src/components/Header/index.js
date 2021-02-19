@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import JumbotronUp from "../JumbotronUp";
+import JumbotronUp from '../JumbotronUp';
 
 function Header() {
-  return (
-    <div>
-      <JumbotronUp />
-    </div>
-  );
+	return (
+		<div>
+			<JumbotronUp />
+		</div>
+	);
 }
 
 export default Header;
