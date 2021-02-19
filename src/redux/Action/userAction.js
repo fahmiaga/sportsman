@@ -15,7 +15,6 @@ export const postSignUp = (body) => (dispatch) => {
           console.log("ini res =>",res)
           const decoded = jwt_decode(res.data.data.token);
           dispatch(signIn(decoded))
-          // token: localStorage.setItem("token", decoded)
         })
         .catch(err => {
           console.log(err)
@@ -35,7 +34,8 @@ export const postSignIn = (body) => (dispatch) => {
           console.log("ini res =>",res)
           const decoded = jwt_decode(res.data.data.token);
           dispatch(signIn(decoded))
-          // token: localStorage.setItem("token", decoded)
+          localStorage.setItem("token", res.data.data.token)
+          localStorage.setItem("userData",JSON.stringify(decoded))
         })
         .catch(err => {
           console.log(err)
