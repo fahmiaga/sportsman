@@ -25,7 +25,7 @@ const Navbar = () => {
 	};
 
 	const handleFeature = () => {
-		history.push("/contact");
+		history.push("/feature");
 	};
 
 	const handleAbout = () => {
