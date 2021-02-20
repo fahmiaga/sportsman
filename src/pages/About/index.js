@@ -1,13 +1,15 @@
-import React from "react";
-import Navbar from "../../components/Navbar2";
+import React from 'react';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
-const About = () => {
-  return (
-    <div>
-      <Navbar />
-      <h1>Ini page about</h1>
-    </div>
-  );
+const about = () => {
+    return (
+        <>
+            <Navbar/>
+            <p>Ini Halaman About</p>
+            <Footer />
+        </>
+    )
 };
 
-export default About;
+export default about;

@@ -9,6 +9,7 @@ import About from "./pages/About";
 
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
+import ContactPage from "./pages/ContactPage";
 
 // import LoginPage from "./components/LoginPage";
 // import RegisterPage from "./components/RegisterPage";
@@ -28,9 +29,7 @@ function App() {
           <Route path="/register" component={RegisterPage} />
           <Route path="/profile" component={Profile} />
           <Route path="/about" component={About} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/register" component={RegisterPage} />
-          <Route path="/register" component={RegisterPage} />
+          <Route path="/contact" component={ContactPage} />
           <Route path="/videos-content/:id" component={VideoContent} />
           <Route path="/faq" component={Faq} />
           <Route path="/content-video" component={Content} />
