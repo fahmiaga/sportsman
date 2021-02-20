@@ -1,6 +1,5 @@
 import React from "react";
 import { CardFooter, Col, Row } from "reactstrap";
-import JumbotronDown from "../JumbotronDown";
 import logo from "../../assets/img/logo/Vector.png";
 import sportsman from "../../assets/img/logo/sportsman.png";
 import googlePlay from "../../assets/img/logo/googlePlayStore.png";
@@ -9,12 +8,13 @@ import appStore from "../../assets/img/logo/appstore.png";
 const Footer = () => {
   return (
     <>
-      <JumbotronDown />
       <div>
         <CardFooter
           className="text-muted"
           style={{
             backgroundColor: "#262626",
+            position: "relative",
+            bottom: "0",
           }}
         >
           <Row className="mt-5 ml-5">
@@ -39,7 +39,11 @@ const Footer = () => {
               <ul style={{ listStyle: "none", color: "white" }}>
                 <p style={{ color: "#80848D" }}>SUPPORT</p>
                 <li>Help Center</li>
-                <li>FAQ</li>
+                <li>
+                  <a href="/faq" style={{ listStyle: "none", color: "white" }}>
+                    FAQ
+                  </a>
+                </li>
                 <li>Contact Us</li>
               </ul>
             </Col>

@@ -1,0 +1,70 @@
+.container-video {
+  width: 90%;
+  height: auto;
+  background-color: rgb(252, 252, 252);
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  .card-video {
+    width: 210px;
+    height: 130px;
+    margin: 10px;
+    cursor: pointer;
+    position: relative;
+    // background-color: red;
+    // z-index: 9999;
+
+    & .thumbnail-video {
+      width: 210px;
+      height: 130px;
+      border-radius: 8px;
+    }
+
+    & .play-button {
+      width: 50px;
+      height: 50px;
+      right: 80px;
+      top: 35px;
+      position: absolute;
+    }
+
+    & .rect-video {
+      width: 210px;
+      height: 0px;
+      bottom: 0px;
+      background-color: #de8b3e;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      opacity: 1;
+      position: absolute;
+      transition: all 0.5s ease;
+    }
+
+    p {
+      position: absolute;
+      top: 65%;
+      left: 0%;
+      opacity: 0;
+      text-transform: capitalize;
+      color: #fff;
+      font-weight: 800;
+      font-size: 15px;
+      z-index: 8;
+      transition: all 0.6s ease;
+    }
+
+    &:hover {
+      p {
+        left: 33%;
+        opacity: 1;
+      }
+      .rect-video {
+        height: 70px;
+        bottom: 0px;
+        opacity: 0.7;
+      }
+    }
+  }
+}

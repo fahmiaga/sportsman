@@ -1,25 +1,41 @@
 import Footer from "./components/Footer";
-// import JumbotronDown from "./components/JumbotronDown";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Content from "./pages/Content";
-
-import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
+import Feature from "./pages/Features";
+import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
+import About from "./pages/About";
+
+import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
+
+// import LoginPage from "./components/LoginPage";
+// import RegisterPage from "./components/RegisterPage";
+import Faq from "./pages/Faq";
+import Content from "./pages/Content";
 
 function App() {
-	return (
-		<div>
-			{/* <Content /> */}
-
-			<BrowserRouter>
-				<Switch>
-					<Route exact patch="/" component={LandingPage} />
-				</Switch>
-			</BrowserRouter>
-			<Footer />
-		</div>
-	);
+  return (
+    <div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/feature" component={Feature} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/about" component={About} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/faq" component={Faq} />
+          <Route path="/content-video" component={Content} />
+        </Switch>
+      </BrowserRouter>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
