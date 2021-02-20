@@ -14,6 +14,7 @@ import RegisterPage from "./components/RegisterPage";
 // import RegisterPage from "./components/RegisterPage";
 import Faq from "./pages/Faq";
 import Content from "./pages/Content";
+import VideoContent from "./pages/VideoContent";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/videos-content/:id" component={VideoContent} />
           <Route path="/faq" component={Faq} />
           <Route path="/content-video" component={Content} />
         </Switch>
