@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Navbar from '../../components/Navbar2';
-import UpdateImage from '../../components/UpdateProfile/updateImage';
-import UpdateData from '../../components/UpdateProfile/updateData';
+import UpdateImage from '../../components/UpdateProfile/UpdateImage';
+import UpdateData from '../../components/UpdateProfile/UpdateData';
 
 const Profile = () => {
 	return (

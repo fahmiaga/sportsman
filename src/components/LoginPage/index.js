@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Logo from '../../assets/Images/Logo.png';
+import Logo from '../../assets/img/logo/Logo.png';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postSignIn } from '../../redux/Action/userAction';
