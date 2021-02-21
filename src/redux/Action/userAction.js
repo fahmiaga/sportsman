@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN } from './actionTypes';
+import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE } from './actionTypes';
 
 export const signUp = (payload) => {
 	return {
@@ -76,5 +76,18 @@ export const setDataToken = () => (dispatch) => {
 	dispatch({
 		type: SET_TOKEN,
 		payload: localStorage.getItem('token'),
+	});
+};
+
+export const uploadImage = (token, body) => (dispatch) => {
+	const config = {
+		headers: { Authorization: token },
+	};
+	axios.post(`api/upload`, body, config).then((res) => {
+		console.log('coba', res.data);
+		dispatch({
+			type: UPLOAD_IMAGE,
+			payload: res.data,
+		});
 	});
 };

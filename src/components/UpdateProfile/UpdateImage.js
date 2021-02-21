@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { uploadImage } from '../../redux/Action/userAction';
+
 import profile from '../../assets/img/anonymous.jpg';
 
 const UpdateImage = () => {
-	const [imageData, setImageData] = useState(null);
+	const [imageData, setImageData] = useState({
+		images: null,
+	});
 	const [imageURL, setImageURL] = useState(null);
+
+	const dispatch = useDispatch();
+	const data = useSelector((state) => state.users.uploadImg);
 
 	const uploadImage = () => {
 		const data = new FormData();
 		data.append('file', imageData);
-		// code below for fetch
+		const body = {
+			images: imageData.images,
+		};
+		dispatch(uploadImage(body));
 	};
 
 	return (
@@ -28,8 +39,7 @@ const UpdateImage = () => {
 									}}
 								/>
 								<label for='upload' className='profile__picture'>
-									<img src={profile}></img>
-									{/* <p>Upload Image</p> */}
+									<img src={profile} alt='upload'></img>
 								</label>
 							</div>
 						) : (
@@ -70,6 +80,7 @@ const UpdateImage = () => {
 						<div className='text-center'>0%</div>
 						<Progress />
 					</div> */}
+					<button onClick={uploadImage}>Save</button>
 				</div>
 
 				{/* <div>

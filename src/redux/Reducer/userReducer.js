@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN } from '../Action/actionTypes';
+import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE } from '../Action/actionTypes';
 
 const initialState = {
 	signUp: '',
@@ -6,6 +6,7 @@ const initialState = {
 	token: 'token' || '',
 	status: null,
 	jwtToken: '',
+	uploadImg: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -36,7 +37,11 @@ const userReducer = (state = initialState, action) => {
 				...state,
 				jwtToken: action.payload,
 			};
-
+		case UPLOAD_IMAGE:
+			return {
+				...state,
+				uploadImg: action.payload,
+			};
 		default:
 			return state;
 	}
