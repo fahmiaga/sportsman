@@ -1,6 +1,6 @@
 import React from "react";
 import { Jumbotron } from "reactstrap";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 import background from "../../assets/img/jumbotron/image2.png";
 import firstBody from "../../assets/img/feature/group-1.png";

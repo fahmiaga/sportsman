@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../../components/Navbar1';
 import Footer from '../../components/Footer';
 
-const about = () => {
+const About = () => {
     return (
         <>
             <Navbar/>
@@ -12,4 +12,4 @@ const about = () => {
     )
 };
 
-export default about;
+export default About;

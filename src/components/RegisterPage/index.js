@@ -26,8 +26,9 @@ const RegisterPage = () => {
     
     const onSubmit = (e) => {
       e.preventDefault();
-      console.log('Submit login');
+      console.log('Submit Register');
       dispatch(postSignUp(userData));
+      history.push('/login')
     };
     
     const handleChange = (e) => {
