@@ -10,6 +10,7 @@ import About from './pages/About';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import ContactPage from './pages/ContactPage';
+import OnBoarding from './components/Onboarding';
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 					<Route path='/profile' component={Profile} />
 					<Route path='/about' component={About} />
 					<Route path='/contact' component={ContactPage} />
+					<Route path='/onboarding' component={OnBoarding} />
 				</Switch>
 			</BrowserRouter>
 			<Footer />

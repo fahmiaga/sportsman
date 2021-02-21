@@ -12,6 +12,11 @@ const LoginPage = () => {
 	const dispatch = useDispatch();
 	const data = useSelector((state) => state.users.signIn);
 
+	const history = useHistory();
+	const dispatch = useDispatch();
+	const data = useSelector((state) => state.users.signIn);
+	const status = useSelector((state) => state.users.status);
+
 	const [userData, setUserData] = useState({
 		email: '',
 		password: '',
@@ -30,7 +35,7 @@ const LoginPage = () => {
 		console.log('Submit login');
 		dispatch(postSignIn(userData));
 		if (_.isEmpty(data)) {
-			NotificationManager.info('Loading', '', 500);
+			NotificationManager.info('Loading', '', 1000);
 		}
 	};
 
@@ -42,11 +47,11 @@ const LoginPage = () => {
 		});
 	};
 
-	useEffect(() => {
-		if (data && !_.isEmpty(data)) {
-			return data;
-		}
-	}, [data]);
+	// useEffect(() => {
+	// 	if (data && !_.isEmpty(data)) {
+	// 		return data;
+	// 	}
+	// }, [data]);
 
 	console.log('userData =>', userData);
 	console.log('data =>', data);
