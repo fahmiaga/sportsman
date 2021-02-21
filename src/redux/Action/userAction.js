@@ -11,7 +11,7 @@ export const signUp = (payload) => {
 
 export const postSignUp = (body) => (dispatch) => {
 	axios
-		.post(`https://sportsmanapp.herokuapp.com/register`, body)
+		.post(`api/register`, body)
 		.then((res) => {
 			console.log('ini res =>', res);
 			const decoded = jwt_decode(res.data.data.token);
@@ -31,7 +31,7 @@ export const signIn = (payload) => {
 
 export const postSignIn = (body) => (dispatch) => {
 	axios
-		.post(`https://sportsmanapp.herokuapp.com/login`, body)
+		.post(`api/login`, body)
 		.then((res) => {
 			console.log('ini res =>', res);
 			const decoded = jwt_decode(res.data.data.token);
