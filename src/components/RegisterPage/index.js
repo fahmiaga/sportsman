@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Logo from "../../assets/img/logo/Logo.png";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { postSignUp } from "../../redux/Action/userAction";
+import React, {useState} from 'react';
+import Logo from '../../assets/img/logo/Logo.png';
+import {useHistory} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {postSignUp} from '../../redux/Action/userAction';
 
 const RegisterPage = () => {
 	const history = useHistory();
@@ -19,9 +19,27 @@ const RegisterPage = () => {
 		history.push("/login");
 	};
 
-	const handleHome = () => {
-		history.push("/");
-	};
+    const handleHome = () => {
+      history.push('/')
+    };
+    
+    const onSubmit = (e) => {
+      e.preventDefault();
+      console.log('Submit Register');
+      dispatch(postSignUp(userData));
+      history.push('/login')
+    };
+    
+    const handleChange = (e) => {
+      console.log('log handle change');
+      setUserData({
+        ...userData,
+        [e.target.name]: e.target.value
+      })
+    }
+    
+    console.log('userData =>', userData);
+    console.log('data =>', data);  
 
 	const onSubmit = (e) => {
 		e.preventDefault();
