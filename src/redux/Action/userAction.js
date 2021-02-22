@@ -51,14 +51,17 @@ export const onBoardingData = (payload) => {
 	};
 };
 
-export const putBoardingData = (body) => (dispatch) => {
+export const putBoardingData = (token, body) => (dispatch) => {
+	const config = {
+		headers: { Authorization: token },
+	};
 	axios
-		.put(`https://sportsmanapp.herokuapp.com//login/update`, body)
+		.put(`api/login/update`, body, config)
 		.then((res) => {
 			console.log('ini res =>', res);
-			const decoded = jwt_decode(res.data.data);
+			// const decoded = jwt_decode(res.data.data);
 			dispatch(onBoardingData(res.data.data));
-			localStorage.getItem('token', decoded);
+			// localStorage.getItem('token', decoded);
 		})
 		.catch((err) => {
 			console.log(err);
@@ -84,10 +87,10 @@ export const uploadImage = (token, body) => (dispatch) => {
 		headers: { Authorization: token },
 	};
 	axios.post(`api/upload`, body, config).then((res) => {
-		console.log('coba', res.data);
+		// console.log('coba', res.data.data);
 		dispatch({
 			type: UPLOAD_IMAGE,
-			payload: res.data,
+			payload: res.data.data,
 		});
 	});
 };

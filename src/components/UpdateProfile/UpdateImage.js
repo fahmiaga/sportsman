@@ -11,15 +11,16 @@ const UpdateImage = () => {
 	const [imageURL, setImageURL] = useState(null);
 
 	const dispatch = useDispatch();
-	const data = useSelector((state) => state.users.uploadImg);
+	const { uploadImg } = useSelector((state) => state.users);
+	const token = localStorage.getItem('token');
 
-	const uploadImage = () => {
+	const handleUploadImage = () => {
 		const data = new FormData();
-		data.append('file', imageData);
+		data.append('images', imageData);
 		const body = {
 			images: imageData.images,
 		};
-		dispatch(uploadImage(body));
+		dispatch(uploadImage(body, token));
 	};
 
 	return (
@@ -80,7 +81,7 @@ const UpdateImage = () => {
 						<div className='text-center'>0%</div>
 						<Progress />
 					</div> */}
-					<button onClick={uploadImage}>Save</button>
+					<button onClick={handleUploadImage}>Save</button>
 				</div>
 
 				{/* <div>
