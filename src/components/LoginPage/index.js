@@ -12,8 +12,7 @@ const LoginPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const data = useSelector(
-    state => state.users.signIn,
-    state => state.users.status
+    state => state.users.signIn
     );
   // const status = useSelector(state => state.users.status);
     
