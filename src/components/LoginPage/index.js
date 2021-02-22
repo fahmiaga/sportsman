@@ -18,17 +18,9 @@ const LoginPage = () => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-<<<<<<< HEAD
-  const data = useSelector(
-    state => state.users.signIn
-    );
-  // const status = useSelector(state => state.users.status);
-    
-=======
   const data = useSelector((state) => state.users.signIn);
   const status = useSelector((state) => state.users.status);
 
->>>>>>> 25dec9fac1995ab95ed3b1c40cba94f91a795946
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -66,17 +58,10 @@ const LoginPage = () => {
   // },[data])
 
   useEffect(() => {
-<<<<<<< HEAD
-    if (data === true) {
-      history.push('/onboarding')
-    } else {
-      history.push('/')
-=======
     if (data && status) {
       history.push("/onboarding");
     } else if (status === false) {
       history.push("/");
->>>>>>> 25dec9fac1995ab95ed3b1c40cba94f91a795946
     }
   }, [data]);
 
