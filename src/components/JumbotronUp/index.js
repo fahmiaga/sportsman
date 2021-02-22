@@ -7,6 +7,12 @@ import background from "../../assets/img/jumbotron/jumbotron-nav.png";
 import { useHistory } from "react-router-dom";
 
 function JumbotronUp() {
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push("/content-video");
+  };
+
   return (
     <div>
       <Jumbotron
@@ -21,7 +27,9 @@ function JumbotronUp() {
         <h1 className="background__text">
           Track every aspect of your workouts.{" "}
         </h1>
-        <button className="background__button">Ready to Sweat</button>
+        <button className="background__button" onClick={handleClick}>
+          Ready to Sweat
+        </button>
       </Jumbotron>
 
       <div>

@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 // import "../../assets/css/footer-jumbotron.css";
 import playButton from "../../assets/img/button/play-button.png";
 
 const Content = (props) => {
+  useEffect(() => {
+    document.title = `Videos`;
+  });
+
   const data = {
     result: [
       {
-        title: "30 minute fat burning home workout for beginners. Achievable, low impact results.",
+        title:
+          "30 minute fat burning home workout for beginners. Achievable, low impact results.",
         url: "gC_L9qAHVJ8",
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur minima quos vero placeat! Corrupti, accusamus maiores beatae iusto in architecto alias. Nihil assumenda eum placeat repellendus dolore. Ratione, veniam alias.",

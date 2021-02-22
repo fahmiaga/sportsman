@@ -11,6 +11,11 @@ import {
 import "react-notifications/lib/notifications.css";
 
 const LoginPage = () => {
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = `Login`;
+  });
+
   const history = useHistory();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.users.signIn);

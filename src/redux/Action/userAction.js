@@ -20,8 +20,8 @@ export const postSignUp = (body) => (dispatch) => {
     .post(`https://sportsmanapp.herokuapp.com/register`, body)
     .then((res) => {
       console.log("ini res =>", res);
-      const decoded = jwt_decode(res.data.data.token);
-      dispatch(signUp(decoded));
+      // const decoded = jwt_decode(res.data.data);
+      dispatch(signUp(res.data.data));
     })
     .catch((err) => {
       console.log(err);
