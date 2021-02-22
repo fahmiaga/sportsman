@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../../assets/Images/Logo.png";
+import Logo from "../../assets/img/logo/Logo.png";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postSignIn } from "../../redux/Action/userAction";
-import jwt_decode from "jwt-decode";
 import _ from "lodash";
 import {
   NotificationContainer,
@@ -14,11 +13,8 @@ import "react-notifications/lib/notifications.css";
 const LoginPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.users.token);
-  const dataStatus = useSelector((state) => state.users.status);
-  // const tokenDecoded = jwt_decode(data);
-  const user = localStorage.getItem("userData");
-  const obj = JSON.parse(user);
+  const data = useSelector((state) => state.users.signIn);
+  const status = useSelector((state) => state.users.status);
 
   const [userData, setUserData] = useState({
     email: "",
@@ -37,13 +33,13 @@ const LoginPage = () => {
     e.preventDefault();
     // console.log("Submit login");
     dispatch(postSignIn(userData));
-    if (_.isEmpty(data) && _.isEmpty(dataStatus)) {
-      NotificationManager.info("Loading", "", 500);
+    if (_.isEmpty(data)) {
+      NotificationManager.info("Loading", "", 1000);
     }
   };
 
   const handleChange = (e) => {
-    // console.log("log handle change");
+    console.log("log handle change");
     setUserData({
       ...userData,
       [e.target.name]: e.target.value,
@@ -51,25 +47,21 @@ const LoginPage = () => {
   };
 
   // useEffect(() => {
-  //   if (data && !_.isEmpty(data)) {
-  //     return tokenDecoded;
+  //  if (data && !_.isEmpty(data)) {
+  //       return data
   //   }
-  // }, [tokenDecoded, data]);
+  // },[data])
 
   useEffect(() => {
-    if (dataStatus === false) {
+    if (data && status) {
       history.push("/onboarding");
-    } else if (dataStatus === true) {
+    } else if (status === false) {
       history.push("/");
-    } else {
-      history.push("/login");
     }
-  }, [dataStatus, history]);
+  }, [data]);
 
   console.log("userData =>", userData);
   console.log("data =>", data);
-  console.log("status =>", dataStatus);
-  // console.log("userData from =>", obj);
 
   return (
     <>
@@ -118,7 +110,7 @@ const LoginPage = () => {
           <div className="redirect">
             Don't have an account?
             <span onClick={handleSignUp}> Register here</span>
-            {/* <p>Logged in as: {tokenDecoded.name}</p> */}
+            <p>Logged in as: {data.name}</p>
             <NotificationContainer />
           </div>
         </div>

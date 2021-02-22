@@ -10,13 +10,13 @@ import About from "./pages/About";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import ContactPage from "./pages/ContactPage";
+import OnBoarding from "./components/Onboarding";
 
 // import LoginPage from "./components/LoginPage";
 // import RegisterPage from "./components/RegisterPage";
 import Faq from "./pages/Faq";
 import Content from "./pages/Content";
 import VideoContent from "./pages/VideoContent";
-import OnBoarding from "./pages/OnBoarding";
 
 function App() {
   return (
@@ -31,10 +31,10 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={ContactPage} />
+          <Route path="/onboarding" component={OnBoarding} />
           <Route path="/videos-content/:id" component={VideoContent} />
           <Route path="/faq" component={Faq} />
           <Route path="/content-video" component={Content} />
-          <Route path="/onboarding" component={OnBoarding} />
         </Switch>
       </BrowserRouter>
       <Footer />

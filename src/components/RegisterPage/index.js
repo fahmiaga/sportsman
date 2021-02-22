@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../../assets/Images/Logo.png";
+import Logo from "../../assets/img/logo/Logo.png";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postSignUp } from "../../redux/Action/userAction";
@@ -25,8 +25,9 @@ const RegisterPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("Submit login");
+    console.log("Submit Register");
     dispatch(postSignUp(userData));
+    history.push("/login");
   };
 
   const handleChange = (e) => {
@@ -36,6 +37,23 @@ const RegisterPage = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  console.log("userData =>", userData);
+  console.log("data =>", data);
+
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Submit login");
+  //   dispatch(postSignUp(userData));
+  // };
+
+  // const handleChange = (e) => {
+  //   console.log("log handle change");
+  //   setUserData({
+  //     ...userData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   console.log("userData =>", userData);
   console.log("data =>", data);

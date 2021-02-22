@@ -1,16 +1,17 @@
 import {
   SIGN_IN,
   SIGN_UP,
+  SET_BOARDING,
+  SIGN_OUT,
   SET_TOKEN,
-  SET_ONBOARD,
 } from "../Action/actionTypes";
 
 const initialState = {
   signUp: "",
   signIn: "",
-  jwtToken: "",
-  token: localStorage.getItem("token") || "",
+  token: "token" || "",
   status: null,
+  jwtToken: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -23,16 +24,18 @@ const userReducer = (state = initialState, action) => {
     case SIGN_IN:
       return {
         ...state,
-        // signIn: action.payload,
-        token: action.payload.token,
-        status: action.payload.status,
+        signIn: action.payload,
+        status: action.payload,
       };
-    case SET_ONBOARD:
+    case SET_BOARDING:
       return {
         ...state,
-        // signIn: action.payload,
-        // token: action.payload.token,
-        status: action.payload.status,
+        boarding: action.payload,
+      };
+    case SIGN_OUT:
+      return {
+        ...state,
+        signOut: action.payload,
       };
     case SET_TOKEN:
       return {

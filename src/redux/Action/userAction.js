@@ -1,6 +1,12 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { SIGN_IN, SIGN_UP, SET_TOKEN, SET_ONBOARD } from "./actionTypes";
+import {
+  SIGN_IN,
+  SIGN_UP,
+  SET_BOARDING,
+  SIGN_OUT,
+  SET_TOKEN,
+} from "./actionTypes";
 
 export const signUp = (payload) => {
   return {
@@ -15,7 +21,7 @@ export const postSignUp = (body) => (dispatch) => {
     .then((res) => {
       console.log("ini res =>", res);
       const decoded = jwt_decode(res.data.data.token);
-      dispatch(signIn(decoded));
+      dispatch(signUp(decoded));
     })
     .catch((err) => {
       console.log(err);
@@ -35,30 +41,41 @@ export const postSignIn = (body) => (dispatch) => {
     .then((res) => {
       console.log("ini res =>", res);
       const decoded = jwt_decode(res.data.data.token);
-      dispatch(signIn(res.data.data));
+      dispatch(signIn(decoded));
       localStorage.setItem("token", res.data.data.token);
-      localStorage.setItem("userData", JSON.stringify(decoded));
+      // localStorage.setItem("userData",JSON.stringify(decoded))
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-export const setOnboard = (userData) => {
-  return (dispatch) => {
-    return axios
-      .post(`https://sportsmanapp.herokuapp.com//login/update`, {
-        data: userData,
-        headers: { Authorization: localStorage.getItem("access_token") },
-      })
-      .then((response) => {
-        console.log(response);
-        dispatch({
-          type: SET_ONBOARD,
-          payload: response.data.data,
-        });
-      });
+export const onBoardingData = (payload) => {
+  return {
+    type: SET_BOARDING,
+    payload,
   };
+};
+
+export const putBoardingData = (body) => (dispatch) => {
+  axios
+    .put(`https://sportsmanapp.herokuapp.com//login/update`, body)
+    .then((res) => {
+      console.log("ini res =>", res);
+      const decoded = jwt_decode(res.data.data);
+      dispatch(onBoardingData(res.data.data));
+      localStorage.getItem("token", decoded);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const signOut = () => (dispatch) => {
+  dispatch({
+    type: SIGN_OUT,
+    payload: localStorage.removeItem("token"),
+  });
 };
 
 export const setDataToken = () => (dispatch) => {
