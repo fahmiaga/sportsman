@@ -4,10 +4,10 @@ import Header from '../../components/Header';
 import Information from '../../components/Information';
 
 const LandingPage = () => {
-	useEffect(() => {
-		// Update the document title using the browser API
-		document.title = `Landing Page`;
-	});
+	// useEffect(() => {
+	// 	// Update the document title using the browser API
+	// 	document.title = `Landing Page`;
+	// });
 
 	return (
 		<div>
