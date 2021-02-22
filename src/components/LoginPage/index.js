@@ -3,6 +3,7 @@ import Logo from "../../assets/Images/Logo.png";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postSignIn } from "../../redux/Action/userAction";
+import jwt_decode from "jwt-decode";
 import _ from "lodash";
 import {
   NotificationContainer,
@@ -13,7 +14,11 @@ import "react-notifications/lib/notifications.css";
 const LoginPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.users.signIn);
+  const data = useSelector((state) => state.users.token);
+  const dataStatus = useSelector((state) => state.users.status);
+  // const tokenDecoded = jwt_decode(data);
+  const user = localStorage.getItem("userData");
+  const obj = JSON.parse(user);
 
   const [userData, setUserData] = useState({
     email: "",
@@ -30,29 +35,41 @@ const LoginPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("Submit login");
+    // console.log("Submit login");
     dispatch(postSignIn(userData));
-    if (_.isEmpty(data)) {
+    if (_.isEmpty(data) && _.isEmpty(dataStatus)) {
       NotificationManager.info("Loading", "", 500);
     }
   };
 
   const handleChange = (e) => {
-    console.log("log handle change");
+    // console.log("log handle change");
     setUserData({
       ...userData,
       [e.target.name]: e.target.value,
     });
   };
 
+  // useEffect(() => {
+  //   if (data && !_.isEmpty(data)) {
+  //     return tokenDecoded;
+  //   }
+  // }, [tokenDecoded, data]);
+
   useEffect(() => {
-    if (data && !_.isEmpty(data)) {
-      return data;
+    if (dataStatus === false) {
+      history.push("/onboarding");
+    } else if (dataStatus === true) {
+      history.push("/");
+    } else {
+      history.push("/login");
     }
-  }, [data]);
+  }, [dataStatus, history]);
 
   console.log("userData =>", userData);
   console.log("data =>", data);
+  console.log("status =>", dataStatus);
+  // console.log("userData from =>", obj);
 
   return (
     <>
@@ -101,7 +118,7 @@ const LoginPage = () => {
           <div className="redirect">
             Don't have an account?
             <span onClick={handleSignUp}> Register here</span>
-            <p>Logged in as: {data.name}</p>
+            {/* <p>Logged in as: {tokenDecoded.name}</p> */}
             <NotificationContainer />
           </div>
         </div>

@@ -16,6 +16,7 @@ import ContactPage from "./pages/ContactPage";
 import Faq from "./pages/Faq";
 import Content from "./pages/Content";
 import VideoContent from "./pages/VideoContent";
+import OnBoarding from "./pages/OnBoarding";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/videos-content/:id" component={VideoContent} />
           <Route path="/faq" component={Faq} />
           <Route path="/content-video" component={Content} />
+          <Route path="/onboarding" component={OnBoarding} />
         </Switch>
       </BrowserRouter>
       <Footer />
