@@ -11,8 +11,11 @@ const LoginPage = () => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const data = useSelector(state => state.users.signIn);
-  const status = useSelector(state => state.users.status);
+  const data = useSelector(
+    state => state.users.signIn,
+    state => state.users.status
+    );
+  // const status = useSelector(state => state.users.status);
     
   const [userData, setUserData] = useState({
     email: '',
@@ -51,9 +54,9 @@ const LoginPage = () => {
   // },[data])
 
   useEffect(() => {
-    if (data && status) {
+    if (data === true) {
       history.push('/onboarding')
-    } else if (status === false){
+    } else {
       history.push('/')
     }
   },[data]);
