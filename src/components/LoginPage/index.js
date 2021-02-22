@@ -57,6 +57,7 @@ const LoginPage = () => {
 	useEffect(() => {
 		if (data && status) {
 			history.push('/onboarding');
+			window.location.reload(true);
 		} else if (status === false) {
 			history.push('/');
 		}
