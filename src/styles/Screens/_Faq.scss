@@ -1,0 +1,34 @@
+.jumbotron-faq {
+  width: 100%;
+  height: 429px;
+  background-image: url(../../assets/img/jumbotron/image1.png);
+  background-size: cover;
+
+  .jumbotron-input {
+    text-align: center;
+    padding: 160px;
+
+    & p {
+      color: white;
+      font-size: 23px;
+      font-weight: 600;
+    }
+    .input-icon {
+      position: relative;
+
+      & input {
+        width: 50%;
+        height: 58px;
+        position: relative;
+      }
+      & i {
+        font-size: 25px;
+        position: absolute;
+        z-index: 999;
+        bottom: 16px;
+        margin-left: 30px;
+        color: rgb(192, 192, 192);
+      }
+    }
+  }
+}
