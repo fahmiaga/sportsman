@@ -8,9 +8,10 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import 'react-notifications/lib/notifications.css';
 
 const LoginPage = () => {
-	const history = useHistory();
-	const dispatch = useDispatch();
-	const data = useSelector((state) => state.users.signIn);
+	useEffect(() => {
+		// Update the document title using the browser API
+		document.title = `Login`;
+	});
 
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const LoginPage = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		console.log('Submit login');
+		// console.log("Submit login");
 		dispatch(postSignIn(userData));
 		if (_.isEmpty(data)) {
 			NotificationManager.info('Loading', '', 1000);
@@ -48,10 +49,18 @@ const LoginPage = () => {
 	};
 
 	// useEffect(() => {
-	// 	if (data && !_.isEmpty(data)) {
-	// 		return data;
-	// 	}
-	// }, [data]);
+	//  if (data && !_.isEmpty(data)) {
+	//       return data
+	//   }
+	// },[data])
+
+	useEffect(() => {
+		if (data && status) {
+			history.push('/onboarding');
+		} else if (status === false) {
+			history.push('/');
+		}
+	}, [data]);
 
 	console.log('userData =>', userData);
 	console.log('data =>', data);
