@@ -4,15 +4,16 @@ import {
   SET_BOARDING,
   SIGN_OUT,
   SET_TOKEN,
+  UPLOAD_IMAGE,
 } from "../Action/actionTypes";
-import jwt_decode from "jwt-decode";
 
 const initialState = {
   signUp: "",
   signIn: "",
-  token: localStorage.getItem("token") || "",
+  token: null,
   status: null,
-  jwtToken: "",
+  boarding: 0,
+  uploadImg: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -25,7 +26,7 @@ const userReducer = (state = initialState, action) => {
     case SIGN_IN:
       return {
         ...state,
-        token: jwt_decode(action.payload.token),
+        signIn: action.payload.token,
         status: action.payload.status,
       };
     case SET_BOARDING:
@@ -33,6 +34,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         boarding: action.payload,
       };
+
     case SIGN_OUT:
       return {
         ...state,
@@ -41,9 +43,13 @@ const userReducer = (state = initialState, action) => {
     case SET_TOKEN:
       return {
         ...state,
-        jwtToken: action.payload,
+        token: action.token,
       };
-
+    case UPLOAD_IMAGE:
+      return {
+        ...state,
+        uploadImg: action.payload,
+      };
     default:
       return state;
   }

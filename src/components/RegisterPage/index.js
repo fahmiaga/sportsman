@@ -6,7 +6,6 @@ import { postSignUp } from "../../redux/Action/userAction";
 
 const RegisterPage = () => {
   useEffect(() => {
-    // Update the document title using the browser API
     document.title = `Register`;
   });
 
@@ -43,25 +42,8 @@ const RegisterPage = () => {
     });
   };
 
-  console.log("userData =>", userData);
-  console.log("data =>", data);
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Submit login");
-  //   dispatch(postSignUp(userData));
-  // };
-
-  // const handleChange = (e) => {
-  //   console.log("log handle change");
-  //   setUserData({
-  //     ...userData,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
-  console.log("userData =>", userData);
-  console.log("data =>", data);
+  // console.log('userData =>', userData);
+  // console.log('data =>', data);
 
   return (
     <>

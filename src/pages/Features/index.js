@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Jumbotron } from "reactstrap";
-// import { useParams } from "react-router-dom";
 
 import background from "../../assets/img/jumbotron/image2.png";
 import firstBody from "../../assets/img/feature/group-1.png";
@@ -15,7 +14,6 @@ const Features = () => {
   useEffect(() => {
     document.title = `Features`;
   });
-
   return (
     <div className="feature">
       <Navbar />

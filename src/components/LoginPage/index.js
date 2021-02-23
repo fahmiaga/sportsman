@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../../assets/img/logo/Logo.png";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postSignIn } from "../../redux/Action/userAction";
 import _ from "lodash";
@@ -9,18 +9,18 @@ import {
   NotificationManager,
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
+import jwt_decode from "jwt-decode";
 
 const LoginPage = () => {
   useEffect(() => {
+    // Update the document title using the browser API
     document.title = `Login`;
   });
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.users.token);
+  const data = useSelector((state) => state.users.signIn);
   const status = useSelector((state) => state.users.status);
-  const token = localStorage.getItem("token");
-
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -52,24 +52,29 @@ const LoginPage = () => {
   };
 
   // useEffect(() => {
-  //  if (data && !_.isEmpty(data)) {
-  //       return data
-  //   }
-  // },[data])
+  // 	if (token && !_.isEmpty(token)) return token;
+  // }, [token]);
+
+  // const token =
+  // 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDMzMjk3ZTA4ZmNlYTAwMjIxYjEyMjkiLCJuYW1lIjoiUGFsZXBhbGUiLCJnZW5kZXIiOiIwIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MTM5NjU3NDF9.J8iXpCRFpxCc2PsUXMfG5wH2c55DIS1ul66Un2DgC5M';
+  // const token = localStorage.getItem('token');
+  // const decoded = jwtDecode(token);
+  const token = localStorage.getItem("token");
+
+  let decoded;
+  if (token && !_.isEmpty(token)) decoded = jwt_decode(token);
 
   useEffect(() => {
-    if (status === false) {
-      history.push("/onboarding");
-    } else if (status === true) {
+    if (status) {
       history.push("/");
-    } else {
-      history.push("/login");
+    } else if (status === false) {
+      history.push("/onboarding");
+      window.location.reload(true);
     }
   }, [status, history]);
 
-  console.log("userData =>", userData);
+  console.log("status =>", status);
   console.log("data =>", data);
-  console.log("status", status);
 
   return (
     <>
@@ -81,13 +86,23 @@ const LoginPage = () => {
           alt="sportsman"
         />
         <div className="login-container">
+          <h2>SIGN IN</h2>
           {token ? (
             <div>
-              <h3>You already Sign In as {data.name}</h3>
+              <h2>You Already Sign as {decoded.name}</h2>
+              <p>
+                <span onClick={handleHome}>Click here</span> to redirect to
+                Homepage
+              </p>
+              {/* {setTimeout(
+								() => (
+									<Redirect to='/' />
+								),
+								5000
+							)} */}
             </div>
           ) : (
-            <div>
-              <h2>SIGN IN</h2>
+            <>
               <div className="form__group field">
                 <input
                   type="email"
@@ -127,7 +142,7 @@ const LoginPage = () => {
                 <p>Logged in as: {data.name}</p>
                 <NotificationContainer />
               </div>
-            </div>
+            </>
           )}
         </div>
       </div>

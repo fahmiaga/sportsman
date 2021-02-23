@@ -9,10 +9,8 @@ import check from "../../assets/img/about/check.png";
 
 const About = () => {
   useEffect(() => {
-    // Update the document title using the browser API
     document.title = `About Us`;
   });
-
   return (
     <div className="about">
       <Navbar />
