@@ -95,7 +95,7 @@ export const uploadImage = (token, body) => (dispatch) => {
 	};
 	console.log('coba', axios);
 	axios
-		.post(`api/upload`, body, config)
+		.post(`https://sportsmanapp.herokuapp.com/upload`, body, config)
 		.then((res) => {
 			dispatch({
 				type: UPLOAD_IMAGE,
