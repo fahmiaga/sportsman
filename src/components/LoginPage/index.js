@@ -12,14 +12,14 @@ import "react-notifications/lib/notifications.css";
 
 const LoginPage = () => {
   useEffect(() => {
-    // Update the document title using the browser API
     document.title = `Login`;
   });
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.users.signIn);
+  const data = useSelector((state) => state.users.token);
   const status = useSelector((state) => state.users.status);
+  const token = localStorage.getItem("token");
 
   const [userData, setUserData] = useState({
     email: "",
@@ -58,15 +58,18 @@ const LoginPage = () => {
   // },[data])
 
   useEffect(() => {
-    if (data && status) {
+    if (status === false) {
       history.push("/onboarding");
-    } else if (status === false) {
+    } else if (status === true) {
       history.push("/");
+    } else {
+      history.push("/login");
     }
-  }, [data]);
+  }, [status, history]);
 
   console.log("userData =>", userData);
   console.log("data =>", data);
+  console.log("status", status);
 
   return (
     <>
@@ -78,46 +81,54 @@ const LoginPage = () => {
           alt="sportsman"
         />
         <div className="login-container">
-          <h2>SIGN IN</h2>
-          <div className="form__group field">
-            <input
-              type="email"
-              class="form__field"
-              placeholder="Email"
-              name="email"
-              id="email"
-              required
-              onChange={handleChange}
-            />
-            <label for="email" class="form__label">
-              Email
-            </label>
-          </div>
+          {token ? (
+            <div>
+              <h3>You already Sign In as {data.name}</h3>
+            </div>
+          ) : (
+            <div>
+              <h2>SIGN IN</h2>
+              <div className="form__group field">
+                <input
+                  type="email"
+                  class="form__field"
+                  placeholder="Email"
+                  name="email"
+                  id="email"
+                  required
+                  onChange={handleChange}
+                />
+                <label for="email" class="form__label">
+                  Email
+                </label>
+              </div>
 
-          <div className="form__group field">
-            <input
-              type="password"
-              class="form__field"
-              placeholder="Password"
-              name="password"
-              id="password"
-              required
-              onChange={handleChange}
-            />
-            <label for="password" class="form__label">
-              Password
-            </label>
-          </div>
+              <div className="form__group field">
+                <input
+                  type="password"
+                  class="form__field"
+                  placeholder="Password"
+                  name="password"
+                  id="password"
+                  required
+                  onChange={handleChange}
+                />
+                <label for="password" class="form__label">
+                  Password
+                </label>
+              </div>
 
-          <button onClick={onSubmit} className="signin-button">
-            SIGN IN
-          </button>
-          <div className="redirect">
-            Don't have an account?
-            <span onClick={handleSignUp}> Register here</span>
-            <p>Logged in as: {data.name}</p>
-            <NotificationContainer />
-          </div>
+              <button onClick={onSubmit} className="signin-button">
+                SIGN IN
+              </button>
+              <div className="redirect">
+                Don't have an account?
+                <span onClick={handleSignUp}> Register here</span>
+                <p>Logged in as: {data.name}</p>
+                <NotificationContainer />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -12,6 +12,7 @@ const OnBoarding = (props) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
 
   const [gender, setGender] = useState("");
   const [intensity, setIntensity] = useState("");
@@ -22,13 +23,18 @@ const OnBoarding = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(putBoardingData(gender, intensity));
+    const body = {
+      gender: gender,
+      intensity: intensity,
+    };
+    dispatch(putBoardingData(token, body));
   };
 
   useEffect(() => {
     console.log("ini gender", gender);
     console.log("ini intensity", intensity);
   }, [gender, intensity]);
+  console.log("token =>", token);
 
   return (
     <>

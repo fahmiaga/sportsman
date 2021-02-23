@@ -9,11 +9,11 @@ import {
   Form,
 } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { setOnboard } from "../../redux/Action/userAction";
+import { onBoardingData } from "../../redux/Action/userAction";
 
 function OnBoarding() {
   const [userData, setUserData] = useState("");
-
+  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -25,13 +25,14 @@ function OnBoarding() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(setOnboard(userData));
+    dispatch(onBoardingData(userData, token));
   };
 
   useEffect(() => {
-    console.log(userData);
-  }, [userData]);
+    console.log("userdata =>", userData);
+  }, [userData, token]);
 
+  console.log("token =>", token);
   return (
     <>
       <div className="onboarding-bg">

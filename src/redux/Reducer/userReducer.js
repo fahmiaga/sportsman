@@ -5,11 +5,12 @@ import {
   SIGN_OUT,
   SET_TOKEN,
 } from "../Action/actionTypes";
+import jwt_decode from "jwt-decode";
 
 const initialState = {
   signUp: "",
   signIn: "",
-  token: "token" || "",
+  token: localStorage.getItem("token") || "",
   status: null,
   jwtToken: "",
 };
@@ -24,8 +25,8 @@ const userReducer = (state = initialState, action) => {
     case SIGN_IN:
       return {
         ...state,
-        signIn: action.payload,
-        status: action.payload,
+        token: jwt_decode(action.payload.token),
+        status: action.payload.status,
       };
     case SET_BOARDING:
       return {

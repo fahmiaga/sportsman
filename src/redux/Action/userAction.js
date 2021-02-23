@@ -40,8 +40,8 @@ export const postSignIn = (body) => (dispatch) => {
     .post(`https://sportsmanapp.herokuapp.com/login`, body)
     .then((res) => {
       console.log("ini res =>", res);
-      const decoded = jwt_decode(res.data.data.token);
-      dispatch(signIn(decoded));
+      // const decoded = jwt_decode(res.data.data.token);
+      dispatch(signIn(res.data.data));
       localStorage.setItem("token", res.data.data.token);
       // localStorage.setItem("userData",JSON.stringify(decoded))
     })
@@ -57,19 +57,39 @@ export const onBoardingData = (payload) => {
   };
 };
 
-export const putBoardingData = (body) => (dispatch) => {
+export const putBoardingData = (token, body) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
   axios
-    .put(`https://sportsmanapp.herokuapp.com//login/update`, body)
+    .put("https://sportsmanapp.herokuapp.com/login/update", body, config)
     .then((res) => {
       console.log("ini res =>", res);
-      const decoded = jwt_decode(res.data.data);
+      // const decoded = jwt_decode(res.data.data);
       dispatch(onBoardingData(res.data.data));
-      localStorage.getItem("token", decoded);
+      // localStorage.getItem("token", decoded);
     })
     .catch((err) => {
-      console.log(err);
+      console.log("error =>", err);
     });
 };
+
+// export const onBoardingData = (token, body) => (dispatch) => {
+//   const config = {
+//     headers: { Authorization: token },
+//   };
+//   axios
+//     .post(`https://sportsmanapp.herokuapp.com/login/update`, body, config)
+//     .then((res) => {
+//       console.log("response", res);
+//       dispatch({
+//         type: SET_BOARDING,
+//         payload: res.data.data,
+//       });
+//     });
+// };
 
 export const signOut = () => (dispatch) => {
   dispatch({
