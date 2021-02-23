@@ -29,15 +29,23 @@ export const signIn = (payload) => {
 	};
 };
 
+export const setToken = (token) => {
+	return {
+		type: SET_TOKEN,
+		token,
+	};
+};
+
 export const postSignIn = (body) => (dispatch) => {
 	axios
 		.post(`api/login`, body)
 		.then((res) => {
 			console.log('ini res =>', res);
-			const decoded = jwt_decode(res.data.data.token);
-			dispatch(signIn(decoded));
-			localStorage.setItem('token', res.data.data.token);
+			// const decoded = jwt_decode(res.data.data.token);
+			dispatch(signIn(res.data.data));
 			// localStorage.setItem('userData', JSON.stringify(decoded));
+			dispatch(setToken(res.data.data.token));
+			localStorage.setItem('token', res.data.data.token);
 		})
 		.catch((err) => {
 			console.log(err);
@@ -52,6 +60,7 @@ export const onBoardingData = (payload) => {
 };
 
 export const putBoardingData = (token, body) => (dispatch) => {
+	console.log('boarding', token);
 	const config = {
 		headers: { Authorization: token },
 	};
@@ -59,9 +68,7 @@ export const putBoardingData = (token, body) => (dispatch) => {
 		.put(`api/login/update`, body, config)
 		.then((res) => {
 			console.log('ini res =>', res);
-			// const decoded = jwt_decode(res.data.data);
 			dispatch(onBoardingData(res.data.data));
-			// localStorage.getItem('token', decoded);
 		})
 		.catch((err) => {
 			console.log(err);
@@ -75,22 +82,27 @@ export const signOut = () => (dispatch) => {
 	});
 };
 
-export const setDataToken = () => (dispatch) => {
-	dispatch({
-		type: SET_TOKEN,
-		payload: localStorage.getItem('token'),
-	});
-};
+// export const setDataToken = () => (dispatch) => {
+// 	dispatch({
+// 		type: SET_TOKEN,
+// 		payload: localStorage.getItem('token'),
+// 	});
+// };
 
 export const uploadImage = (token, body) => (dispatch) => {
 	const config = {
-		headers: { Authorization: token },
+		headers: { Authorization: token, 'Content-Type': 'multipart/form-data' },
 	};
-	axios.post(`api/upload`, body, config).then((res) => {
-		// console.log('coba', res.data.data);
-		dispatch({
-			type: UPLOAD_IMAGE,
-			payload: res.data.data,
+	console.log('coba', axios);
+	axios
+		.post(`api/upload`, body, config)
+		.then((res) => {
+			dispatch({
+				type: UPLOAD_IMAGE,
+				payload: res.data.data,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
 		});
-	});
 };
