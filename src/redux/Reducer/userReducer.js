@@ -3,9 +3,9 @@ import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE } fro
 const initialState = {
 	signUp: '',
 	signIn: '',
-	token: 'token' || '',
+	token: null,
 	status: null,
-	jwtToken: '',
+	// jwtToken: '',
 	uploadImg: null,
 };
 
@@ -19,8 +19,8 @@ const userReducer = (state = initialState, action) => {
 		case SIGN_IN:
 			return {
 				...state,
-				signIn: action.payload,
-				status: action.payload,
+				signIn: action.payload.token,
+				status: action.payload.status,
 			};
 		case SET_BOARDING:
 			return {
@@ -35,7 +35,7 @@ const userReducer = (state = initialState, action) => {
 		case SET_TOKEN:
 			return {
 				...state,
-				jwtToken: action.payload,
+				token: action.token,
 			};
 		case UPLOAD_IMAGE:
 			return {

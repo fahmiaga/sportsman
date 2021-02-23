@@ -17,10 +17,10 @@ const UpdateImage = () => {
 	const handleUploadImage = () => {
 		const data = new FormData();
 		data.append('images', imageData);
-		const body = {
-			images: imageData.images,
-		};
-		dispatch(uploadImage(body, token));
+		// const body = {
+		// 	images: imageData.images,
+		// };
+		dispatch(uploadImage(token, data));
 	};
 
 	return (

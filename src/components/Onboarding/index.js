@@ -27,7 +27,7 @@ const OnBoarding = (props) => {
 			gender: gender,
 			intensity: intensity,
 		};
-		dispatch(putBoardingData(token,body));
+		dispatch(putBoardingData(token, body));
 	};
 
 	useEffect(() => {

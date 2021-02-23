@@ -31,6 +31,13 @@ const Navbar = () => {
 	const handleAbout = () => {
 		history.push('/about');
 	};
+
+	const handleSignOut = () => {
+		localStorage.removeItem('token');
+		history.push('/');
+	};
+	const token = localStorage.getItem('token');
+
 	return (
 		<>
 			<nav className={`layout ${scrollY > 230 ? 'layout--orange' : ''}`}>
@@ -46,10 +53,15 @@ const Navbar = () => {
 						<li onClick={handleAbout}>About</li>
 					</ul>
 				</div>
-
-				<button onClick={handleSignIn} className='layout__button'>
-					Ready To Sweat?
-				</button>
+				{token ? (
+					<button onClick={handleSignOut} className='layout__button'>
+						Sign Out
+					</button>
+				) : (
+					<button onClick={handleSignIn} className='layout__button'>
+						Ready To Sweat?
+					</button>
+				)}
 			</nav>
 		</>
 	);
