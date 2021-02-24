@@ -56,6 +56,11 @@ export const publicRoutes = [
 		path: '/register',
 		exact: true,
 	},
+	{
+		component: ContactPage,
+		path: '/contactus',
+		exact: true,
+	},
 ];
 
 export const privateRoutes = [
@@ -117,7 +122,7 @@ export const privateRoutes = [
 	},
 	{
 		component: ContactPage,
-		path: '/contact',
+		path: '/contactus',
 		exact: true,
 	},
 ];
