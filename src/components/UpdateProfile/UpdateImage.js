@@ -5,9 +5,7 @@ import { uploadImage } from '../../redux/Action/userAction';
 import profile from '../../assets/img/anonymous.jpg';
 
 const UpdateImage = () => {
-	const [imageData, setImageData] = useState({
-		images: null,
-	});
+	const [imageData, setImageData] = useState(null);
 	const [imageURL, setImageURL] = useState(null);
 
 	const dispatch = useDispatch();

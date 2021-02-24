@@ -15,7 +15,7 @@ const OnBoarding = (props) => {
 	const dispatch = useDispatch();
 
 	const [gender, setGender] = useState('');
-	const [intensity, setIntensity] = useState('');
+	const [level, setLevel] = useState('');
 
 	const handleHome = () => {
 		history.push('/');
@@ -25,15 +25,15 @@ const OnBoarding = (props) => {
 		e.preventDefault();
 		const body = {
 			gender: gender,
-			intensity: intensity,
+			level: level,
 		};
-		dispatch(putBoardingData(token, body));
+		dispatch(putBoardingData(token, body)).then(() => props.history.push('/'));
 	};
 
 	useEffect(() => {
 		console.log('ini gender', gender);
-		console.log('ini intensity', intensity);
-	}, [gender, intensity]);
+		console.log('ini level', level);
+	}, [gender, level]);
 
 	return (
 		<>
@@ -56,22 +56,22 @@ const OnBoarding = (props) => {
 						</FormGroup>
 					</div>
 
-					<h2>Select Intensity</h2>
+					<h2>Select level</h2>
 					<div className='form__group field'>
 						<FormGroup tag='fieldset'>
 							<FormGroup check>
 								<Label check>
-									<Input onChange={(e) => setIntensity(e.target.value)} type='radio' name='intensity' value='1' /> Often
+									<Input onChange={(e) => setLevel(e.target.value)} type='radio' name='level' value='1' /> Often
 								</Label>
 							</FormGroup>
 							<FormGroup check>
 								<Label check>
-									<Input onChange={(e) => setIntensity(e.target.value)} type='radio' name='intensity' value='2' /> Sometimes
+									<Input onChange={(e) => setLevel(e.target.value)} type='radio' name='level' value='2' /> Sometimes
 								</Label>
 							</FormGroup>
 							<FormGroup check>
 								<Label check>
-									<Input onChange={(e) => setIntensity(e.target.value)} type='radio' name='intensity' value='3' /> Rarely
+									<Input onChange={(e) => setLevel(e.target.value)} type='radio' name='level' value='3' /> Rarely
 								</Label>
 							</FormGroup>
 						</FormGroup>
