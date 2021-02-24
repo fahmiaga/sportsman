@@ -21,6 +21,7 @@ function JumbotronUp() {
 					backgroundImage: `url(${background})`,
 					marginBottom: `0`,
 					borderRadius: `0`,
+					paddingTop: `0`,
 				}}>
 				<Navbar />
 				<h1 className='background__text'>Track every aspect of your workouts. </h1>
