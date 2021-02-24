@@ -59,7 +59,7 @@ export const onBoardingData = (payload) => {
 	};
 };
 
-export const putBoardingData = (token, body) => (dispatch) => {
+export const putBoardingData = (token, body) => async (dispatch) => {
 	console.log('boarding', token);
 	const config = {
 		headers: { Authorization: token },
@@ -95,7 +95,7 @@ export const uploadImage = (token, body) => (dispatch) => {
 	};
 	console.log('coba', axios);
 	axios
-		.post(`https://sportsmanapp.herokuapp.com/upload`, body, config)
+		.post(`api/upload`, body, config)
 		.then((res) => {
 			dispatch({
 				type: UPLOAD_IMAGE,
