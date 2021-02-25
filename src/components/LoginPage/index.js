@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/img/logo/Logo.png';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postSignIn } from '../../redux/Action/userAction';
 import _ from 'lodash';
@@ -33,7 +33,6 @@ const LoginPage = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		// console.log("Submit login");
 		dispatch(postSignIn(userData));
 		if (_.isEmpty(data)) {
 			NotificationManager.info('Loading', '', 1000);
@@ -85,12 +84,6 @@ const LoginPage = () => {
 							<p>
 								<span onClick={handleHome}>Click here</span> to redirect to Homepage
 							</p>
-							{/* {setTimeout(
-								() => (
-									<Redirect to='/' />
-								),
-								5000
-							)} */}
 						</div>
 					) : (
 						<div>
