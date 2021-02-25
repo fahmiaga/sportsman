@@ -13,14 +13,15 @@ import Navbar from '../../components/Navbar1';
 const Features = () => {
 	return (
 		<div className='feature'>
-			<Navbar />
 			<Jumbotron
 				className='feature__background'
 				style={{
 					backgroundImage: `url(${background})`,
 					marginBottom: `0`,
 					borderRadius: `0`,
+					paddingTop: `0`,
 				}}>
+				<Navbar />
 				<h1 className='feature__text'>Measure your performance with us </h1>
 				<button className='background__button'>Explore Feature</button>
 			</Jumbotron>

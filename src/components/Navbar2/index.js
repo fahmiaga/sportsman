@@ -13,6 +13,14 @@ const Navbar = () => {
 		history.push('/login');
 	};
 
+	const handleSignOut = () => {
+		localStorage.removeItem('token');
+		history.push('/');
+		window.location.reload(true);
+	};
+
+	const token = localStorage.getItem('token');
+
 	return (
 		<>
 			<nav className='layout2'>
@@ -20,9 +28,15 @@ const Navbar = () => {
 					<img src={logo} onClick={handleHome} alt='logo' className='layout2__img' />
 				</div>
 
-				<button onClick={handleSignIn} className='layout2__button'>
-					Logout
-				</button>
+				{token ? (
+					<button onClick={handleSignOut} className='layout2__button'>
+						Sign Out
+					</button>
+				) : (
+					<button onClick={handleSignIn} className='layout2__button'>
+						Login
+					</button>
+				)}
 			</nav>
 		</>
 	);
