@@ -1,5 +1,6 @@
 import React from 'react';
 import { Jumbotron } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
 
 import background from '../../assets/img/jumbotron/image2.png';
 import firstBody from '../../assets/img/feature/group-1.png';
@@ -11,6 +12,13 @@ import groupThree from '../../assets/img/feature/feature-3.png';
 import Navbar from '../../components/Navbar1';
 
 const Features = () => {
+
+	const history = useHistory();
+
+	const handleTracking = () => {
+		history.push('/tracking');
+	};
+
 	return (
 		<div className='feature'>
 			<Jumbotron
@@ -23,7 +31,7 @@ const Features = () => {
 				}}>
 				<Navbar />
 				<h1 className='feature__text'>Measure your performance with us </h1>
-				<button className='background__button'>Explore Feature</button>
+				<button onClick={handleTracking} className='background__button'>Tracking your Record</button>
 			</Jumbotron>
 			<div className='first-body'>
 				<img src={firstBody} alt='' />

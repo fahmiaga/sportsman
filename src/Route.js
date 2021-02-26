@@ -13,6 +13,7 @@ import Profile from './pages/Profile';
 import OnBoarding from './components/Onboarding';
 import VideoContent from './pages/VideoContent';
 import ContactPage from './pages/ContactPage';
+import Tracking from './pages/HistoryTracking';
 
 export const publicRoutes = [
 	{
@@ -123,6 +124,11 @@ export const privateRoutes = [
 	{
 		component: ContactPage,
 		path: '/contactus',
+		exact: true,
+	},
+	{
+		component: Tracking,
+		path: '/tracking',
 		exact: true,
 	},
 ];

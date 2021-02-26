@@ -2,7 +2,7 @@ import Footer from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { publicRoutes, privateRoutes } from './Route';
-import _ from 'lodash';
+// import _ from 'lodash';
 
 function App() {
 	const token = localStorage.getItem('token');

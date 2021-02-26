@@ -86,7 +86,7 @@ const LoginPage = () => {
 							</p>
 						</div>
 					) : (
-						<div>
+						<> 
 							<div className='form__group field'>
 								<input type='email' class='form__field' placeholder='Email' name='email' id='email' required onChange={handleChange} />
 								<label for='email' class='form__label'>
@@ -110,7 +110,7 @@ const LoginPage = () => {
 								<p>Logged in as: {data.name}</p>
 								<NotificationContainer />
 							</div>
-						</div>
+						</>
 					)}
 				</div>
 			</div>
