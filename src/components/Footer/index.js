@@ -65,10 +65,10 @@ const Footer = () => {
                 </a>
                 <li>
                   <a
-                    href="/contactus"
+                    href="/contact-us"
                     style={{ listStyle: "none", color: "white" }}
                   >
-                    COntact Us
+                    Contact Us
                   </a>
                 </li>
               </ul>

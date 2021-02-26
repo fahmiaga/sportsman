@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../../assets/img/logo/Logo.png";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postSignIn } from "../../redux/Action/userAction";
 import _ from "lodash";
@@ -44,7 +44,6 @@ const LoginPage = () => {
   };
 
   const handleChange = (e) => {
-    console.log("log handle change");
     setUserData({
       ...userData,
       [e.target.name]: e.target.value,

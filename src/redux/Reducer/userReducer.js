@@ -5,6 +5,7 @@ import {
   SIGN_OUT,
   SET_TOKEN,
   UPLOAD_IMAGE,
+  POST_CONTACT,
 } from "../Action/actionTypes";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   status: null,
   boarding: 0,
   uploadImg: null,
+  contact: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -49,6 +51,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         uploadImg: action.payload,
+      };
+    case POST_CONTACT:
+      return {
+        ...state,
+        contact: action.payload,
       };
     default:
       return state;

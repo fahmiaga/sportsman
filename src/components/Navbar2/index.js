@@ -1,31 +1,47 @@
-import React from 'react';
-import logo from '../../assets/img/logo/Logo.png';
-import { useHistory } from 'react-router-dom';
+import React from "react";
+import logo from "../../assets/img/logo/Logo.png";
+import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
-	const history = useHistory();
+  const history = useHistory();
 
-	const handleHome = () => {
-		history.push('/');
-	};
+  const handleHome = () => {
+    history.push("/");
+  };
 
-	const handleSignIn = () => {
-		history.push('/login');
-	};
+  const handleSignIn = () => {
+    history.push("/login");
+  };
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    history.push("/");
+  };
 
-	return (
-		<>
-			<nav className='layout2'>
-				<div className='layout2__logo'>
-					<img src={logo} onClick={handleHome} alt='logo' className='layout2__img' />
-				</div>
+  const token = localStorage.getItem("token");
+  return (
+    <>
+      <nav className="layout2">
+        <div className="layout2__logo">
+          <img
+            src={logo}
+            onClick={handleHome}
+            alt="logo"
+            className="layout2__img"
+          />
+        </div>
 
-				<button onClick={handleSignIn} className='layout2__button'>
-					Logout
-				</button>
-			</nav>
-		</>
-	);
+        {token ? (
+          <button onClick={handleSignOut} className="layout2__button">
+            Sign Out
+          </button>
+        ) : (
+          <button onClick={handleSignIn} className="layout2__button">
+            Ready To Sweat?
+          </button>
+        )}
+      </nav>
+    </>
+  );
 };
 
 export default Navbar;

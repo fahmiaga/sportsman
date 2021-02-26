@@ -7,6 +7,7 @@ import {
   SIGN_OUT,
   SET_TOKEN,
   UPLOAD_IMAGE,
+  POST_CONTACT,
 } from "./actionTypes";
 
 export const signUp = (payload) => {
@@ -82,21 +83,6 @@ export const putBoardingData = (token, body) => (dispatch) => {
     });
 };
 
-// export const onBoardingData = (token, body) => (dispatch) => {
-//   const config = {
-//     headers: { Authorization: token },
-//   };
-//   axios
-//     .post(`https://sportsmanapp.herokuapp.com/login/update`, body, config)
-//     .then((res) => {
-//       console.log("response", res);
-//       dispatch({
-//         type: SET_BOARDING,
-//         payload: res.data.data,
-//       });
-//     });
-// };
-
 export const signOut = () => (dispatch) => {
   dispatch({
     type: SIGN_OUT,
@@ -121,6 +107,24 @@ export const uploadImage = (token, body) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: UPLOAD_IMAGE,
+        payload: res.data.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const postContact = (token, body) => (dispatch) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  axios
+    .post(`api/contact-us`, body, config)
+    .then((res) => {
+      console.log("coba", res);
+      dispatch({
+        type: POST_CONTACT,
         payload: res.data.data,
       });
     })

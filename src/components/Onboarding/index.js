@@ -16,7 +16,7 @@ const OnBoarding = () => {
   const dispatch = useDispatch();
 
   const [gender, setGender] = useState("");
-  const [intensity, setIntensity] = useState("");
+  const [level, setLevel] = useState("");
 
   const handleHome = () => {
     history.push("/");
@@ -26,19 +26,19 @@ const OnBoarding = () => {
     e.preventDefault();
     const body = {
       gender: gender,
-      intensity: intensity,
+      level: level,
     };
     dispatch(putBoardingData(token, body));
   };
 
   useEffect(() => {
     console.log("ini gender", gender);
-    console.log("ini intensity", intensity);
+    console.log("ini level", level);
     console.log("ini boarding", boarding);
     if (boarding.status === 200) {
       history.push("/");
     }
-  }, [gender, intensity, boarding, history]);
+  }, [gender, level, boarding, history]);
 
   return (
     <>
@@ -78,39 +78,39 @@ const OnBoarding = () => {
             </FormGroup>
           </div>
 
-          <h2>Select Intensity</h2>
+          <h2>Select level</h2>
           <div className="form__group field">
             <FormGroup tag="fieldset">
               <FormGroup check>
                 <Label check>
                   <Input
-                    onChange={(e) => setIntensity(e.target.value)}
+                    onChange={(e) => setLevel(e.target.value)}
                     type="radio"
-                    name="intensity"
+                    name="level"
                     value="1"
-                  />{" "}
+                  />
                   Often
                 </Label>
               </FormGroup>
               <FormGroup check>
                 <Label check>
                   <Input
-                    onChange={(e) => setIntensity(e.target.value)}
+                    onChange={(e) => setLevel(e.target.value)}
                     type="radio"
-                    name="intensity"
+                    name="level"
                     value="2"
-                  />{" "}
+                  />
                   Sometimes
                 </Label>
               </FormGroup>
               <FormGroup check>
                 <Label check>
                   <Input
-                    onChange={(e) => setIntensity(e.target.value)}
+                    onChange={(e) => setLevel(e.target.value)}
                     type="radio"
-                    name="intensity"
+                    name="level"
                     value="3"
-                  />{" "}
+                  />
                   Rarely
                 </Label>
               </FormGroup>
