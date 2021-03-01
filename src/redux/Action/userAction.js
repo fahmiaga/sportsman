@@ -7,6 +7,7 @@ import {
   SIGN_OUT,
   SET_TOKEN,
   UPLOAD_IMAGE,
+  PUT_USERDATA,
   POST_CONTACT,
 } from "./actionTypes";
 
@@ -67,7 +68,7 @@ export const onBoardingData = (payload) => {
   };
 };
 
-export const putBoardingData = (token, body) => (dispatch) => {
+export const putBoardingData = (token, body) => async (dispatch) => {
   console.log("boarding", token);
   const config = {
     headers: { Authorization: token },
@@ -76,7 +77,7 @@ export const putBoardingData = (token, body) => (dispatch) => {
     .put(`api/login/update`, body, config)
     .then((res) => {
       console.log("ini res =>", res);
-      dispatch(onBoardingData(res));
+      dispatch(onBoardingData(res.data.data));
     })
     .catch((err) => {
       console.log(err);
@@ -101,10 +102,10 @@ export const uploadImage = (token, body) => (dispatch) => {
   const config = {
     headers: { Authorization: token, "Content-Type": "multipart/form-data" },
   };
-  console.log("coba", axios);
   axios
     .post(`https://sportsmanapp.herokuapp.com/upload`, body, config)
     .then((res) => {
+      console.log("coba", res);
       dispatch({
         type: UPLOAD_IMAGE,
         payload: res.data.data,
@@ -115,6 +116,23 @@ export const uploadImage = (token, body) => (dispatch) => {
     });
 };
 
+export const putUserData = (token, userData) => (dispatch) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  axios
+    .put(`https://sportsmanapp.herokuapp.com/update`, userData, config)
+    .then((res) => {
+      console.log("putUserData => ", res);
+      dispatch({
+        type: PUT_USERDATA,
+        payload: res.data.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 export const postContact = (token, body) => (dispatch) => {
   const config = {
     headers: { Authorization: token },

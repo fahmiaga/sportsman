@@ -17,7 +17,14 @@ const Navbar = () => {
     history.push("/");
   };
 
+  // const handleSignOut = () => {
+  // 	localStorage.removeItem('token');
+  // 	history.push('/');
+  // 	window.location.reload(true);
+  // };
+
   const token = localStorage.getItem("token");
+
   return (
     <>
       <nav className="layout2">
@@ -36,7 +43,7 @@ const Navbar = () => {
           </button>
         ) : (
           <button onClick={handleSignIn} className="layout2__button">
-            Ready To Sweat?
+            Login
           </button>
         )}
       </nav>

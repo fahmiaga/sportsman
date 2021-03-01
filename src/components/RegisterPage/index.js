@@ -60,14 +60,14 @@ const RegisterPage = () => {
           <div className="form__group field">
             <input
               type="input"
-              class="form__field"
+              className="form__field"
               placeholder="Name"
               name="name"
               id="name"
               required
               onChange={handleChange}
             />
-            <label for="name" class="form__label">
+            <label for="name" className="form__label">
               Name
             </label>
           </div>
@@ -75,14 +75,14 @@ const RegisterPage = () => {
           <div className="form__group field">
             <input
               type="emailt"
-              class="form__field"
+              className="form__field"
               placeholder="Email"
               name="email"
               id="email"
               required
               onChange={handleChange}
             />
-            <label for="email" class="form__label">
+            <label for="email" className="form__label">
               Email
             </label>
           </div>
@@ -90,14 +90,14 @@ const RegisterPage = () => {
           <div className="form__group field">
             <input
               type="password"
-              class="form__field"
+              className="form__field"
               placeholder="Pasword"
               name="password"
               id="password"
               required
               onChange={handleChange}
             />
-            <label for="password" class="form__label">
+            <label for="password" className="form__label">
               Password
             </label>
           </div>

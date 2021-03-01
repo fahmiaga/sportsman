@@ -18,17 +18,17 @@ const Sidebar = () => {
             tag="a"
             href="/admin-dashboard"
           >
-            <i class="fas fa-tachometer-alt"></i> Dashboard
+            <i className="fas fa-tachometer-alt"></i> Dashboard
           </ListGroupItem>
           <ListGroupItem
             className="list-content-item mt-2"
             tag="a"
             href="/admin-content"
           >
-            <i class="fas fa-photo-video"></i> Add Content
+            <i className="fas fa-photo-video"></i> Add Content
           </ListGroupItem>
           <ListGroupItem className="list-content-item mt-2" tag="a" href="#">
-            <i class="fas fa-user-slash"></i> Remove User
+            <i className="fas fa-user-slash"></i> Remove User
           </ListGroupItem>
         </ListGroup>
       </div>

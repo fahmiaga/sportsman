@@ -105,14 +105,14 @@ const LoginPage = () => {
               <div className="form__group field">
                 <input
                   type="email"
-                  class="form__field"
+                  className="form__field"
                   placeholder="Email"
                   name="email"
                   id="email"
                   required
                   onChange={handleChange}
                 />
-                <label for="email" class="form__label">
+                <label for="email" className="form__label">
                   Email
                 </label>
               </div>
@@ -120,14 +120,14 @@ const LoginPage = () => {
               <div className="form__group field">
                 <input
                   type="password"
-                  class="form__field"
+                  className="form__field"
                   placeholder="Password"
                   name="password"
                   id="password"
                   required
                   onChange={handleChange}
                 />
-                <label for="password" class="form__label">
+                <label for="password" className="form__label">
                   Password
                 </label>
               </div>

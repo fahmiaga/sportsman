@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import AdminContent from "./pages/AdminContent";
 import AdminDashboard from "./pages/AdminDashboard";
 import ContactUs from "./pages/ContactPage";
+import Content from "./pages/Content";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -34,7 +35,8 @@ function App() {
                 />
               ))}
 
-          <Route path="/videos-content/:id" component={VideoContent} />
+          <Route path="/workout-video/:id" component={VideoContent} />
+          <Route path="/content" component={Content} />
           <Route path="/profile" component={Profile} />
           <Route path="/admin-content" component={AdminContent} />
           <Route path="/admin-dashboard" component={AdminDashboard} />

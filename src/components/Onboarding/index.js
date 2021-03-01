@@ -88,7 +88,7 @@ const OnBoarding = () => {
                     type="radio"
                     name="level"
                     value="1"
-                  />
+                  />{" "}
                   Often
                 </Label>
               </FormGroup>
@@ -99,7 +99,7 @@ const OnBoarding = () => {
                     type="radio"
                     name="level"
                     value="2"
-                  />
+                  />{" "}
                   Sometimes
                 </Label>
               </FormGroup>
@@ -110,7 +110,7 @@ const OnBoarding = () => {
                     type="radio"
                     name="level"
                     value="3"
-                  />
+                  />{" "}
                   Rarely
                 </Label>
               </FormGroup>

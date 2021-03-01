@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Jumbotron, Container } from "reactstrap";
 import Navbar from "../Navbar1";
 import background from "../../assets/img/jumbotron/jumbotron-nav.png";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { useHistory } from "react-router-dom";
 
 function JumbotronUp(props) {
@@ -14,7 +14,7 @@ function JumbotronUp(props) {
   const toggle = () => setModal(!modal);
 
   const handleClick = () => {
-    history.push("/content-video");
+    history.push("/content");
   };
 
   return (
@@ -23,13 +23,14 @@ function JumbotronUp(props) {
         className="background"
         style={{
           backgroundImage: `url(${background})`,
+          paddingTop: "0",
           marginBottom: `0`,
           borderRadius: `0`,
         }}
       >
         <Navbar />
         <h1 className="background__text">
-          Track every aspect of your workouts.{" "}
+          Track every aspect of your workouts.
         </h1>
         <button
           className="background__button"

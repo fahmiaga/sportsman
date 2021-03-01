@@ -97,7 +97,7 @@ const AdminContent = () => {
                         className="mr-2 ml-1  "
                         onClick={() => handleRemoveInput(i)}
                       >
-                        <i class="fas fa-minus-circle"></i>
+                        <i className="fas fa-minus-circle"></i>
                       </Button>
                     )}
                     {inputList.length - 1 === i && (
@@ -106,7 +106,7 @@ const AdminContent = () => {
                         color="primary"
                         onClick={() => handleAddInput(i)}
                       >
-                        <i class="fas fa-plus-circle"></i>
+                        <i className="fas fa-plus-circle"></i>
                       </Button>
                     )}
                   </>
