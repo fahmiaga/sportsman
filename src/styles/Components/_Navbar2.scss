@@ -1,0 +1,38 @@
+.layout2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  top: 3;
+  left: 0;
+  height: 70px;
+  width: 100%;
+  transition: "background .3s ease";
+
+  &__logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    right: 80px;
+    cursor: pointer;
+  }
+  &__img {
+    height: 35px;
+    margin-top: 3px;
+  }
+
+  &__button {
+    border-radius: 35px;
+    padding: 15px 40px;
+    margin-left: 20px;
+    // border: rgba(255, 255, 255, 0.363) solid 2px;
+    border: 1px solid rgba(151, 140, 140, 0.623);
+    background: white;
+    color: rgba(242, 105, 49, 1);
+    font-weight: 700;
+  }
+  &__button:hover {
+    background: rgba(235, 144, 7, 0.473);
+  }
+}

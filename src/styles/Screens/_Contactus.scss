@@ -1,0 +1,55 @@
+.Contact {
+    font-family: Montserrat;
+    &__hello-drop { 
+        // width: 80vh;
+        margin-left: 160px;
+        margin-top: 70px;
+        margin-bottom: 40px;
+        >h1 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+}
+        &__i {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            > div {
+                margin-bottom: 20px;
+            }
+            &__msg {
+                >h3{
+                font-weight: 700;
+            }
+            
+        }
+        &__input-email {
+            >input {
+                width: 70vh;
+            }
+            
+        }
+        &__textarea-msg {
+            >textarea {
+                width: 70vh;
+                height: 20vh;
+            }
+        }
+        &__btn-send {
+            >button {
+
+                border: 0;
+                width: 20vh;
+                border-radius: 15px;
+                background-color: tomato;
+                height: 6vh;
+                color: white;
+                margin-bottom: 50px;
+            }
+            >button:hover {
+                background-color: #c24914;
+            }
+        }
+    }
+
+}

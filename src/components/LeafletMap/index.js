@@ -1,8 +1,8 @@
 //Manual
-import React, { useState } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { geolocated } from "react-geolocated";
+import React, { useState } from 'react';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import { geolocated } from 'react-geolocated';
 
 function MapView() {
 	const [currentLocation] = useState({
@@ -12,10 +12,7 @@ function MapView() {
 	const [zoom] = useState(17);
 	return (
 		<MapContainer center={currentLocation} zoom={zoom}>
-			<TileLayer
-				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-				attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-			/>
+			<TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' />
 		</MapContainer>
 	);
 }

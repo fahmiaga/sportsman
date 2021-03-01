@@ -11,12 +11,12 @@ const JumbotronDown = () => {
         <h1>Join Sportsman for free</h1>
         <div>
           <button className="fb">
-            <i class="fab fa-facebook-f"></i>&nbsp; Facebook
+            <i className="fab fa-facebook-f"></i>&nbsp; Facebook
           </button>
         </div>
         <div>
           <button className="google">
-            <i class="fab fa-google"></i>&nbsp; Google
+            <i className="fab fa-google"></i>&nbsp; Google
           </button>
         </div>
         <a href="">Signup with email</a>
@@ -25,9 +25,9 @@ const JumbotronDown = () => {
           our Privacy Policy.
         </p>
       </div>
-      <div class="subscription">
+      <div className="subscription">
         <h3>Sportsman Subscription</h3>
-        <div class="explore-button">
+        <div className="explore-button">
           <button>Explore</button>
         </div>
       </div>
