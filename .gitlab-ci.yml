@@ -5,7 +5,7 @@ stages:
 
 build:
   stage: build
-  image: node:latest
+  image: node:12.18.0
   script:
     - npm install
   cache:
