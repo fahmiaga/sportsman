@@ -2,23 +2,34 @@ import React, { useState } from 'react';
 import jwt_decode from 'jwt-decode';
 import _ from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
-import { uploadImage } from '../../redux/Action/userAction';
+import { useHistory } from 'react-router-dom';
+import { uploadImage, deleteAccount, putUserData, getUserData } from '../../redux/Action/userAction';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import Navbar from '../../components/Navbar2';
 import profile from '../../assets/img/anonymous.jpg';
 
-const Profile = () => {
+const Profile = (props) => {
 	const [imageData, setImageData] = useState(null);
 	const [imageURL, setImageURL] = useState(null);
 	const [userData, setUserData] = useState({
 		name: '',
-		gender: '',
 		password: '',
 	});
-	const [gender, setGender] = useState('');
+	const [gender, setGender] = useState({
+		gender: '',
+	});
+
+	const history = useHistory();
 
 	const dispatch = useDispatch();
 	const { uploadImg } = useSelector((state) => state.users);
+
+	const { buttonLabel, className } = props;
+
+	const [modal, setModal] = useState(false);
+
+	const toggle = () => setModal(!modal);
 
 	const handleChange = (event) => {
 		setUserData({
@@ -33,12 +44,26 @@ const Profile = () => {
 		dispatch(uploadImage(token, data));
 	};
 
-	const handleUploadForm = () => {
-		//fetch API upload form
+	const handleuserData = () => {
+		dispatch(putUserData(token, userData));
+	};
+
+	const handleGetData = () => {
+		dispatch(getUserData(token, userData));
 	};
 
 	const onCreate = () => {
 		handleUploadImage();
+		handleuserData();
+		handleGetData();
+	};
+
+	const handleDeleteAccount = () => {
+		dispatch(deleteAccount(token));
+		localStorage.removeItem('token');
+		history.push('/');
+		// .then(() => props.history.push('/'));
+		// window.location.reload(true);
 	};
 
 	const token = localStorage.getItem('token');
@@ -59,33 +84,52 @@ const Profile = () => {
 					</ul>
 				</aside>
 				<main className='pr__main'>
-					<div className='pr__dis'>
-						<div>
-							{!imageURL ? (
-								<div>
-									<input
-										type='file'
-										id='upload'
-										hidden
-										onChange={(event) => {
-											setImageData(event.target.files[0]);
-											setImageURL(URL.createObjectURL(event.target.files[0]));
-										}}
-									/>
-									<label for='upload' className='profile__picture'>
-										<img src={profile} alt='upload'></img>
-									</label>
-								</div>
-							) : (
-								<>
-									<div className='profile__picture--selected'>
-										<img src={imageURL} alt='' />
-										<button onClick={() => setImageURL(null)}>remove image</button>
+					<div className='pr__wrap'>
+						<div className='pr__dis'>
+							<div>
+								{!imageURL ? (
+									<div>
+										<input
+											type='file'
+											id='upload'
+											hidden
+											onChange={(event) => {
+												setImageData(event.target.files[0]);
+												setImageURL(URL.createObjectURL(event.target.files[0]));
+											}}
+										/>
+										<label for='upload' className='profile__picture'>
+											<img src={profile} alt='upload'></img>
+										</label>
 									</div>
-								</>
-							)}
+								) : (
+									<>
+										<div className='profile__picture--selected'>
+											<img src={imageURL} alt='' />
+											<button onClick={() => setImageURL(null)}>remove image</button>
+										</div>
+									</>
+								)}
+							</div>
+							<h1>{decoded.name}</h1>
 						</div>
-						<h1>{decoded.name}</h1>
+						<button onClick={toggle}>Delete Account</button>
+						<Modal isOpen={modal} toggle={toggle} className={className}>
+							<ModalHeader toggle={toggle}>Are you sure you want to delete Your Account?</ModalHeader>
+							<ModalBody style={{ padding: '60px' }}>
+								Deleting your account will permanently remove your profile, personal settings, and all other associated information. One your account is deleted, you will
+								be logged out and will be unable to log back in.
+								<h6>If you understand and agree to the above statement, and would still like to delete your account, click below</h6>
+							</ModalBody>
+							<ModalFooter>
+								<Button onClick={handleDeleteAccount} color='primary'>
+									I Agree
+								</Button>{' '}
+								<Button color='secondary' onClick={toggle}>
+									Cancel
+								</Button>
+							</ModalFooter>
+						</Modal>
 					</div>
 					<div className='pr__edit'>
 						<tr>

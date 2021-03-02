@@ -5,13 +5,14 @@ import Logo from '../../assets/img/logo/Logo.png';
 import { useHistory } from 'react-router-dom';
 import { FormGroup, Input, Label } from 'reactstrap';
 
-const OnBoarding = (props) => {
+const OnBoarding = () => {
 	useEffect(() => {
 		document.title = `On Board`;
 	});
 
 	const token = localStorage.getItem('token');
 	const history = useHistory();
+	const boarding = useSelector((state) => state.users.boarding);
 	const dispatch = useDispatch();
 
 	const [gender, setGender] = useState('');
@@ -27,13 +28,17 @@ const OnBoarding = (props) => {
 			gender: gender,
 			level: level,
 		};
-		dispatch(putBoardingData(token, body)).then(() => props.history.push('/'));
+		dispatch(putBoardingData(token, body));
 	};
 
 	useEffect(() => {
 		console.log('ini gender', gender);
 		console.log('ini level', level);
-	}, [gender, level]);
+		console.log('ini boarding', boarding.status);
+		if (boarding.status === 200) {
+			history.push('/');
+		}
+	}, [gender, level, boarding, history]);
 
 	return (
 		<>

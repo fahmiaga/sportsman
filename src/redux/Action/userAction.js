@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE } from './actionTypes';
+import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE, PUT_USERDATA, POST_CONTACT, DELETE_ACCOUNT, GET_USERDATA } from './actionTypes';
 
 export const signUp = (payload) => {
 	return {
@@ -68,7 +68,7 @@ export const putBoardingData = (token, body) => async (dispatch) => {
 		.put(`api/login/update`, body, config)
 		.then((res) => {
 			console.log('ini res =>', res);
-			dispatch(onBoardingData(res.data.data));
+			dispatch(onBoardingData(res));
 		})
 		.catch((err) => {
 			console.log(err);
@@ -93,10 +93,10 @@ export const uploadImage = (token, body) => (dispatch) => {
 	const config = {
 		headers: { Authorization: token, 'Content-Type': 'multipart/form-data' },
 	};
-	console.log('coba', axios);
 	axios
 		.post(`api/upload`, body, config)
 		.then((res) => {
+			console.log('coba', res);
 			dispatch({
 				type: UPLOAD_IMAGE,
 				payload: res.data.data,
@@ -105,4 +105,70 @@ export const uploadImage = (token, body) => (dispatch) => {
 		.catch((err) => {
 			console.log(err);
 		});
+};
+
+export const putUserData = (token, userData) => (dispatch) => {
+	const config = {
+		headers: { Authorization: token },
+	};
+	axios
+		.put(`api/update`, userData, config)
+		.then((res) => {
+			console.log('putUserData => ', res);
+			dispatch({
+				type: PUT_USERDATA,
+				payload: res.data.data,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+export const postContact = (token, body) => (dispatch) => {
+	const config = {
+		headers: { Authorization: token },
+	};
+	axios
+		.post(`api/contact-us`, body, config)
+		.then((res) => {
+			console.log('coba', res);
+			dispatch({
+				type: POST_CONTACT,
+				payload: res.data.data,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
+export const deleteAccount = (token) => async (dispatch) => {
+	const config = {
+		headers: { Authorization: token },
+	};
+	axios.delete(`api/users/delete`, config).then((res) => {
+		if (res === 200) {
+			dispatch({
+				type: DELETE_ACCOUNT,
+				payload: res.data.message,
+			});
+		}
+	});
+};
+
+export const getUserData = (token, userData) => (dispatch) => {
+	const config = {
+		headers: { Authorization: token },
+	};
+	axios.get(`api/get`, userData, config).then((res) => {
+		console.log('ini get user data RIRI', res);
+		if (res === 200) {
+			dispatch({
+				type: GET_USERDATA,
+				payload: res,
+			}).catch((err) => {
+				console.log(err);
+			});
+		}
+	});
 };
