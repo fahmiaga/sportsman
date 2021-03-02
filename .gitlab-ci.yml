@@ -21,7 +21,7 @@ staging:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=beta-sportsman --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=beta-app-sportsman --api-key=$HEROKU_API_KEY_SPORTSMAN
   only:
     - develop
 
@@ -31,6 +31,6 @@ production:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=production-sportsman --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=app-sportsman --api-key=$HEROKU_API_KEY_SPORTSMAN
   only:
     - master

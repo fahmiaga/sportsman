@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/img/logo/Logo.png';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postSignIn } from '../../redux/Action/userAction';
 import _ from 'lodash';
@@ -41,7 +41,6 @@ const LoginPage = () => {
 	};
 
 	const handleChange = (e) => {
-		console.log('log handle change');
 		setUserData({
 			...userData,
 			[e.target.name]: e.target.value,
@@ -68,9 +67,9 @@ const LoginPage = () => {
 			history.push('/onboarding');
 			window.location.reload(true);
 		}
-	}, [data]);
+	}, [status, history]);
 
-	console.log('userData =>', status);
+	console.log('status =>', status);
 	console.log('data =>', data);
 
 	return (
@@ -93,17 +92,17 @@ const LoginPage = () => {
 							)} */}
 						</div>
 					) : (
-						<div>
+						<>
 							<div className='form__group field'>
-								<input type='email' class='form__field' placeholder='Email' name='email' id='email' required onChange={handleChange} />
-								<label for='email' class='form__label'>
+								<input type='email' className='form__field' placeholder='Email' name='email' id='email' required onChange={handleChange} />
+								<label for='email' className='form__label'>
 									Email
 								</label>
 							</div>
 
 							<div className='form__group field'>
-								<input type='password' class='form__field' placeholder='Password' name='password' id='password' required onChange={handleChange} />
-								<label for='password' class='form__label'>
+								<input type='password' className='form__field' placeholder='Password' name='password' id='password' required onChange={handleChange} />
+								<label for='password' className='form__label'>
 									Password
 								</label>
 							</div>
@@ -117,7 +116,7 @@ const LoginPage = () => {
 								<p>Logged in as: {data.name}</p>
 								<NotificationContainer />
 							</div>
-						</div>
+						</>
 					)}
 				</div>
 			</div>

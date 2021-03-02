@@ -1,12 +1,14 @@
-import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE } from '../Action/actionTypes';
+import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE, DELETE_ACCOUNT, POST_CONTACT, PUT_USERDATA, GET_USERDATA } from '../Action/actionTypes';
 
 const initialState = {
 	signUp: '',
 	signIn: '',
 	token: null,
 	status: null,
-	// jwtToken: '',
+	boarding: 0,
 	uploadImg: null,
+	contact: '',
+	userData: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -27,6 +29,7 @@ const userReducer = (state = initialState, action) => {
 				...state,
 				boarding: action.payload,
 			};
+
 		case SIGN_OUT:
 			return {
 				...state,
@@ -41,6 +44,26 @@ const userReducer = (state = initialState, action) => {
 			return {
 				...state,
 				uploadImg: action.payload,
+			};
+		case POST_CONTACT:
+			return {
+				...state,
+				contact: action.payload,
+			};
+		case PUT_USERDATA:
+			return {
+				...state,
+				userData: action.payload,
+			};
+		case GET_USERDATA:
+			return {
+				...state,
+				userData: action.payload,
+			};
+		case DELETE_ACCOUNT:
+			return {
+				...state,
+				status: action.payload,
 			};
 		default:
 			return state;

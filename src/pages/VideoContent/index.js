@@ -47,8 +47,8 @@ const VideoContent = () => {
 
   return (
     <>
-      <div class="video-content-container">
-        <div class="video-container">
+      <div Name="video-content-container">
+        <div className="video-container">
           <YouTube videoId={id} opts={opts} onReady={onReady} />
           {/* <h4>{count === 0 ? "START" : count}</h4> */}
           <CountdownCircleTimer
@@ -69,7 +69,7 @@ const VideoContent = () => {
             }
           </CountdownCircleTimer>
         </div>
-        <div class="content-sidebar">This is Sidebar</div>
+        <div className="content-sidebar">This is Sidebar</div>
       </div>
     </>
   );
