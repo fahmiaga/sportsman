@@ -7,7 +7,7 @@ build:
   stage: build
   image: node:latest
   script:
-    - npm
+    - npm install
   cache:
     paths:
       - node_modules/
