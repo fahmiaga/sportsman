@@ -11,6 +11,8 @@ import {
   POST_CONTACT,
   MESSAGE_ERROR,
   GOOGLE_AUTH,
+  DELETE_ACCOUNT,
+  GET_USERDATA,
 } from "./actionTypes";
 
 export const signUp = (payload) => {
@@ -170,4 +172,35 @@ export const postContact = (token, body) => (dispatch) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+export const deleteAccount = (token) => async (dispatch) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  axios.delete(`api/users/delete`, config).then((res) => {
+    if (res === 200) {
+      dispatch({
+        type: DELETE_ACCOUNT,
+        payload: res.data.message,
+      });
+    }
+  });
+};
+
+export const getUserData = (token) => (dispatch) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  axios.get(`api/get`, config).then((res) => {
+    console.log("ini get user data RIRI", res);
+    if (res === 200) {
+      dispatch({
+        type: GET_USERDATA,
+        payload: res,
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+  });
 };

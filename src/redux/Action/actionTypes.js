@@ -10,3 +10,5 @@ export const PUT_USERDATA = "PUT_USERDATA";
 export const GET_CONTENT_BY_ID = "GET_CONTENT_BY_ID";
 export const MESSAGE_ERROR = "MESSAGE_ERROR";
 export const GOOGLE_AUTH = "GOOGLE_AUTH";
+export const DELETE_ACCOUNT = "DELETE_ACCOUNT";
+export const GET_USERDATA = "GET_USERDATA";
