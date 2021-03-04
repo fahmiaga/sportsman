@@ -1,7 +1,8 @@
-import { GET_CONTENT } from "../Action/actionTypes";
+import { GET_CONTENT, GET_CONTENT_BY_ID } from "../Action/actionTypes";
 
 const initialState = {
   content: [],
+  video: "",
 };
 
 const contentReducer = (state = initialState, action) => {
@@ -11,6 +12,11 @@ const contentReducer = (state = initialState, action) => {
       return {
         ...state,
         content: payload,
+      };
+    case GET_CONTENT_BY_ID:
+      return {
+        ...state,
+        video: payload,
       };
     default:
       return state;

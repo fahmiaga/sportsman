@@ -7,6 +7,8 @@ import {
   UPLOAD_IMAGE,
   POST_CONTACT,
   PUT_USERDATA,
+  MESSAGE_ERROR,
+  GOOGLE_AUTH,
 } from "../Action/actionTypes";
 
 const initialState = {
@@ -18,6 +20,8 @@ const initialState = {
   uploadImg: null,
   contact: "",
   userData: [],
+  message: "",
+  google: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -63,6 +67,16 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userData: action.payload,
+      };
+    case MESSAGE_ERROR:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case GOOGLE_AUTH:
+      return {
+        ...state,
+        google: action.payload,
       };
     default:
       return state;

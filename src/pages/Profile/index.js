@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import _ from "lodash";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,6 +9,10 @@ import Navbar from "../../components/Navbar2";
 import profile from "../../assets/img/anonymous.jpg";
 
 const Profile = () => {
+  useEffect(() => {
+    document.title = "Profile";
+  }, []);
+
   const [imageData, setImageData] = useState(null);
   const [imageURL, setImageURL] = useState(null);
   const [userData, setUserData] = useState({
@@ -102,15 +106,17 @@ const Profile = () => {
                 <label htmlFor="">Name</label>
               </td>
               <td>
-                <input
-                  type="text"
-                  onChange={(event) => {
-                    handleChange(event);
-                  }}
-                  name="name"
-                  className="pr__input"
-                  placeholder="Full Name"
-                />
+                <div class="radio-toolbar">
+                  <input
+                    type="text"
+                    onChange={(event) => {
+                      handleChange(event);
+                    }}
+                    name="name"
+                    className="pr__input"
+                    placeholder="Full Name"
+                  />
+                </div>
               </td>
             </tr>
             <tr>
@@ -119,6 +125,7 @@ const Profile = () => {
               </td>
               <div className="pr__gender">
                 <div className="pr__gender__choose">
+                  {/* <input type="radio" value="male" /> */}
                   <i className="fas fa-female"></i>
                 </div>
                 <div className="pr__gender__choose">

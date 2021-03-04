@@ -7,3 +7,6 @@ export const SET_TOKEN = "SET_TOKEN";
 export const UPLOAD_IMAGE = "UPLOAD_IMAGE";
 export const GET_CONTENT = "GET_CONTENT";
 export const PUT_USERDATA = "PUT_USERDATA";
+export const GET_CONTENT_BY_ID = "GET_CONTENT_BY_ID";
+export const MESSAGE_ERROR = "MESSAGE_ERROR";
+export const GOOGLE_AUTH = "GOOGLE_AUTH";

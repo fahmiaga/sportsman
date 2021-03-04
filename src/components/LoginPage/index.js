@@ -21,6 +21,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.users.signIn);
   const status = useSelector((state) => state.users.status);
+  const errMessage = useSelector((state) => state.users.message);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -74,6 +75,7 @@ const LoginPage = () => {
 
   console.log("status =>", status);
   console.log("data =>", data);
+  console.log("error Message =>", errMessage);
 
   return (
     <>
@@ -112,7 +114,7 @@ const LoginPage = () => {
                   required
                   onChange={handleChange}
                 />
-                <label for="email" className="form__label">
+                <label htmlFor="email" className="form__label">
                   Email
                 </label>
               </div>
@@ -127,7 +129,7 @@ const LoginPage = () => {
                   required
                   onChange={handleChange}
                 />
-                <label for="password" className="form__label">
+                <label htmlFor="password" className="form__label">
                   Password
                 </label>
               </div>

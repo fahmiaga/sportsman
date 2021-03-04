@@ -9,6 +9,8 @@ import {
   UPLOAD_IMAGE,
   PUT_USERDATA,
   POST_CONTACT,
+  MESSAGE_ERROR,
+  GOOGLE_AUTH,
 } from "./actionTypes";
 
 export const signUp = (payload) => {
@@ -57,6 +59,25 @@ export const postSignIn = (body) => (dispatch) => {
       localStorage.setItem("token", res.data.data.token);
     })
     .catch((err) => {
+      console.log("error ==>", err.response);
+      dispatch({
+        type: MESSAGE_ERROR,
+        payload: err.response.data.message,
+      });
+    });
+};
+
+export const googleSignin = () => (dispatch) => {
+  axios
+    .get(`api/google`)
+    .then((res) => {
+      console.log("coba", res);
+      dispatch({
+        type: GOOGLE_AUTH,
+        payload: res.request.responseURL,
+      });
+    })
+    .catch((err) => {
       console.log(err);
     });
 };
@@ -77,7 +98,7 @@ export const putBoardingData = (token, body) => async (dispatch) => {
     .put(`api/login/update`, body, config)
     .then((res) => {
       console.log("ini res =>", res);
-      dispatch(onBoardingData(res.data.data));
+      dispatch(onBoardingData(res));
     })
     .catch((err) => {
       console.log(err);
@@ -103,7 +124,7 @@ export const uploadImage = (token, body) => (dispatch) => {
     headers: { Authorization: token, "Content-Type": "multipart/form-data" },
   };
   axios
-    .post(`https://sportsmanapp.herokuapp.com/upload`, body, config)
+    .post(`api/upload`, body, config)
     .then((res) => {
       console.log("coba", res);
       dispatch({
@@ -121,7 +142,7 @@ export const putUserData = (token, userData) => (dispatch) => {
     headers: { Authorization: token },
   };
   axios
-    .put(`https://sportsmanapp.herokuapp.com/update`, userData, config)
+    .put(`api/update`, userData, config)
     .then((res) => {
       console.log("putUserData => ", res);
       dispatch({
