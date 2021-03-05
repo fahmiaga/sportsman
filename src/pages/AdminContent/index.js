@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Row, Col, Table, Button } from "reactstrap";
 import Sidebar from "../../components/Sidebar";
-import { getContent } from "../../redux/Action/contentAction";
+import { deleteContent, getContent } from "../../redux/Action/contentAction";
 
 const AdminContent = () => {
   useEffect(() => {
@@ -21,13 +21,26 @@ const AdminContent = () => {
   }, [dispatch, token]);
   console.log("contents =>", contents);
 
+  const handleDelete = (id) => {
+    // history.push(`admin-content/${id}`);
+    dispatch(deleteContent(token, id));
+  };
+
   return (
     <>
       <Row>
         <Col md="3">
           <Sidebar />
         </Col>
-        <Col className="mt-5" md="9">
+        <Col className="mt-5 " md="9">
+          <Button
+            onClick={() => history.push(`add-content`)}
+            outline
+            color="primary"
+            className="mr-1 mb-3"
+          >
+            Add New Workout
+          </Button>
           <Table>
             <thead>
               <tr>
@@ -38,29 +51,45 @@ const AdminContent = () => {
               </tr>
             </thead>
             <tbody>
-              {contents.map((content, i) => (
-                <tr key={i}>
-                  <th scope="row">{i + 1}</th>
-                  <td>{content.title}</td>
-                  <td>{content.gender}</td>
-                  <td>
-                    <Button
-                      onClick={() => history.push(`add-content/${content._id}`)}
-                      outline
-                      color="primary"
-                      className="mr-1"
-                    >
-                      <i class="fas fa-plus-circle"></i>
-                    </Button>
-                    <Button outline color="warning" className="mr-1">
-                      <i class="fas fa-edit"></i>
-                    </Button>
-                    <Button outline color="danger" className="mr-1">
-                      <i class="fas fa-trash-alt"></i>
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+              {contents.length === 0 || undefined ? (
+                <h4>Loading...</h4>
+              ) : (
+                <>
+                  {contents.map((content, i) => (
+                    <tr key={i}>
+                      <th scope="row">{i + 1}</th>
+                      <td>{content.title}</td>
+                      <td>{content.gender}</td>
+                      <td>
+                        <Button
+                          onClick={() =>
+                            history.push(`update-content/${content._id}`)
+                          }
+                          outline
+                          color="warning"
+                          className="mr-1"
+                        >
+                          <i
+                            className="fas fa-edit"
+                            style={{ fontSize: "20px" }}
+                          ></i>
+                        </Button>
+                        <Button
+                          onClick={() => handleDelete(content._id)}
+                          outline
+                          color="danger"
+                          className="mr-1"
+                        >
+                          <i
+                            className="fas fa-trash-alt"
+                            style={{ fontSize: "20px" }}
+                          ></i>
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </>
+              )}
             </tbody>
           </Table>
         </Col>

@@ -12,3 +12,6 @@ export const MESSAGE_ERROR = "MESSAGE_ERROR";
 export const GOOGLE_AUTH = "GOOGLE_AUTH";
 export const DELETE_ACCOUNT = "DELETE_ACCOUNT";
 export const GET_USERDATA = "GET_USERDATA";
+export const POST_CONTENT = "POST_CONTENT";
+export const PUT_CONTENT = "PUT_CONTENT";
+export const DELETE_CONTENT = "DELETE_CONTENT";

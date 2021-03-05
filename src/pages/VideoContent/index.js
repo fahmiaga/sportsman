@@ -10,7 +10,7 @@ const VideoContent = () => {
   }, []);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const video = useSelector((state) => state.content.video);
+  const videos = useSelector((state) => state.content.video);
   const token = localStorage.getItem("token");
   const history = useHistory();
 
@@ -18,7 +18,7 @@ const VideoContent = () => {
     dispatch(getContentById(token, id));
   }, [dispatch, token, id]);
 
-  console.log("ini video", video);
+  console.log("ini video =>", videos.video);
 
   return (
     <>
@@ -28,20 +28,22 @@ const VideoContent = () => {
       <div className="content-video-container">
         <h3>Your Videos Workout</h3>
 
-        {video.length === 0 ? (
+        {videos.length === 0 ? (
           <h2>Loading...</h2>
         ) : (
           <>
-            {video.map((video, i) => (
+            {videos.video.map((video, i) => (
               <div key={i} className="content-video-card">
                 <div className="video-card-long">
                   <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOKuoUSuwQc_AqL2M3VnUJv4O4jP0-5fwMKw&usqp=CAU"
+                    src={`https://img.youtube.com/vi/${video.videoUrl}/0.jpg`}
                     alt=""
                   />
-                  <p>{video}</p>
-                  <div class="button-play-video">
-                    <h6 onClick={() => history.push(`video/${video}`)}>Play</h6>
+                  <p>{video.time} seconds</p>
+                  <div className="button-play-video">
+                    <h6 onClick={() => history.push(`video/${video.videoUrl}`)}>
+                      Play
+                    </h6>
                   </div>
                 </div>
               </div>

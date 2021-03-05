@@ -127,28 +127,27 @@ const Content = () => {
           <h4>Loading...</h4>
         ) : (
           <>
-            {contents.map((content, i) => (
-              <div key={i} className="content-card">
-                <img className="content-img" src={testImg} alt="test" />
+            {contents
+              .map((content, i) => (
+                <div key={i} className="content-card">
+                  <img className="content-img" src={content.image} alt="test" />
 
-                <div className="content-description">
-                  <h4>{content.title}</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Cumque aliquam totam deserunt iusto eius perspiciatis,
-                    numquam quasi quo, laboriosam eum omnis fugiat at hic
-                    consequatur unde fugit, delectus praesentium minima.
-                  </p>
-                </div>
+                  <div className="content-description">
+                    <h4>{content.title}</h4>
+                    <p>{content.description}</p>
+                  </div>
 
-                <div
-                  className="start-button"
-                  onClick={() => history.push(`/videos-content/${content._id}`)}
-                >
-                  <i className="fas fa-play"></i>
+                  <div
+                    className="start-button"
+                    onClick={() =>
+                      history.push(`/videos-content/${content._id}`)
+                    }
+                  >
+                    <i className="fas fa-play"></i>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+              .reverse()}
           </>
         )}
       </div>

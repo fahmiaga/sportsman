@@ -36,6 +36,7 @@ const Profile = (props) => {
   const token = localStorage.getItem("token");
   const history = useHistory();
   const decoded = jwt_decode(token);
+  const user = useSelector((state) => state.users.userData);
 
   const handleChange = (event) => {
     setUserData({
@@ -76,6 +77,7 @@ const Profile = (props) => {
   //   const handleUploadForm = () => {
   //     //fetch API upload form
   //   };
+  console.log("user =>", user);
 
   return (
     <div className="pr__container">

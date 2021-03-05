@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import Navbar from "../../components/Navbar1";
-import { useDispatch, useSelector } from "react-redux";
 import {
   Container,
   FormGroup,
@@ -12,54 +10,25 @@ import {
   Col,
 } from "reactstrap";
 import Sidebar from "../../components/Sidebar";
-import { postContent } from "../../redux/Action/contentAction";
+import { useDispatch, useSelector } from "react-redux";
+import { getContentById, putContent } from "../../redux/Action/contentAction";
+import { useParams } from "react-router-dom";
 
-const AddContent = () => {
+const UpdateContent = () => {
   useEffect(() => {
-    document.title = "Add Content";
+    document.title = "Update Content";
   }, []);
 
-  // const [number, setNumber] = useState(1);
-
-  // const [inputList, setInputList] = useState([
-  //   {
-  //     url: "",
-  //     timer: "",
-  //   },
-  // ]);
-
-  const [input, setInput] = useState({
-    title: "",
-    image: "",
-    equipment: "",
-    time: "",
-    gender: "",
-    intensity: "",
-    description: "",
-    url1: "",
-    time1: "",
-    url2: "",
-    time2: "",
-    url3: "",
-    time3: "",
-    url4: "",
-    time4: "",
-    url5: "",
-    time5: "",
-  });
-
   const dispatch = useDispatch();
+  const { id } = useParams();
   const token = localStorage.getItem("token");
+  const content = useSelector((state) => state.content.video);
 
-  // const handleChangeUrl = (e, i) => {
-  //   const list = [...inputList];
-  //   list[i][e.target.name] = e.target.value;
-  //   setInputList(list);
-  // };
+  const [input, setInput] = useState(content);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postContent(token, input));
+    dispatch(putContent(token, input, id));
   };
 
   const handleChangeInput = (e) => {
@@ -69,18 +38,12 @@ const AddContent = () => {
     });
   };
 
-  // const handleAddInput = () => {
-  //   setInputList([...inputList, { url: "", timer: "" }]);
-  //   setNumber(number + 1);
-  // };
-  // const handleRemoveInput = (i) => {
-  //   const list = [...inputList];
-  //   list.splice(i, 1);
-  //   setInputList(list);
-  // };
-  // console.log("input List =>", inputList);
+  useEffect(() => {
+    dispatch(getContentById(token, id));
+  }, []);
 
-  console.log("input =>", input);
+  console.log("get one input =>", input);
+
   return (
     <>
       <Row>
@@ -95,23 +58,23 @@ const AddContent = () => {
                 <FormGroup>
                   <Label for="exampleEmail">Title</Label>
                   <Input
-                    onChange={(e) => handleChangeInput(e)}
-                    // name="title"
-                    name={`title`}
+                    name="title"
+                    // name={`title`}
                     // value={inp.title}
                     placeholder="Title"
                     type="text"
+                    value={input.title}
+                    onChange={(e) => handleChangeInput(e)}
                   />
                 </FormGroup>
                 <FormGroup className="ml-4">
                   <Label for="exampleEmail">Image</Label>
                   <Input
                     onChange={(e) => handleChangeInput(e)}
-                    // name="title"
                     name="image"
-                    // value={inp.image}
                     placeholder="Image"
                     type="text"
+                    value={input.image}
                   />
                 </FormGroup>
               </Row>
@@ -122,10 +85,11 @@ const AddContent = () => {
                   type="textarea"
                   name="description"
                   id="exampleText"
+                  value={input.description}
                 />
               </FormGroup>
               <Row>
-                <FormGroup>
+                {/* <FormGroup>
                   <Label for="exampleEmail">Time</Label>
                   <Input
                     onChange={(e) => handleChangeInput(e)}
@@ -134,8 +98,9 @@ const AddContent = () => {
                     // value={inp.image}
                     placeholder="Time"
                     type="text"
+                    value={input.time}
                   />
-                </FormGroup>
+                </FormGroup> */}
                 <FormGroup className="ml-4">
                   <Label for="exampleEmail">Equipment</Label>
                   <Input
@@ -145,6 +110,7 @@ const AddContent = () => {
                     // value={inp.image}
                     placeholder="Time"
                     type="text"
+                    value={input.equipment}
                   />
                 </FormGroup>
               </Row>
@@ -160,6 +126,7 @@ const AddContent = () => {
                         id="radio2-option1"
                         value="male"
                         onChange={(e) => handleChangeInput(e)}
+                        checked={input.gender === "male"}
                       />
                       <Label check for="radio2-option1">
                         Male
@@ -171,6 +138,7 @@ const AddContent = () => {
                         name="gender"
                         id="radio2-option2"
                         value="female"
+                        checked={input.gender === "female"}
                         onChange={(e) => handleChangeInput(e)}
                       />
                       <Label check for="radio2-option2">
@@ -188,11 +156,12 @@ const AddContent = () => {
                         type="radio"
                         name="intensity"
                         id="radio2-option1"
-                        value="1"
+                        value="low"
                         onChange={(e) => handleChangeInput(e)}
+                        checked={input.gender === "low"}
                       />
                       <Label check for="radio2-option1">
-                        1
+                        Low
                       </Label>
                     </FormGroup>
                     <FormGroup check>
@@ -200,11 +169,12 @@ const AddContent = () => {
                         type="radio"
                         name="intensity"
                         id="radio2-option2"
-                        value="2"
+                        value="medium"
                         onChange={(e) => handleChangeInput(e)}
+                        checked={input.gender === "medium"}
                       />
                       <Label check for="radio2-option2">
-                        2
+                        Medium
                       </Label>
                     </FormGroup>
                     <FormGroup check>
@@ -212,11 +182,12 @@ const AddContent = () => {
                         type="radio"
                         name="intensity"
                         id="radio2-option2"
-                        value="3"
+                        value="high"
                         onChange={(e) => handleChangeInput(e)}
+                        checked={input.gender === "high"}
                       />
                       <Label check for="radio2-option2">
-                        3
+                        High
                       </Label>
                     </FormGroup>
                   </Col>
@@ -233,6 +204,7 @@ const AddContent = () => {
                     // value={inp.image}
                     placeholder="Url 1"
                     type="text"
+                    // value={input.video[0].videoUrl}
                   />
                 </FormGroup>
                 <FormGroup className="ml-4">
@@ -244,6 +216,7 @@ const AddContent = () => {
                     // value={inp.image}
                     placeholder="Time"
                     type="text"
+                    // value={input.video[0].time}
                   />
                 </FormGroup>
               </Row>
@@ -290,7 +263,7 @@ const AddContent = () => {
                     // name="title"
                     name="time3"
                     // value={inp.image}
-                    placeholder="Time 3"
+                    placeholder="Time 4"
                     type="text"
                   />
                 </FormGroup>
@@ -302,30 +275,6 @@ const AddContent = () => {
                     onChange={(e) => handleChangeInput(e)}
                     // name="title"
                     name="url4"
-                    // value={inp.image}
-                    placeholder="Url 4"
-                    type="text"
-                  />
-                </FormGroup>
-                <FormGroup className="ml-4">
-                  <Label for="exampleEmail">Time 4</Label>
-                  <Input
-                    onChange={(e) => handleChangeInput(e)}
-                    // name="title"
-                    name="time4"
-                    // value={inp.image}
-                    placeholder="Time 4"
-                    type="text"
-                  />
-                </FormGroup>
-              </Row>
-              <Row>
-                <FormGroup>
-                  <Label for="exampleEmail">Url 5</Label>
-                  <Input
-                    onChange={(e) => handleChangeInput(e)}
-                    // name="title"
-                    name="url5"
                     // value={inp.image}
                     placeholder="Url 5"
                     type="text"
@@ -391,8 +340,8 @@ const AddContent = () => {
                 );
               })} */}
               <br />
-              <Button outline color="success" className="col-md-4 mt-2 mb-2">
-                Submit
+              <Button outline color="primary" className="col-md-4 mt-2 mb-2">
+                Update
               </Button>
             </Form>
           </Container>
@@ -401,4 +350,5 @@ const AddContent = () => {
     </>
   );
 };
-export default AddContent;
+
+export default UpdateContent;

@@ -1,4 +1,10 @@
-import { GET_CONTENT, GET_CONTENT_BY_ID } from "../Action/actionTypes";
+import {
+  DELETE_CONTENT,
+  GET_CONTENT,
+  GET_CONTENT_BY_ID,
+  POST_CONTENT,
+  PUT_CONTENT,
+} from "../Action/actionTypes";
 
 const initialState = {
   content: [],
@@ -17,6 +23,21 @@ const contentReducer = (state = initialState, action) => {
       return {
         ...state,
         video: payload,
+      };
+    case POST_CONTENT:
+      return {
+        ...state,
+        content: payload,
+      };
+    case PUT_CONTENT:
+      return {
+        ...state,
+        content: payload,
+      };
+    case DELETE_CONTENT:
+      return {
+        ...state,
+        content: payload,
       };
     default:
       return state;
