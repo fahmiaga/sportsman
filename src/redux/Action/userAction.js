@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE } from './actionTypes';
+import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE,  MESSAGE_ERROR } from './actionTypes';
 
 export const signUp = (payload) => {
 	return {
@@ -48,7 +48,11 @@ export const postSignIn = (body) => (dispatch) => {
 			localStorage.setItem('token', res.data.data.token);
 		})
 		.catch((err) => {
-			console.log(err);
+			console.log("ini erornya", err.response.data.message);
+			dispatch({
+				type: MESSAGE_ERROR,
+				payload: err.response.data.message,
+			})
 		});
 };
 

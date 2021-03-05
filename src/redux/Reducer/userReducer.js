@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE } from '../Action/actionTypes';
+import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE, MESSAGE_ERROR } from '../Action/actionTypes';
 
 const initialState = {
 	signUp: '',
@@ -42,6 +42,11 @@ const userReducer = (state = initialState, action) => {
 				...state,
 				uploadImg: action.payload,
 			};
+		case MESSAGE_ERROR:
+			return {
+				...state,
+				message:action.payload,
+			}
 		default:
 			return state;
 	}
