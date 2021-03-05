@@ -1,121 +1,72 @@
-// .main-container {
-//   display: flex;
-//   flex-direction: row;
-// }
-//   .left {
-//     background-color: #e62424;
-//     padding: 10px;
-//     flex: 50%;
-//   }
+.bg-container {
+  margin: 40px;
+  display: flex;
+  background-color: rgba(240, 152, 70, 0.7);
+  // background-image: url(../../assets/img/logo/yoga.jpg);
+  // background-size: cover;
+}
 
-//   .right {
-//     background-color: dodgerblue;
-//     padding: 10px;
-//     flex: 50%;
-//   }
+.sub {
+  &__side {
+    width: 20%;
+    position: relative;
+    padding: 40px;
+    margin: auto;
+    align-items: center;
+    box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
+    -webkit-box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
+    -moz-box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
+    >ul {
+      padding-left: 0;
+      align-items: center;
+    }
+    >ul li {
+      padding: 15px 0;
+      margin-bottom: 15px;
+      text-align: center;
+      // outline-color: honeydew;
+      border-bottom: gray 1px solid;
+      cursor: pointer;
+    }
 
-//   @include for-size(tablet) {
-//     flex-direction: column;
-//   }
-//   @include for-size(phone) {
-//     flex-direction: column;  
-//   }
 
-  
-  // .back-page {
-  //   margin: 40px;
-  //   display: flex;
-  // }
-  
-  // .left {
-  //   &__dis {
-  //     display: flex;
-  //     margin-bottom: 30px;
-  //     align-items: center;
-  //     width: 500px;
-  //     >img {
-  //       width: 160px;
-  //       height: 160px;
-  //       margin-right: 30px;
-  //       margin-left: 40px;
-  //       clip-path: circle(50% at 50% 50%);
-  //       cursor: pointer;
-  //     }
-  //     >h1 {
-  //       display: flex;
-  //       align-items: center;
-  //     }
-  //   }
-  //   &__main {
-  //     width: 80%;
-  //     margin-left: 25px;
-  //     display: flex;
-  //     box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
-  //     -webkit-box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
-  //     -moz-box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
-  //   }
-  //   &__aside {
-  //     width: 20%;
-  //     padding-top: 40px;
-  //     box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
-  //     -webkit-box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
-  //     -moz-box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
-  //     >ul {
-  //       padding-left: 0;
-  //     }
-  //     >ul li {
-  //       padding: 15px 0;
-  //       margin-bottom: 15px;
-  //       text-align: center;
-  //       border-bottom: gray 1px solid;
-  //       cursor: pointer;
-  //     }
-  //   }
-  //   &__edit {
-  //     padding: 50px;
-  //     >div {
-  //       display: flex;
-  //       flex-direction: row;
-  //       display: grid;
-  //       grid-template-columns: 0.25fr 1fr;
-  //     }
-  //     >tr td{
-  //       padding-top: 30px;
-  //     }
-  //   }
-  //   &__label {
-  //     padding-right: 45px;
-  //     padding-bottom: 20px;
-  //     font-weight: 500;
-  //   }
-  //   &__input {
-  //     border: none;
-  //     background: transparent;
-  //     border-bottom: 2px solid #9b9b9b;
-  //     width: 350px;
-  //   }
-  //   &__gender {
-  //     display: flex;
-  //     justify-content: space-around;
-  //     &__choose {
-  //       margin: 0 10px;
-  //       border: 2px solid grey;
-  //       padding: 40px 50px;
-  //       border-radius: 15px;
-  //     }
-  //     &__choose:hover {
-  //       background-color: rgba(242, 104, 49, 0.603);
-  //     }
-  //   }
-  //   &__button {
-  //     margin: auto 200px;
-  //     color: white;
-  //     font-weight: 500;
-  //     margin-top: 15px;
-  //     padding: 15px 40px;
-  //     border: none;
-  //     background-color: rgba(242, 105, 49, 1);
-  //     border-radius: 8px;
-  //   }
-  
-  // }
+  &__dis {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+    width: 500px;
+    >img {
+      width: 160px;
+      height: 160px;
+      margin-right: 30px;
+      margin-left: 40px;
+      clip-path: circle(50% at 50% 50%);
+      cursor: pointer;
+    }
+    >h1 {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+
+  &__main {
+    width: 80%;
+    margin-left: 25px;
+    display: flex;
+    box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
+    -webkit-box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
+    -moz-box-shadow: 2px 4px 12px 1px rgba(140,140,140,0.75);
+  }
+  &__button {
+    margin: auto 200px;
+    color: rgb(40, 26, 236);
+    font-weight: 500;
+    margin-top: 15px;
+    padding: 15px 40px;
+    border: none;
+    background-color: rgba(242, 105, 49, 1);
+    border-radius: 8px;
+    }
+  }
+}
