@@ -5,35 +5,40 @@ import Logo from '../../assets/img/logo/Logo.png';
 import { useHistory } from 'react-router-dom';
 import { FormGroup, Button } from 'reactstrap';
 
-const OnBoarding = (props) => {
-	useEffect(() => {
-		document.title = `On Board`;
-	});
+const OnBoarding = () => {
+  useEffect(() => {
+    document.title = `On Board`;
+  });
 
-	const token = localStorage.getItem('token');
-	const history = useHistory();
-	const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
+  const history = useHistory();
+  const boarding = useSelector((state) => state.users.boarding);
+  const dispatch = useDispatch();
 
-	const [gender, setGender] = useState('');
-	const [level, setLevel] = useState('');
+  const [gender, setGender] = useState("");
+  const [level, setLevel] = useState("");
 
-	const handleHome = () => {
-		history.push('/');
-	};
+  const handleHome = () => {
+    history.push("/");
+  };
 
-	const onSubmit = (e) => {
-		e.preventDefault();
-		const body = {
-			gender: gender,
-			level: level,
-		};
-		dispatch(putBoardingData(token, body)).then(() => props.history.push('/'));
-	};
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const body = {
+      gender: gender,
+      level: level,
+    };
+    dispatch(putBoardingData(token, body));
+  };
 
-	useEffect(() => {
-		console.log('ini gender', gender);
-		console.log('ini level', level);
-	}, [gender, level]);
+  useEffect(() => {
+    console.log("ini gender", gender);
+    console.log("ini level", level);
+    console.log("ini boarding", boarding);
+    if (boarding.status === 200) {
+      history.push("/");
+    }
+  }, [gender, level, boarding, history]);
 
 	return (
 		<>
@@ -61,14 +66,14 @@ const OnBoarding = (props) => {
 						</FormGroup>
 					</div>
 
-					<button onClick={onSubmit} className='signin-button'>
-						Submit
-					</button>
-					<div className='redirect'></div>
-				</div>
-			</div>
-		</>
-	);
+          <button onClick={onSubmit} className="signin-button">
+            Submit
+          </button>
+          <div className="redirect"></div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default OnBoarding;

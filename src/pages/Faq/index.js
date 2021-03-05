@@ -18,12 +18,12 @@ const Faq = () => {
 
   return (
     <>
-      <div class="jumbotron-faq">
+      <div className="jumbotron-faq">
         <Navbar />
-        <div class="jumbotron-input">
+        <div className="jumbotron-input">
           <p>Frequenty Asked Questions/FAQ</p>
-          <div class="input-icon">
-            <i class="fas fa-search"></i>
+          <div className="input-icon">
+            <i className="fas fa-search"></i>
             <input
               type="text"
               placeholder="              Search Your Questions Here"
@@ -35,7 +35,7 @@ const Faq = () => {
       <Container className="mt-5 mb-5">
         <Row>
           <Col md="4">
-            <div class="titles">
+            <div className="titles">
               <ul style={{ fontWeight: 500 }}>
                 <li>
                   Get Started
@@ -69,7 +69,7 @@ const Faq = () => {
             </div>
           </Col>
           <Col md="6">
-            <div class="questions">
+            <div className="questions">
               <ul style={{ fontWeight: 700 }}>
                 <li>
                   <div

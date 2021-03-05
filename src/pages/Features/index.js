@@ -2,14 +2,14 @@ import React from 'react';
 import { Jumbotron } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 
-import background from '../../assets/img/jumbotron/image2.png';
-import firstBody from '../../assets/img/feature/group-1.png';
-import groupOne from '../../assets/img/feature/feature-1.png';
-import secondBody from '../../assets/img/feature/group-2.png';
-import groupTwo from '../../assets/img/feature/feature-2.png';
-import thirdBody from '../../assets/img/feature/group-3.png';
-import groupThree from '../../assets/img/feature/feature-3.png';
-import Navbar from '../../components/Navbar1';
+import background from "../../assets/img/jumbotron/image2.png";
+import firstBody from "../../assets/img/feature/group-1.png";
+import groupOne from "../../assets/img/feature/feature-1.png";
+import secondBody from "../../assets/img/feature/group-2.png";
+import groupTwo from "../../assets/img/feature/feature-2.png";
+import thirdBody from "../../assets/img/feature/group-3.png";
+import groupThree from "../../assets/img/feature/feature-3.png";
+import Navbar from "../../components/Navbar1";
 
 const Features = () => {
 

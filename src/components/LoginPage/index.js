@@ -24,13 +24,13 @@ const LoginPage = () => {
 		password: '',
 	});
 
-	const handleSignUp = () => {
-		history.push('/register');
-	};
+  const handleSignUp = () => {
+    history.push("/register");
+  };
 
-	const handleHome = () => {
-		history.push('/');
-	};
+  const handleHome = () => {
+    history.push("/");
+  };
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -42,30 +42,30 @@ const LoginPage = () => {
 		}
 	};
 
-	const handleChange = (e) => {
-		console.log('log handle change');
-		setUserData({
-			...userData,
-			[e.target.name]: e.target.value,
-		});
-	};
+  const handleChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
 	const token = localStorage.getItem('token');
 
-	let decoded;
-	if (token && !_.isEmpty(token)) decoded = jwt_decode(token);
+  let decoded;
+  if (token && !_.isEmpty(token)) decoded = jwt_decode(token);
 
-	useEffect(() => {
-		if (status) {
-			history.push('/');
-		} else if (status === false) {
-			history.push('/onboarding');
-			window.location.reload(true);
-		}
-	}, [data]);
+  useEffect(() => {
+    if (status) {
+      history.push("/");
+    } else if (status === false) {
+      history.push("/onboarding");
+      window.location.reload(true);
+    }
+  }, [status, history]);
 
-	console.log('userData =>', status);
-	console.log('data =>', data);
+  console.log("status =>", status);
+  console.log("data =>", data);
+
 
 	return (
 		<>
@@ -89,12 +89,20 @@ const LoginPage = () => {
 								</label>
 							</div>
 
-							<div className='form__group field'>
-								<input type='password' class='form__field' placeholder='Password' name='password' id='password' required onChange={handleChange} />
-								<label for='password' class='form__label'>
-									Password
-								</label>
-							</div>
+              <div className="form__group field">
+                <input
+                  type="password"
+                  className="form__field"
+                  placeholder="Password"
+                  name="password"
+                  id="password"
+                  required
+                  onChange={handleChange}
+                />
+                <label htmlFor="password" className="form__label">
+                  Password
+                </label>
+              </div>
 
 							<button onClick={onSubmit} className='signin-button'>
 								SIGN IN
