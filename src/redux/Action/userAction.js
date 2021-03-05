@@ -192,15 +192,18 @@ export const getUserData = (token) => (dispatch) => {
   const config = {
     headers: { Authorization: token },
   };
-  axios.get(`api/get`, config).then((res) => {
-    console.log("ini get user data RIRI", res);
-    if (res === 200) {
-      dispatch({
-        type: GET_USERDATA,
-        payload: res,
-      }).catch((err) => {
-        console.log(err);
-      });
-    }
-  });
+  axios
+    .get(`api/get`, config)
+    .then((res) => {
+      console.log("ini get user data RIRI", res);
+      if (res.status === 200) {
+        dispatch({
+          type: GET_USERDATA,
+          payload: res.data,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

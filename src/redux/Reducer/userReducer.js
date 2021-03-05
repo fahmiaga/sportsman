@@ -7,6 +7,7 @@ import {
   UPLOAD_IMAGE,
   POST_CONTACT,
   PUT_USERDATA,
+  GET_USERDATA,
   MESSAGE_ERROR,
   GOOGLE_AUTH,
 } from "../Action/actionTypes";
@@ -64,6 +65,11 @@ const userReducer = (state = initialState, action) => {
         contact: action.payload,
       };
     case PUT_USERDATA:
+      return {
+        ...state,
+        userData: action.payload,
+      };
+    case GET_USERDATA:
       return {
         ...state,
         userData: action.payload,

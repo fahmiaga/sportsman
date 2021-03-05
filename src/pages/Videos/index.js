@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 // import { useParams } from "react-router-dom";
 import YouTube from "react-youtube";
 // import { CountdownCircleTimer } from "react-countdown-circle-timer";
@@ -30,6 +31,8 @@ const Videos = () => {
       setDisable(false);
     }, e.target.getDuration() * 1000);
   };
+
+  const { id } = useParams();
 
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -99,7 +102,7 @@ const Videos = () => {
     <>
       <Navbar />
       <div className="video-container">
-        <YouTube videoId="UOaz2GbVE9E" opts={opts} onReady={onReady} />
+        <YouTube videoId={`${id}`} opts={opts} onReady={onReady} />
       </div>
       <div className="timer-workout">
         <div className="video-timer">
