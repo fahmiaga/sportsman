@@ -3,6 +3,7 @@ import { getContentById } from "../../redux/Action/contentAction";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/Navbar1";
+import { postFavorite } from "../../redux/Action/userAction";
 
 const VideoContent = () => {
   useEffect(() => {
@@ -14,6 +15,7 @@ const VideoContent = () => {
   const token = localStorage.getItem("token");
   const history = useHistory();
 
+
   useEffect(() => {
     dispatch(getContentById(token, id));
   }, [dispatch, token, id]);
@@ -22,6 +24,7 @@ const VideoContent = () => {
 
   return (
     <>
+      
       <div className="content-video-jumbotron">
         <Navbar />
       </div>

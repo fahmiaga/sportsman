@@ -15,3 +15,4 @@ export const GET_USERDATA = "GET_USERDATA";
 export const POST_CONTENT = "POST_CONTENT";
 export const PUT_CONTENT = "PUT_CONTENT";
 export const DELETE_CONTENT = "DELETE_CONTENT";
+export const POST_FAVORITE = "POST_FAVORITE";

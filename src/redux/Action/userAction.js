@@ -13,6 +13,7 @@ import {
   GOOGLE_AUTH,
   DELETE_ACCOUNT,
   GET_USERDATA,
+  POST_FAVORITE,
 } from "./actionTypes";
 
 export const signUp = (payload) => {
@@ -199,6 +200,25 @@ export const getUserData = (token) => (dispatch) => {
       if (res.status === 200) {
         dispatch({
           type: GET_USERDATA,
+          payload: res.data,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+export const postFavorite = (token, body) => (dispatch) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  axios
+    .post(`https://sportsmanapp.herokuapp.com/favourite`, body, config)
+    .then((res) => {
+      console.log("ini get user data RIRI", res);
+      if (res.status === 200) {
+        dispatch({
+          type: POST_FAVORITE,
           payload: res.data,
         });
       }

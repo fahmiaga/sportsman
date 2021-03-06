@@ -84,10 +84,10 @@ export const deleteContent = (token, id) => (dispatch) => {
   axios
     .delete(`api/admin/content/${id}`, config)
     .then((res) => {
-      console.log("coba", res);
+      console.log("delete =>", res);
       dispatch({
         type: DELETE_CONTENT,
-        payload: res.data,
+        payload: res,
       });
     })
     .catch((err) => {

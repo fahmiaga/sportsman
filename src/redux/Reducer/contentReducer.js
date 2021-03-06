@@ -8,6 +8,7 @@ import {
 
 const initialState = {
   content: [],
+  message: "",
   video: "",
 };
 
@@ -28,6 +29,7 @@ const contentReducer = (state = initialState, action) => {
       return {
         ...state,
         content: payload,
+        message: payload,
       };
     case PUT_CONTENT:
       return {
@@ -37,7 +39,7 @@ const contentReducer = (state = initialState, action) => {
     case DELETE_CONTENT:
       return {
         ...state,
-        content: payload,
+        message: payload,
       };
     default:
       return state;

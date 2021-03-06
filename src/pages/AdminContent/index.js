@@ -13,18 +13,25 @@ const AdminContent = () => {
 
   const history = useHistory();
   const contents = useSelector((state) => state.content.content);
+  const message = useSelector((state) => state.content.message);
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getContent(token));
   }, [dispatch, token]);
-  console.log("contents =>", contents);
+  console.log("message =>", message);
 
   const handleDelete = (id) => {
     // history.push(`admin-content/${id}`);
     dispatch(deleteContent(token, id));
   };
+
+  useEffect(() => {
+    if (message.status === 200) {
+      window.location.reload();
+    }
+  }, [message]);
 
   return (
     <>
