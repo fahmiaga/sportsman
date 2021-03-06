@@ -13,7 +13,7 @@ import Profile from './pages/Profile';
 import OnBoarding from './components/Onboarding';
 import VideoContent from './pages/VideoContent';
 import ContactPage from './pages/ContactPage';
-import Tracking from './pages/HistoryTracking';
+import HistoryUser from './pages/HistoryUser/index';
 
 export const publicRoutes = [
 	{
@@ -127,8 +127,8 @@ export const privateRoutes = [
 		exact: true,
 	},
 	{
-		component: Tracking,
-		path: '/tracking',
+		component: HistoryUser,
+		path: '/history',
 		exact: true,
 	},
 ];

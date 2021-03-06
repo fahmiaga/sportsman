@@ -15,8 +15,8 @@ const Features = () => {
 
 	const history = useHistory();
 
-	const handleTracking = () => {
-		history.push('/tracking');
+	const handleHistory = () => {
+		history.push('/history');
 	};
 
 	return (
@@ -31,7 +31,7 @@ const Features = () => {
 				}}>
 				<Navbar />
 				<h1 className='feature__text'>Measure your performance with us </h1>
-				<button onClick={handleTracking} className='background__button'>Tracking your Record</button>
+				<button onClick={handleHistory} className='background__button'>Tracking your Record</button>
 			</Jumbotron>
 			<div className='first-body'>
 				<img src={firstBody} alt='' />

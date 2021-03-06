@@ -35,10 +35,10 @@ const LoginPage = () => {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		dispatch(postSignIn(userData));
-		if (_.isEmpty(data)) {
-			NotificationManager.info('Loading', '', 3000);
-		} else if (message === "Cannot Find Users") {
-			NotificationManager.info('Email/Password is wrong', '', 1000);
+		if(message){
+			NotificationManager.info('Email/Password is wrong','',1000);
+		// } else if (_.isEmpty(data)){
+		// 	NotificationManager.info('Loading', '', 3000);
 		}
 	};
 
@@ -49,7 +49,7 @@ const LoginPage = () => {
     });
   };
 
-	const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token');
 
   let decoded;
   if (token && !_.isEmpty(token)) decoded = jwt_decode(token);
@@ -64,7 +64,7 @@ const LoginPage = () => {
   }, [status, history]);
 
   console.log("status =>", status);
-  console.log("data =>", data);
+  console.log("error =>", message);
 
 
 	return (
@@ -89,20 +89,20 @@ const LoginPage = () => {
 								</label>
 							</div>
 
-              <div className="form__group field">
-                <input
-                  type="password"
-                  className="form__field"
-                  placeholder="Password"
-                  name="password"
-                  id="password"
-                  required
-                  onChange={handleChange}
-                />
-                <label htmlFor="password" className="form__label">
-                  Password
-                </label>
-              </div>
+              				<div className="form__group field">
+                			<input
+                  				type="password"
+                  				className="form__field"
+                  				placeholder="Password"
+                  				name="password"
+                  				id="password"
+                  				required
+                  				onChange={handleChange}
+                			/>
+                			<label htmlFor="password" className="form__label">
+                  				Password
+                			</label>
+              				</div>
 
 							<button onClick={onSubmit} className='signin-button'>
 								SIGN IN
@@ -110,7 +110,6 @@ const LoginPage = () => {
 							<div className='redirect'>
 								Don't have an account?
 								<span onClick={handleSignUp}> Register here</span>
-								<p>Logged in as: {data.name}</p>
 								<NotificationContainer />
 							</div>
 						</>

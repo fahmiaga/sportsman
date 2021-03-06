@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { SIGN_IN, SIGN_UP, SET_BOARDING, SIGN_OUT, SET_TOKEN, UPLOAD_IMAGE,  MESSAGE_ERROR } from './actionTypes';
-=======
-import axios from "axios";
-import jwt_decode from "jwt-decode";
 import {
   SIGN_IN,
   SIGN_UP,
@@ -19,7 +14,6 @@ import {
   DELETE_ACCOUNT,
   GET_USERDATA,
 } from "./actionTypes";
->>>>>>> a6a1dbf47e32f8c100759b85893fdbf45aec1de0
 
 export const signUp = (payload) => {
   return {
@@ -67,7 +61,7 @@ export const postSignIn = (body) => (dispatch) => {
       localStorage.setItem("token", res.data.data.token);
     })
     .catch((err) => {
-      console.log("error ==>", err.response);
+      // console.log("error ==>", err.response);
       dispatch({
         type: MESSAGE_ERROR,
         payload: err.response.data.message,
@@ -79,7 +73,6 @@ export const googleSignin = () => (dispatch) => {
   axios
     .get(`api/google`)
     .then((res) => {
-      console.log("coba", res);
       dispatch({
         type: GOOGLE_AUTH,
         payload: res.request.responseURL,
