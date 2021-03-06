@@ -7,11 +7,9 @@ const HistoryUser = () => {
   return (
     <>
         <Navbar />
-        <div className='bg-container'>
-        {/* <div className='sub__side'> */}           		 
+        <div className='bg-container'>        		 
           <Button/> 
         </div> 
-        {/* </div>   */}
     </>
   )
 }

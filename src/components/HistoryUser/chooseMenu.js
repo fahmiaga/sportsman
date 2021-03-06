@@ -30,12 +30,12 @@ const ListMenu = () => {
     <>
         <div>
         <Container>
-          <Button color="primary" onClick={trackbtn}
+          <Button color="danger" onClick={trackbtn}
             className={btnActive.overview ? "mr-2 mb-2 rounded-pill button--inactive" : "mr-2 mb-2 rounded-pill button--active"}>
             Tracking
           </Button>
 
-          <Button color="info" onClick={workbtn}
+          <Button color="danger" onClick={workbtn}
             className={btnActive.casts ? "mr-2 mb-2 rounded-pill button--inactive" : "mr-2 mb-2 rounded-pill button--active"}>
             Workout
           </Button>
