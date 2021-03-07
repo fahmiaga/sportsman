@@ -1,51 +1,53 @@
-import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+import _ from "lodash";
 import {
-	SIGN_IN,
-	SIGN_UP,
-	SET_BOARDING,
-	SIGN_OUT,
-	SET_TOKEN,
-	UPLOAD_IMAGE,
-	PUT_USERDATA,
-	POST_CONTACT,
-	MESSAGE_ERROR,
-	GOOGLE_AUTH,
-	DELETE_ACCOUNT,
-	GET_USERDATA,
+  SIGN_IN,
+  SIGN_UP,
+  SET_BOARDING,
+  SIGN_OUT,
+  SET_TOKEN,
+  UPLOAD_IMAGE,
+  PUT_USERDATA,
+  POST_CONTACT,
+  MESSAGE_ERROR,
+  GOOGLE_AUTH,
+  DELETE_ACCOUNT,
+  GET_USERDATA,
 } from "./actionTypes";
 
 export const signUp = (payload) => {
-	return {
-		type: SIGN_UP,
-		payload,
-	};
+  return {
+    type: SIGN_UP,
+    payload,
+  };
 };
 
 export const postSignUp = (body) => (dispatch) => {
-	axios.post(`api/register`, body)
-		.then((res) => {
-			console.log("ini res =>", res);
-			const decoded = jwt_decode(res.data.data.token);
-			dispatch(signIn(decoded));
-		})
-		.catch((err) => {
-			console.log(err);
-		});
+  axios
+    .post(`api/register`, body)
+    .then((res) => {
+      console.log("ini res =>", res);
+      const decoded = jwt_decode(res.data.data.token);
+      dispatch(signIn(decoded));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 export const signIn = (payload) => {
-	return {
-		type: SIGN_IN,
-		payload,
-	};
+  return {
+    type: SIGN_IN,
+    payload,
+  };
 };
 
 export const setToken = (token) => {
-	return {
-		type: SET_TOKEN,
-		token,
-	};
+  return {
+    type: SET_TOKEN,
+    token,
+  };
 };
 
 export const postSignIn = (body) => (dispatch) => {
@@ -83,32 +85,31 @@ export const googleSignin = () => (dispatch) => {
 };
 
 export const onBoardingData = (payload) => {
-	return {
-		type: SET_BOARDING,
-		payload,
-	};
+  return {
+    type: SET_BOARDING,
+    payload,
+  };
 };
 
-export const putBoardingData = (token, body) => async (dispatch) => {
-	console.log("boarding", token);
-	const config = {
-		headers: { Authorization: token },
-	};
-	axios.put(`api/login/update`, body, config)
-		.then((res) => {
-			console.log("ini res =>", res);
-			dispatch(onBoardingData(res));
-		})
-		.catch((err) => {
-			console.log(err);
-		});
+export const putBoardingData = (body) => async (dispatch) => {
+  const config = {
+    headers: { Authorization: localStorage.getItem("token") },
+  };
+  axios
+    .put(`api/login/update`, body, config)
+    .then((res) => {
+      dispatch(onBoardingData(res));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 export const signOut = () => (dispatch) => {
-	dispatch({
-		type: SIGN_OUT,
-		payload: localStorage.removeItem("token"),
-	});
+  dispatch({
+    type: SIGN_OUT,
+    payload: localStorage.removeItem("token"),
+  });
 };
 
 // export const setDataToken = () => (dispatch) => {
@@ -118,88 +119,94 @@ export const signOut = () => (dispatch) => {
 // 	});
 // };
 
-export const uploadImage = (token, body) => (dispatch) => {
-	const config = {
-		headers: {
-			Authorization: token,
-			"Content-Type": "multipart/form-data",
-		},
-	};
-	axios.post(`api/upload`, body, config)
-		.then((res) => {
-			console.log("coba", res);
-			dispatch({
-				type: UPLOAD_IMAGE,
-				payload: res.data.data,
-			});
-		})
-		.catch((err) => {
-			console.log(err);
-		});
+export const uploadImage = (body) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  axios
+    .post(`/api/upload`, body, config)
+    .then((res) => {
+      dispatch({
+        type: UPLOAD_IMAGE,
+        payload: res.data.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
-export const putUserData = (token, userData) => (dispatch) => {
-	const config = {
-		headers: { Authorization: token },
-	};
-	axios.put(`api/update`, userData, config)
-		.then((res) => {
-			console.log("putUserData => ", res);
-			dispatch({
-				type: PUT_USERDATA,
-				payload: res.data.data,
-			});
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-};
-export const postContact = (token, body) => (dispatch) => {
-	const config = {
-		headers: { Authorization: token },
-	};
-	axios.post(`api/contact-us`, body, config)
-		.then((res) => {
-			console.log("coba", res);
-			dispatch({
-				type: POST_CONTACT,
-				payload: res.data.data,
-			});
-		})
-		.catch((err) => {
-			console.log(err);
-		});
+export const putUserData = (userData) => (dispatch) => {
+  const config = {
+    headers: { Authorization: localStorage.getItem("token") },
+  };
+  axios
+    .put(`/api/update`, userData, config)
+    .then((res) => {
+      console.log("putUserData => ", res);
+      localStorage.setItem("token", res.data.data[0]);
+      let decoded;
+      if (res.data.data && !_.isEmpty(res.data.data[0])) {
+        decoded = jwt_decode(res.data.data[0]);
+      }
+      dispatch({
+        type: PUT_USERDATA,
+        payload: decoded,
+      });
+      alert("Update Data Success");
+      window.location.reload(true);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
-export const deleteAccount = (token) => async (dispatch) => {
-	const config = {
-		headers: { Authorization: token },
-	};
-	axios.delete(`api/users/delete`, config).then((res) => {
-		if (res === 200) {
-			dispatch({
-				type: DELETE_ACCOUNT,
-				payload: res.data.message,
-			});
-		}
-	});
+export const postContact = (body) => (dispatch) => {
+  const config = {
+    headers: { Authorization: localStorage.getItem("token") },
+  };
+  axios
+    .post(`api/contact-us`, body, config)
+    .then((res) => {
+      dispatch({
+        type: POST_CONTACT,
+        payload: res.data.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
-export const getUserData = (token) => (dispatch) => {
-	const config = {
-		headers: { Authorization: token },
-	};
-	axios.get(`api/get`, config)
-		.then((res) => {
-			console.log("ini get user data RIRI", res);
-			if (res.status === 200) {
-				dispatch({
-					type: GET_USERDATA,
-					payload: res.data,
-				});
-			}
-		})
-		.catch((err) => {
-			console.log(err);
-		});
+export const deleteAccount = () => async (dispatch) => {
+  const config = {
+    headers: { Authorization: localStorage.getItem("token") },
+  };
+  axios.delete(`api/users/delete`, config).then((res) => {
+    dispatch({
+      type: DELETE_ACCOUNT,
+      payload: res.data.message,
+    });
+  });
+};
+
+export const getUserData = () => (dispatch) => {
+  const config = {
+    headers: { Authorization: localStorage.getItem("token") },
+  };
+  axios
+    .get(`/api/get`, config)
+    .then((res) => {
+      console.log("ini get user data RIRI", res.data);
+      dispatch({
+        type: GET_USERDATA,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
