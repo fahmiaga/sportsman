@@ -15,6 +15,8 @@ import {
   DELETE_ACCOUNT,
   GET_USERDATA,
   POST_FAVORITE,
+  POST_EXERCISE,
+  GET_EXERCISE,
 } from "./actionTypes";
 
 export const signUp = (payload) => {
@@ -211,22 +213,41 @@ export const getUserData = () => (dispatch) => {
       console.log(err);
     });
 };
-// export const postFavorite = (token, body) => (dispatch) => {
-//   const config = {
-//     headers: { Authorization: token },
-//   };
-//   axios
-//     .post(`https://sportsmanapp.herokuapp.com/favourite`, body, config)
-//     .then((res) => {
-//       console.log("ini get user data RIRI", res);
-//       if (res.status === 200) {
-//         dispatch({
-//           type: POST_FAVORITE,
-//           payload: res.data,
-//         });
-//       }
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
+export const getExercise = () => (dispatch) => {
+  const config = {
+    headers: { Authorization: localStorage.getItem("token") },
+  };
+  axios
+    .get(`/api/history`, config)
+    .then((res) => {
+      console.log("ini exercise =>", res);
+      if (res.status === 200) {
+        dispatch({
+          type: GET_EXERCISE,
+          payload: res,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+export const postExercise = (body) => (dispatch) => {
+  const config = {
+    headers: { Authorization: localStorage.getItem("token") },
+  };
+  axios
+    .post(`/api/history`, body, config)
+    .then((res) => {
+      console.log("ini exercise =>", res);
+      if (res.status === 200) {
+        dispatch({
+          type: POST_EXERCISE,
+          payload: res,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

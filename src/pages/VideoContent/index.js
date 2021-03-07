@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/Navbar1";
 // import { postFavorite } from "../../redux/Action/userAction";
 import { bookmarkVideo } from "../../redux/Action/bookmarkAction";
-import Video from "../Videos";
 
 const VideoContent = () => {
   useEffect(() => {
@@ -33,7 +32,6 @@ const VideoContent = () => {
 
   return (
     <>
-      <Video content={videos.video} />
       <div className="content-video-jumbotron">
         <Navbar />
       </div>
@@ -60,7 +58,14 @@ const VideoContent = () => {
                   />
                   <p>{video.time} seconds</p>
                   <div className="button-play-video">
-                    <h6 onClick={() => history.push(`video/${video.videoUrl}`)}>
+                    <h6
+                      onClick={() =>
+                        history.push({
+                          pathname: `video/${video.videoUrl}`,
+                          title: videos.title,
+                        })
+                      }
+                    >
                       Play
                     </h6>
                     {/* <button

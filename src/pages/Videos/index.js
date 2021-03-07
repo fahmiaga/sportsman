@@ -4,8 +4,14 @@ import { useParams } from "react-router-dom";
 import YouTube from "react-youtube";
 // import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import Navbar from "../../components/Navbar2";
+import { useDispatch, useSelector } from "react-redux";
+import { postExercise } from "../../redux/Action/userAction";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
-const Videos = () => {
+const Videos = (props) => {
   // const { id } = useParams();
   // let [count, setCount] = useState(5);
 
@@ -16,6 +22,7 @@ const Videos = () => {
   }, []);
 
   const [disable, setDisable] = useState(true);
+  const [videoTitle, setVideoTitle] = useState("");
 
   const opts = {
     height: "500",
@@ -26,55 +33,22 @@ const Videos = () => {
   };
   const onReady = (e) => {
     console.log("video => ", e.target.playerInfo.videoData.title);
+    setVideoTitle(e.target.playerInfo.videoData.title);
     e.target.playVideo();
     setTimeout(function () {
       setDisable(false);
     }, e.target.getDuration() * 1000);
   };
 
+  const dispatch = useDispatch();
   const { id } = useParams();
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCount((count -= 1));
-  //     if (count === maxCount) {
-  //       clearInterval(interval);
-  //     }
-  //   }, 1000);
-  // }, []);
-
-  // const onReady = (e) => {
-  //   console.log("e target =>", e.target);
-  //   e.target.pauseVideo();
-  //   setTimeout(function () {
-  //     e.target.playVideo();
-  //   }, 5000);
-  //   setInterval(() => {
-  //     console.log("Pause Video");
-  //     e.target.pauseVideo();
-  //     setInterval(() => {
-  //       console.log("Play Video");
-  //       e.target.playVideo();
-  //     }, 11000);
-  //     if (e.target.currentTime === e.target.getDuration()) {
-  //       clearInterval();
-  //     }
-  //   }, 16000);
-  // };
+  const { title } = props.location;
+  const message = useSelector((state) => state.users.message);
 
   // timer
   const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
   const [interv, setInterv] = useState();
   const [status, setStatus] = useState(0);
-
-  const handleClickStart = () => {
-    run();
-    setInterv(setInterval(run, 10));
-    setStatus(1);
-  };
-  const handleClickStop = () => {
-    clearInterval(interv);
-  };
 
   let updateMs = time.ms,
     updateS = time.s,
@@ -97,9 +71,34 @@ const Videos = () => {
     updateMs++;
     return setTime({ ms: updateMs, s: updateS, m: updateM, h: updateH });
   };
+  // const history = updateM * 60 + updateS;
 
-  const history = updateM * 60 + updateS;
-  console.log("result =>", history);
+  const handleClickStart = () => {
+    run();
+    setInterv(setInterval(run, 10));
+    setStatus(1);
+  };
+
+  const handleClickStop = () => {
+    const body = {
+      content: title,
+      video: videoTitle,
+      times: `${updateH}:${updateM}:${updateS}`,
+    };
+    clearInterval(interv);
+    dispatch(postExercise(body));
+  };
+
+  useEffect(() => {
+    if (message.status === 200) {
+      NotificationManager.success(message.data.message);
+    }
+  }, [message]);
+
+  console.log("message =>", message.data.message);
+
+  console.log("props =>", title);
+  console.log("Video Title =>", videoTitle);
 
   return (
     <>
@@ -133,6 +132,7 @@ const Videos = () => {
             Stop
           </button>
         )}
+        <NotificationContainer />
       </div>
 
       {/* <h4>{count === 0 ? "START" : count}</h4> */}

@@ -60,6 +60,11 @@ const Navbar = () => {
     window.location.reload(true);
   };
 
+  const handleHistory = () => {
+    history.push("/history");
+    window.location.reload(true);
+  };
+
   const handleSignOut = () => {
     localStorage.removeItem("token");
     history.push("/");
@@ -91,7 +96,6 @@ const Navbar = () => {
           <li onClick={handleFeature}>Feature</li>
           <li onClick={handleAbout}>About</li>
           <li onClick={handleContactUs}>Contact Us</li>
-
           {userProfile === null ? (
             ""
           ) : userProfile.roles === "admin" ? (
@@ -99,7 +103,6 @@ const Navbar = () => {
           ) : (
             ""
           )}
-
           {userProfile ? (
             <div>
               <ButtonDropdown
@@ -129,7 +132,9 @@ const Navbar = () => {
                 <DropdownMenu>
                   {/* <DropdownItem header>Header</DropdownItem> */}
                   <DropdownItem onClick={handleProfile}>Profile</DropdownItem>
-                  <DropdownItem>History Workout</DropdownItem>
+                  <DropdownItem onClick={handleHistory}>
+                    History Workout
+                  </DropdownItem>
                   <DropdownItem>Favorite Workout</DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem onClick={handleSignOut}>Sign Out</DropdownItem>
