@@ -32,7 +32,7 @@ const Videos = (props) => {
     },
   };
   const onReady = (e) => {
-    console.log("video => ", e.target.playerInfo.videoData.title);
+    // console.log("video => ", e.target.playerInfo.videoData.title);
     setVideoTitle(e.target.playerInfo.videoData.title);
     e.target.playVideo();
     setTimeout(function () {
@@ -83,7 +83,8 @@ const Videos = (props) => {
     const body = {
       content: title,
       video: videoTitle,
-      times: `${updateH}:${updateM}:${updateS}`,
+      time: `${updateH}:${updateM}:${updateS}`,
+      // time: "tes",
     };
     clearInterval(interv);
     dispatch(postExercise(body));
@@ -95,10 +96,9 @@ const Videos = (props) => {
     }
   }, [message]);
 
-  console.log("message =>", message.data.message);
-
-  console.log("props =>", title);
-  console.log("Video Title =>", videoTitle);
+  console.log("message =>", message);
+  // console.log("props =>", title);
+  // console.log("Video Title =>", videoTitle);
 
   return (
     <>

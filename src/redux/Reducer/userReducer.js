@@ -97,12 +97,12 @@ const userReducer = (state = initialState, action) => {
     case GET_EXERCISE:
       return {
         ...state,
-        message: action.payload,
+        exercise: action.payload,
       };
     case POST_EXERCISE:
       return {
         ...state,
-        exercise: action.payload,
+        message: action.payload,
       };
     default:
       return state;

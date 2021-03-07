@@ -99,7 +99,7 @@ const Navbar = () => {
           {userProfile === null ? (
             ""
           ) : userProfile.roles === "admin" ? (
-            <li onClick={() => history.push("admin-dashboard")}>Admin Page</li>
+            <li onClick={() => history.push("/admin-dashboard")}>Admin Page</li>
           ) : (
             ""
           )}

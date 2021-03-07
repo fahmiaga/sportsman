@@ -43,10 +43,10 @@ const VideoContent = () => {
         ) : (
           <>
             <button
-              className="bookmark"
+              className="btn btn-primary"
               onClick={() => handleBookmark(videos.title, videos._id)}
             >
-              Bookmark Video
+              Bookmark Content
             </button>
 
             {videos.video.map((video, i) => (

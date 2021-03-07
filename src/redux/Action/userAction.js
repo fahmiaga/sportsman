@@ -224,7 +224,7 @@ export const getExercise = () => (dispatch) => {
       if (res.status === 200) {
         dispatch({
           type: GET_EXERCISE,
-          payload: res,
+          payload: res.data.data,
         });
       }
     })
