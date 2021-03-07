@@ -1,12 +1,12 @@
 //public route
-import LandingPage from './pages/LandingPage';
-import Feature from './pages/Features';
-import Dashboard from './pages/Dashboard';
-import About from './pages/About';
-import Faq from './pages/Faq';
-import Content from './pages/Content';
-import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
+import LandingPage from "./pages/LandingPage";
+import Feature from "./pages/Features";
+import Dashboard from "./pages/Dashboard";
+import About from "./pages/About";
+import Faq from "./pages/Faq";
+import Content from "./pages/Content";
+import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
 
 //private route
 import Profile from './pages/Profile';
@@ -14,52 +14,56 @@ import OnBoarding from './components/Onboarding';
 import VideoContent from './pages/VideoContent';
 import ContactPage from './pages/ContactPage';
 import HistoryUser from './pages/HistoryUser/index';
+<<<<<<< HEAD
+=======
+import BookmarkVideo from './pages/BookmarkVideo';
+>>>>>>> 16e122afb4e2385f87510219d7e8d0accd4868ec
 
 export const publicRoutes = [
 	{
 		component: LandingPage,
-		path: '/',
+		path: "/",
 		exact: true,
 	},
 
 	{
 		component: Feature,
-		path: '/feature',
+		path: "/feature",
 		exact: true,
 	},
 	{
 		component: Dashboard,
-		path: '/dashboard',
+		path: "/dashboard",
 		exact: true,
 	},
 	{
 		component: About,
-		path: '/about',
+		path: "/about",
 		exact: true,
 	},
 	{
 		component: Faq,
-		path: '/faq',
+		path: "/faq",
 		exact: true,
 	},
 	{
 		component: Content,
-		path: '/content-video',
+		path: "/content-video",
 		exact: true,
 	},
 	{
 		component: LoginPage,
-		path: '/login',
+		path: "/login",
 		exact: true,
 	},
 	{
 		component: RegisterPage,
-		path: '/register',
+		path: "/register",
 		exact: true,
 	},
 	{
 		component: ContactPage,
-		path: '/contactus',
+		path: "/contactus",
 		exact: true,
 	},
 ];
@@ -67,63 +71,73 @@ export const publicRoutes = [
 export const privateRoutes = [
 	{
 		component: LandingPage,
-		path: '/',
+		path: "/",
 		exact: true,
 	},
 
 	{
 		component: Feature,
-		path: '/feature',
+		path: "/feature",
 		exact: true,
 	},
 	{
 		component: Dashboard,
-		path: '/dashboard',
+		path: "/dashboard",
 		exact: true,
 	},
 	{
 		component: About,
-		path: '/about',
+		path: "/about",
 		exact: true,
 	},
 	{
 		component: Faq,
-		path: '/faq',
+		path: "/faq",
 		exact: true,
 	},
 	{
 		component: Content,
-		path: '/content-video',
+		path: "/content-video",
 		exact: true,
 	},
 	{
 		component: LoginPage,
-		path: '/login',
+		path: "/login",
 		exact: true,
 	},
 	{
 		component: RegisterPage,
-		path: '/register',
+		path: "/register",
 		exact: true,
 	},
 	{
 		component: Profile,
-		path: '/profile',
+		path: "/profile",
 		exact: true,
 	},
 	{
 		component: OnBoarding,
-		path: '/onboarding',
+		path: "/onboarding",
 		exact: true,
 	},
 	{
 		component: VideoContent,
-		path: '/videos-content/:id',
+		path: "/videos-content/:id",
 		exact: true,
 	},
 	{
 		component: ContactPage,
-		path: '/contactus',
+		path: "/contactus",
+		exact: true,
+	},
+	{
+		component: BookmarkVideo,
+		path: "/bookmark",
+		exact: true,
+	},
+	{
+		component: HistoryUser,
+		path: '/history',
 		exact: true,
 	},
 	{
