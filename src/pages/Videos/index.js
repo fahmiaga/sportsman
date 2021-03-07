@@ -98,6 +98,9 @@ const Videos = () => {
     return setTime({ ms: updateMs, s: updateS, m: updateM, h: updateH });
   };
 
+  const history = updateM * 60 + updateS;
+  console.log("result =>", history);
+
   return (
     <>
       <Navbar />

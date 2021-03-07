@@ -3,8 +3,9 @@ import { getContentById } from "../../redux/Action/contentAction";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/Navbar1";
-import { postFavorite } from "../../redux/Action/userAction";
+// import { postFavorite } from "../../redux/Action/userAction";
 import { bookmarkVideo } from "../../redux/Action/bookmarkAction";
+import Video from "../Videos";
 
 const VideoContent = () => {
   useEffect(() => {
@@ -28,10 +29,11 @@ const VideoContent = () => {
     dispatch(bookmarkVideo(token, body));
   };
 
-  console.log("ini video =>", videos.video);
+  console.log("ini video =>", videos);
 
   return (
     <>
+      <Video content={videos.video} />
       <div className="content-video-jumbotron">
         <Navbar />
       </div>

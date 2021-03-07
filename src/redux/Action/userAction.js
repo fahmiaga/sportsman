@@ -1,5 +1,6 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import _ from "lodash";
 import {
   SIGN_IN,
   SIGN_UP,
@@ -91,15 +92,13 @@ export const onBoardingData = (payload) => {
   };
 };
 
-export const putBoardingData = (token, body) => async (dispatch) => {
-  console.log("boarding", token);
+export const putBoardingData = (body) => async (dispatch) => {
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: localStorage.getItem("token") },
   };
   axios
     .put(`api/login/update`, body, config)
     .then((res) => {
-      console.log("ini res =>", res);
       dispatch(onBoardingData(res));
     })
     .catch((err) => {
@@ -121,17 +120,16 @@ export const signOut = () => (dispatch) => {
 // 	});
 // };
 
-export const uploadImage = (token, body) => (dispatch) => {
+export const uploadImage = (body) => (dispatch) => {
   const config = {
     headers: {
-      Authorization: token,
+      Authorization: localStorage.getItem("token"),
       "Content-Type": "multipart/form-data",
     },
   };
   axios
-    .post(`api/upload`, body, config)
+    .post(`/api/upload`, body, config)
     .then((res) => {
-      console.log("coba", res);
       dispatch({
         type: UPLOAD_IMAGE,
         payload: res.data.data,
@@ -142,31 +140,38 @@ export const uploadImage = (token, body) => (dispatch) => {
     });
 };
 
-export const putUserData = (token, userData) => (dispatch) => {
+export const putUserData = (userData) => (dispatch) => {
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: localStorage.getItem("token") },
   };
   axios
-    .put(`api/update`, userData, config)
+    .put(`/api/update`, userData, config)
     .then((res) => {
       console.log("putUserData => ", res);
+      localStorage.setItem("token", res.data.data[0]);
+      let decoded;
+      if (res.data.data && !_.isEmpty(res.data.data[0])) {
+        decoded = jwt_decode(res.data.data[0]);
+      }
       dispatch({
         type: PUT_USERDATA,
-        payload: res.data.data,
+        payload: decoded,
       });
+      alert("Update Data Success");
+      window.location.reload(true);
     })
     .catch((err) => {
       console.log(err);
     });
 };
-export const postContact = (token, body) => (dispatch) => {
+
+export const postContact = (body) => (dispatch) => {
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: localStorage.getItem("token") },
   };
   axios
     .post(`api/contact-us`, body, config)
     .then((res) => {
-      console.log("coba", res);
       dispatch({
         type: POST_CONTACT,
         payload: res.data.data,
@@ -177,34 +182,30 @@ export const postContact = (token, body) => (dispatch) => {
     });
 };
 
-export const deleteAccount = (token) => async (dispatch) => {
+export const deleteAccount = () => async (dispatch) => {
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: localStorage.getItem("token") },
   };
   axios.delete(`api/users/delete`, config).then((res) => {
-    if (res === 200) {
-      dispatch({
-        type: DELETE_ACCOUNT,
-        payload: res.data.message,
-      });
-    }
+    dispatch({
+      type: DELETE_ACCOUNT,
+      payload: res.data.message,
+    });
   });
 };
 
-export const getUserData = (token) => (dispatch) => {
+export const getUserData = () => (dispatch) => {
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: localStorage.getItem("token") },
   };
   axios
-    .get(`api/get`, config)
+    .get(`/api/get`, config)
     .then((res) => {
-      console.log("ini get user data RIRI", res);
-      if (res.status === 200) {
-        dispatch({
-          type: GET_USERDATA,
-          payload: res.data,
-        });
-      }
+      console.log("ini get user data RIRI", res.data);
+      dispatch({
+        type: GET_USERDATA,
+        payload: res.data,
+      });
     })
     .catch((err) => {
       console.log(err);
