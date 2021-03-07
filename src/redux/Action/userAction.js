@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-=======
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import _ from "lodash";
->>>>>>> 16e122afb4e2385f87510219d7e8d0accd4868ec
 import {
   SIGN_IN,
   SIGN_UP,

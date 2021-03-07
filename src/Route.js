@@ -14,10 +14,7 @@ import OnBoarding from './components/Onboarding';
 import VideoContent from './pages/VideoContent';
 import ContactPage from './pages/ContactPage';
 import HistoryUser from './pages/HistoryUser/index';
-<<<<<<< HEAD
-=======
 import BookmarkVideo from './pages/BookmarkVideo';
->>>>>>> 16e122afb4e2385f87510219d7e8d0accd4868ec
 
 export const publicRoutes = [
 	{
