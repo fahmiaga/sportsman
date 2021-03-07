@@ -35,6 +35,7 @@ const contentReducer = (state = initialState, action) => {
       return {
         ...state,
         content: payload,
+        message: payload,
       };
     case DELETE_CONTENT:
       return {

@@ -25,7 +25,7 @@ const Videos = () => {
     },
   };
   const onReady = (e) => {
-    console.log("video => ", e.target.getDuration());
+    console.log("video => ", e.target.playerInfo.videoData.title);
     e.target.playVideo();
     setTimeout(function () {
       setDisable(false);

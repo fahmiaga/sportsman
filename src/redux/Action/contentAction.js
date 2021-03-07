@@ -31,7 +31,7 @@ export const getContentById = (token, id) => (dispatch) => {
   axios
     .get(`/api/content/${id}`, config)
     .then((res) => {
-      console.log("coba", res);
+      console.log("coba content by id =>", res);
       dispatch({
         type: GET_CONTENT_BY_ID,
         payload: res.data,
@@ -59,6 +59,7 @@ export const postContent = (token, input) => (dispatch) => {
       console.log(err);
     });
 };
+
 export const putContent = (token, input, id) => (dispatch) => {
   const config = {
     headers: { Authorization: token },
@@ -69,7 +70,7 @@ export const putContent = (token, input, id) => (dispatch) => {
       console.log("put content =>", res);
       dispatch({
         type: PUT_CONTENT,
-        payload: res.data,
+        payload: res,
       });
     })
     .catch((err) => {

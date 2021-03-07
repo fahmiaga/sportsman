@@ -62,7 +62,7 @@ export const postSignIn = (body) => (dispatch) => {
       localStorage.setItem("token", res.data.data.token);
     })
     .catch((err) => {
-      console.log("error ==>", err.response);
+      // console.log("error ==>", err.response);
       dispatch({
         type: MESSAGE_ERROR,
         payload: err.response.data.message,
@@ -74,7 +74,6 @@ export const googleSignin = () => (dispatch) => {
   axios
     .get(`api/google`)
     .then((res) => {
-      console.log("coba", res);
       dispatch({
         type: GOOGLE_AUTH,
         payload: res.request.responseURL,
@@ -124,7 +123,10 @@ export const signOut = () => (dispatch) => {
 
 export const uploadImage = (token, body) => (dispatch) => {
   const config = {
-    headers: { Authorization: token, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: token,
+      "Content-Type": "multipart/form-data",
+    },
   };
   axios
     .post(`api/upload`, body, config)
@@ -208,22 +210,22 @@ export const getUserData = (token) => (dispatch) => {
       console.log(err);
     });
 };
-export const postFavorite = (token, body) => (dispatch) => {
-  const config = {
-    headers: { Authorization: token },
-  };
-  axios
-    .post(`https://sportsmanapp.herokuapp.com/favourite`, body, config)
-    .then((res) => {
-      console.log("ini get user data RIRI", res);
-      if (res.status === 200) {
-        dispatch({
-          type: POST_FAVORITE,
-          payload: res.data,
-        });
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+// export const postFavorite = (token, body) => (dispatch) => {
+//   const config = {
+//     headers: { Authorization: token },
+//   };
+//   axios
+//     .post(`https://sportsmanapp.herokuapp.com/favourite`, body, config)
+//     .then((res) => {
+//       console.log("ini get user data RIRI", res);
+//       if (res.status === 200) {
+//         dispatch({
+//           type: POST_FAVORITE,
+//           payload: res.data,
+//         });
+//       }
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
