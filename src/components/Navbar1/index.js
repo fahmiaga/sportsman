@@ -135,7 +135,9 @@ const Navbar = () => {
                   <DropdownItem onClick={handleHistory}>
                     History Workout
                   </DropdownItem>
-                  <DropdownItem>Favorite Workout</DropdownItem>
+                  <DropdownItem onClick={() => history.push("/bookmark")}>
+                    Favorite Workout
+                  </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem onClick={handleSignOut}>Sign Out</DropdownItem>
                 </DropdownMenu>
