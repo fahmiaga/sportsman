@@ -54,7 +54,7 @@ export const setToken = (token) => {
 };
 
 export const postSignIn = (body) => (dispatch) => {
-  axios
+  return axios
     .post(`api/login`, body)
     .then((res) => {
       console.log("ini res =>", res);
@@ -63,6 +63,7 @@ export const postSignIn = (body) => (dispatch) => {
       // localStorage.setItem('userData', JSON.stringify(decoded));
       dispatch(setToken(res.data.data.token));
       localStorage.setItem("token", res.data.data.token);
+      return true
     })
     .catch((err) => {
       // console.log("error ==>", err.response);
@@ -70,6 +71,7 @@ export const postSignIn = (body) => (dispatch) => {
         type: MESSAGE_ERROR,
         payload: err.response.data.message,
       });
+      return false
     });
 };
 

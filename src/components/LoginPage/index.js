@@ -34,12 +34,12 @@ const LoginPage = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		dispatch(postSignIn(userData));
-		if(message){
-			NotificationManager.info('Email/Password is wrong','',1000);
-		// } else if (_.isEmpty(data)){
-		// 	NotificationManager.info('Loading', '', 3000);
-		}
+		NotificationManager.info('Loading', '', 3000);
+		dispatch(postSignIn(userData)).then((res) => {
+			if(!res){
+				NotificationManager.info('Email/Password is wrong','',1000);
+			}
+		})
 	};
 
   const handleChange = (e) => {
@@ -62,10 +62,6 @@ const LoginPage = () => {
       window.location.reload(true);
     }
   }, [status, history]);
-
-  console.log("status =>", status);
-  console.log("error =>", message);
-
 
 	return (
 		<>

@@ -42,6 +42,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         signIn: action.payload.token,
         status: action.payload.status,
+        message: "",
       };
     case SET_BOARDING:
       return {
