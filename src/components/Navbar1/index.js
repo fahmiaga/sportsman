@@ -120,11 +120,7 @@ const Navbar = () => {
                 >
                   <img
                     className="image-navbar"
-                    src={
-                      userProfile && userProfile.images
-                        ? userProfile.images
-                        : img
-                    }
+                    src={userProfile.images === "0" ? img : userProfile.images}
                     alt=""
                   />
                   {/* <span>{userProfile && userProfile.name}</span> */}

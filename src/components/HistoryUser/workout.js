@@ -37,16 +37,18 @@ const Workout = () => {
                 <h3>Loading...</h3>
               ) : (
                 <>
-                  {exercises.map((exercise, i) => (
-                    <Card color="secondary" key={i}>
-                      {exercise.created_at}
-                      <CardHeader>{exercise.content}</CardHeader>
-                      <CardBody>
-                        <CardTitle tag="h5">{exercise.video}</CardTitle>
-                      </CardBody>
-                      <CardFooter>{exercise.times}</CardFooter>
-                    </Card>
-                  ))}
+                  {exercises
+                    .map((exercise, i) => (
+                      <Card color="secondary" key={i}>
+                        {exercise.created_at}
+                        <CardHeader>{exercise.content}</CardHeader>
+                        <CardBody>
+                          <CardTitle tag="h5">{exercise.video}</CardTitle>
+                        </CardBody>
+                        <CardFooter>{exercise.times}</CardFooter>
+                      </Card>
+                    ))
+                    .reverse()}
                 </>
               )}
             </Row>
