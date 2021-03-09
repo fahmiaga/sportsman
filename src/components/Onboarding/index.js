@@ -61,16 +61,18 @@ const OnBoarding = () => {
                   onClick={(e) => setGender(e.target.value)}
                   name="gender"
                   value="male"
+                  outline={gender === "male" ? false : true}
                 >
                   Male
                 </Button>
                 <Button
-                  color="primary"
+                  color="danger"
                   size="lg"
                   block
                   onClick={(e) => setGender(e.target.value)}
                   name="gender"
                   value="female"
+                  outline={gender === "female" ? false : true}
                 >
                   Female
                 </Button>
@@ -83,22 +85,24 @@ const OnBoarding = () => {
             <FormGroup tag="fieldset">
               <FormGroup check>
                 <Button
-                  color="success"
+                  color="danger"
                   size="lg"
                   block
                   onClick={(e) => setLevel(e.target.value)}
                   name="level"
                   value="1"
+                  outline={level === "1" ? false : true}
                 >
                   Often
                 </Button>
                 <Button
-                  color="warning"
+                  color="danger"
                   size="lg"
                   block
                   onClick={(e) => setLevel(e.target.value)}
                   name="level"
                   value="2"
+                  outline={level === "2" ? false : true}
                 >
                   Sometimes
                 </Button>
@@ -109,6 +113,7 @@ const OnBoarding = () => {
                   onClick={(e) => setLevel(e.target.value)}
                   name="level"
                   value="3"
+                  outline={level === "3" ? false : true}
                 >
                   Never
                 </Button>
