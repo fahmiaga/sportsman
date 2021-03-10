@@ -5,6 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/Navbar1";
 // import { postFavorite } from "../../redux/Action/userAction";
 import { bookmarkVideo } from "../../redux/Action/bookmarkAction";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
 
 const VideoContent = () => {
   useEffect(() => {
@@ -13,12 +18,13 @@ const VideoContent = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const videos = useSelector((state) => state.content.video);
+  const message = useSelector((state) => state.bookmark.message);
   const token = localStorage.getItem("token");
   const history = useHistory();
 
   useEffect(() => {
     dispatch(getContentById(token, id));
-  }, [dispatch, token, id]);
+  }, [dispatch, token, id]); 
 
   const handleBookmark = (title, id) => {
     const body = {
@@ -28,7 +34,14 @@ const VideoContent = () => {
     dispatch(bookmarkVideo(token, body));
   };
 
+  useEffect(() => {
+    if (message.status === 200) {
+      NotificationManager.success(message.data.message, "", 3000);
+    }
+  }, [message]);
+
   console.log("ini video =>", videos);
+  console.log("message =>", message);
 
   return (
     <>
@@ -49,19 +62,19 @@ const VideoContent = () => {
               Bookmark Content
             </button>
 
-            {videos.video.map((video, i) => (
+            {videos.video.map((item, i) => (
               <div key={i} className="content-video-card">
                 <div className="video-card-long">
                   <img
-                    src={`https://img.youtube.com/vi/${video.videoUrl}/0.jpg`}
+                    src={`https://img.youtube.com/vi/${item.videoUrl}/0.jpg`}
                     alt=""
                   />
-                  <p>{video.time} seconds</p>
+                  <p>{item.time} seconds</p>
                   <div className="button-play-video">
                     <h6
                       onClick={() =>
                         history.push({
-                          pathname: `video/${video.videoUrl}`,
+                          pathname: `video/${item.videoUrl}`,
                           title: videos.title,
                         })
                       }
@@ -85,6 +98,7 @@ const VideoContent = () => {
           </>
         )}
       </div>
+      <NotificationContainer />
     </>
   );
 };

@@ -14,12 +14,12 @@ import {
   GOOGLE_AUTH,
   DELETE_ACCOUNT,
   GET_USERDATA,
-  POST_FAVORITE,
+  // POST_FAVORITE,
   POST_EXERCISE,
   GET_EXERCISE,
 } from "./actionTypes";
 
-export const signUp = (payload) => {
+export const signUp = (payload, res) => {
   return {
     type: SIGN_UP,
     payload,
@@ -31,11 +31,15 @@ export const postSignUp = (body) => (dispatch) => {
     .post(`api/register`, body)
     .then((res) => {
       console.log("ini res =>", res);
-      const decoded = jwt_decode(res.data.data.token);
-      dispatch(signIn(decoded));
+      // const decoded = jwt_decode(res.data.data.token);
+      dispatch(signUp(res));
     })
     .catch((err) => {
-      console.log(err);
+      // console.log("error ==>", err.response);
+      dispatch({
+        type: MESSAGE_ERROR,
+        payload: err.response,
+      });
     });
 };
 
@@ -58,9 +62,9 @@ export const postSignIn = (body) => (dispatch) => {
     .post(`api/login`, body)
     .then((res) => {
       console.log("ini res =>", res);
-      // const decoded = jwt_decode(res.data.data.token);
+      const decoded = jwt_decode(res.data.data.token);
       dispatch(signIn(res.data.data));
-      // localStorage.setItem('userData', JSON.stringify(decoded));
+      localStorage.setItem('userData', JSON.stringify(decoded));
       dispatch(setToken(res.data.data.token));
       localStorage.setItem("token", res.data.data.token);
       return true
@@ -69,7 +73,7 @@ export const postSignIn = (body) => (dispatch) => {
       // console.log("error ==>", err.response);
       dispatch({
         type: MESSAGE_ERROR,
-        payload: err.response.data.message,
+        payload: err.response,
       });
       return false
     });
