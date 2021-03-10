@@ -10,20 +10,15 @@ import {
 import profile from "../../../assets/img/anonymous.jpg";
 
 const DetailProfile = () => {
-  useEffect(() => {
-    document.title = "Profile";
-  }, []);
-
+  const message = useSelector((state) => state.users.message);
   const userProfile = useSelector((state) => state.users.userProfile);
 
   const [imageData, setImageData] = useState(null);
   const [imageURL, setImageURL] = useState(null);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState("");
   const [gender, setGender] = useState("");
 
   const dispatch = useDispatch();
-
-  console.log("Test", userData);
 
   useEffect(() => {
     setUserData(userProfile);
@@ -54,9 +49,10 @@ const DetailProfile = () => {
     }
   }, []);
 
-  //   useEffect(() => {
-  //     console.log("Test", userProfile);
-  //   }, [userProfile]);
+  useEffect(() => {
+    console.log("Test", userProfile);
+    console.log("message =>", message);
+  }, [userProfile, message]);
 
   const onCreate = () => {
     handleUploadImage();
@@ -79,8 +75,8 @@ const DetailProfile = () => {
                     setImageURL(URL.createObjectURL(event.target.files[0]));
                   }}
                 />
-                <label htmlFor="upload" className="profile__picture">
-                  {userProfile && userProfile.images ? (
+                <label for="upload" className="profile__picture">
+                  {userProfile && userProfile.images !== "0" ? (
                     <img src={userProfile.images} alt="upload"></img>
                   ) : (
                     <img src={profile} alt="upload"></img>
@@ -110,7 +106,7 @@ const DetailProfile = () => {
                 name="name"
                 className="pr__input"
                 placeholder="Full Name"
-                value={userData === null ? "" : userData.name}
+                value={userData !== null ? userData.name : ""}
               />
             </td>
           </tr>

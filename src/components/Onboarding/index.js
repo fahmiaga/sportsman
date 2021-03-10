@@ -10,7 +10,7 @@ const OnBoarding = () => {
     document.title = `On Board`;
   });
 
-  // const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const history = useHistory();
   const boarding = useSelector((state) => state.users.boarding);
   const dispatch = useDispatch();

@@ -73,13 +73,13 @@ const Navbar = () => {
 
   useEffect((res) => {
     dispatch(getUserData());
-    console.log("ini userProfile", userProfile);
+    // console.log("ini userProfile", userProfile);
     if (userProfile && userProfile.status === 200) {
       localStorage.setItem("token", res.data.data);
     }
   }, []);
 
-  console.log("INI", userProfile);
+  // console.log("INI", userProfile);
   return (
     <Headroom>
       <header className={`header ${scrollY > 230 ? "layout--orange" : ""}`}>
@@ -120,7 +120,11 @@ const Navbar = () => {
                 >
                   <img
                     className="image-navbar"
-                    src={userProfile.images === "0" ? img : userProfile.images}
+                    src={
+                      userProfile && userProfile.images !== "0"
+                        ? userProfile.images
+                        : img
+                    }
                     alt=""
                   />
                   {/* <span>{userProfile && userProfile.name}</span> */}
