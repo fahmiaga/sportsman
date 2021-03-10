@@ -7,6 +7,12 @@ import {
   UPLOAD_IMAGE,
   POST_CONTACT,
   PUT_USERDATA,
+  GET_USERDATA,
+  MESSAGE_ERROR,
+  GOOGLE_AUTH,
+  DELETE_ACCOUNT,
+  POST_EXERCISE,
+  GET_EXERCISE,
 } from "../Action/actionTypes";
 
 const initialState = {
@@ -18,6 +24,10 @@ const initialState = {
   uploadImg: null,
   contact: "",
   userData: [],
+  message: "",
+  google: "",
+  exercise: "",
+  userProfile: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -25,13 +35,15 @@ const userReducer = (state = initialState, action) => {
     case SIGN_UP:
       return {
         ...state,
-        signUp: action.payload,
+        // signUp: action.payload,
+        message: action.payload,
       };
     case SIGN_IN:
       return {
         ...state,
         signIn: action.payload.token,
         status: action.payload.status,
+        message: "",
       };
     case SET_BOARDING:
       return {
@@ -62,7 +74,39 @@ const userReducer = (state = initialState, action) => {
     case PUT_USERDATA:
       return {
         ...state,
-        userData: action.payload,
+        // userProfile: action.payload.user,
+        userProfile: action.payload.user,
+        message: action.payload.message,
+      };
+    case GET_USERDATA:
+      return {
+        ...state,
+        userProfile: action.payload,
+      };
+    case MESSAGE_ERROR:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case GOOGLE_AUTH:
+      return {
+        ...state,
+        google: action.payload,
+      };
+    case DELETE_ACCOUNT:
+      return {
+        ...state,
+        status: action.payload,
+      };
+    case GET_EXERCISE:
+      return {
+        ...state,
+        exercise: action.payload,
+      };
+    case POST_EXERCISE:
+      return {
+        ...state,
+        message: action.payload,
       };
     default:
       return state;

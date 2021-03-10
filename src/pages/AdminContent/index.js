@@ -1,123 +1,108 @@
 import React, { useState, useEffect } from "react";
 // import Navbar from "../../components/Navbar1";
-import {
-  Container,
-  FormGroup,
-  Input,
-  Label,
-  Form,
-  Button,
-  Row,
-  Col,
-} from "reactstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Row, Col, Table, Button } from "reactstrap";
 import Sidebar from "../../components/Sidebar";
+import { deleteContent, getContent } from "../../redux/Action/contentAction";
 
 const AdminContent = () => {
   useEffect(() => {
-    document.title = "Dashboard";
+    document.title = "Add Content";
   }, []);
-  const url = "url";
-  const timer = "timer";
-  const title = "title";
-  const [number, setNumber] = useState(1);
 
-  const [inputList, setInputList] = useState([
-    {
-      [title + number]: "",
-      [url + number]: "",
-      [timer + number]: "",
-    },
-  ]);
+  const history = useHistory();
+  const contents = useSelector((state) => state.content.content);
+  const message = useSelector((state) => state.content.message);
+  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
 
-  const handleChange = (e, i) => {
-    const list = [...inputList];
-    list[i][e.target.name] = e.target.value;
-    setInputList(list);
+  useEffect(() => {
+    dispatch(getContent(token));
+  }, [dispatch, token]);
+  console.log("message =>", message);
+
+  const handleDelete = (id) => {
+    // history.push(`admin-content/${id}`);
+    dispatch(deleteContent(token, id));
   };
 
-  const handleAddInput = () => {
-    setInputList([
-      ...inputList,
-      { [title + number]: "", [url + number]: "", [timer + number]: "" },
-    ]);
-    setNumber(number + 1);
-  };
-  const handleRemoveInput = (i) => {
-    const list = [...inputList];
-    list.splice(i, 1);
-    setInputList(list);
-  };
-  console.log(inputList);
+  useEffect(() => {
+    if (message.status === 200) {
+      window.location.reload();
+    }
+  }, [message]);
+
   return (
     <>
       <Row>
-        {/* <Navbar /> */}
-        <Sidebar />
-        <Col md="6">
-          <Container className="mt-4 mb-2">
-            <Form>
-              {inputList.map((inp, i) => {
-                return (
-                  <>
-                    <FormGroup>
-                      <Label for="exampleEmail">Title</Label>
-                      <Input
-                        onChange={(e) => handleChange(e, i)}
-                        // name="title"
-                        name={`title${number}`}
-                        // value={inp.title}
-                        placeholder="Title"
-                        type="text"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label for="examplePassword">URL</Label>
-                      <Input
-                        onChange={(e) => handleChange(e, i)}
-                        // value={inp.url}
-                        name={`url${number}`}
-                        type="text"
-                        placeholder="URL"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label for="examplePassword">Timer</Label>
-                      <Input
-                        onChange={(e) => handleChange(e, i)}
-                        // value={inp.timer}
-                        name={`timer${number}`}
-                        type="text"
-                        placeholder="Timer"
-                      />
-                    </FormGroup>
-                    {inputList.length !== 1 && (
-                      <Button
-                        outline
-                        color="danger"
-                        className="mr-2 ml-1  "
-                        onClick={() => handleRemoveInput(i)}
-                      >
-                        <i className="fas fa-minus-circle"></i>
-                      </Button>
-                    )}
-                    {inputList.length - 1 === i && (
-                      <Button
-                        outline
-                        color="primary"
-                        onClick={() => handleAddInput(i)}
-                      >
-                        <i className="fas fa-plus-circle"></i>
-                      </Button>
-                    )}
-                  </>
-                );
-              })}
-              <Button outline color="success" className="col mt-2 mb-2">
-                Submit
-              </Button>
-            </Form>
-          </Container>
+        <Col md="3">
+          <Sidebar />
         </Col>
+        <div className="add-content-page">
+          <Col md="9">
+            <div class="admin-content-jumbotron-l"></div>
+            <Button
+              onClick={() => history.push(`add-content`)}
+              outline
+              color="primary"
+              className="mr-1 mb-3"
+            >
+              Add New Workout
+            </Button>
+            <Table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Workout Name</th>
+                  <th>Gender</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {contents.length === 0 || undefined ? (
+                  <h4>Loading...</h4>
+                ) : (
+                  <>
+                    {contents.map((content, i) => (
+                      <tr key={i}>
+                        <th scope="row">{i + 1}</th>
+                        <td>{content.title}</td>
+                        <td>{content.gender}</td>
+                        <td>
+                          <Button
+                            onClick={() =>
+                              history.push(`update-content/${content._id}`)
+                            }
+                            outline
+                            color="warning"
+                            className="mr-1"
+                          >
+                            <i
+                              className="fas fa-edit"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </Button>
+                          <Button
+                            onClick={() => handleDelete(content._id)}
+                            outline
+                            color="danger"
+                            className="mr-1"
+                          >
+                            <i
+                              className="fas fa-trash-alt"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </>
+                )}
+              </tbody>
+            </Table>
+          </Col>
+        </div>
       </Row>
     </>
   );

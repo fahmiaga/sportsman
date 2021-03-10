@@ -3,6 +3,11 @@ import Logo from "../../assets/img/logo/Logo.png";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postSignUp } from "../../redux/Action/userAction";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
 
 const RegisterPage = () => {
   useEffect(() => {
@@ -12,6 +17,7 @@ const RegisterPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.users.signUp);
+  const message = useSelector((state) => state.users.message);
 
   const [userData, setUserData] = useState({
     name: "",
@@ -31,8 +37,22 @@ const RegisterPage = () => {
     e.preventDefault();
     console.log("Submit Register");
     dispatch(postSignUp(userData));
-    history.push("/login");
+    NotificationManager.info("Loading", "", 3000);
+    // history.push("/login");
   };
+
+  useEffect(() => {
+    if (message.status === 400) {
+      NotificationManager.error(message.data.error, "", 3000);
+    } else if (message.status === 200) {
+      NotificationManager.success(message.data.message, "", 3000);
+      history.push("/login");
+    }
+  }, [message, history]);
+
+  console.log("userData =>", userData);
+  console.log("data =>", data);
+  console.log("message =>", message);
 
   const handleChange = (e) => {
     console.log("log handle change");
@@ -41,9 +61,6 @@ const RegisterPage = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  // console.log('userData =>', userData);
-  // console.log('data =>', data);
 
   return (
     <>
@@ -67,7 +84,7 @@ const RegisterPage = () => {
               required
               onChange={handleChange}
             />
-            <label for="name" className="form__label">
+            <label htmlFor="name" className="form__label">
               Name
             </label>
           </div>
@@ -82,7 +99,7 @@ const RegisterPage = () => {
               required
               onChange={handleChange}
             />
-            <label for="email" className="form__label">
+            <label htmlFor="email" className="form__label">
               Email
             </label>
           </div>
@@ -97,7 +114,7 @@ const RegisterPage = () => {
               required
               onChange={handleChange}
             />
-            <label for="password" className="form__label">
+            <label htmlFor="password" className="form__label">
               Password
             </label>
           </div>
@@ -111,6 +128,7 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
+      <NotificationContainer />
     </>
   );
 };

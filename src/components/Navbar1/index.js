@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/img/logo/orange.png";
+import img from "../../assets/img/anonymous.jpg";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Headroom from "react-headroom";
 import _ from "lodash";
-import jwt_decode from "jwt-decode";
+import { getUserData } from "../../redux/Action/userAction";
+import {
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 
 const Navbar = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
   });
 
+  const userProfile = useSelector((state) => state.users.userProfile);
+  const dispatch = useDispatch();
+
   const [scrollY, setScrollY] = useState(0);
   const handleScroll = () => {
     setScrollY(window.scrollY);
   };
 
+  const [dropdownOpen, setOpen] = useState(false);
+
+  const toggle = () => setOpen(!dropdownOpen);
   const history = useHistory();
+  const image = useSelector((state) => state.users.uploadImg);
 
   const page = window.location.pathname.substring(1);
   console.log(page);
@@ -45,16 +60,26 @@ const Navbar = () => {
     window.location.reload(true);
   };
 
+  const handleHistory = () => {
+    history.push("/history");
+    window.location.reload(true);
+  };
+
   const handleSignOut = () => {
     localStorage.removeItem("token");
     history.push("/");
     window.location.reload(true);
   };
-  const token = localStorage.getItem("token");
 
-  let decoded;
-  if (token && !_.isEmpty(token)) decoded = jwt_decode(token);
+  useEffect((res) => {
+    dispatch(getUserData());
+    // console.log("ini userProfile", userProfile);
+    if (userProfile && userProfile.status === 200) {
+      localStorage.setItem("token", res.data.data);
+    }
+  }, []);
 
+  // console.log("INI", userProfile);
   return (
     <Headroom>
       <header className={`header ${scrollY > 230 ? "layout--orange" : ""}`}>
@@ -71,19 +96,54 @@ const Navbar = () => {
           <li onClick={handleFeature}>Feature</li>
           <li onClick={handleAbout}>About</li>
           <li onClick={handleContactUs}>Contact Us</li>
-          {token ? (
+          {userProfile === null ? (
+            ""
+          ) : userProfile.roles === "admin" ? (
+            <li onClick={() => history.push("/admin-dashboard")}>Admin Page</li>
+          ) : (
+            ""
+          )}
+          {userProfile ? (
             <div>
-              <li onClick={handleProfile} className="menu-item">
-                Welcome {decoded.name}!
-              </li>
-              <li onClick={handleSignOut} className="border-li">
-                Sign Out
-              </li>
+              <ButtonDropdown
+                isOpen={dropdownOpen}
+                toggle={toggle}
+                style={{ marginTop: "5px" }}
+              >
+                <DropdownToggle
+                  caret
+                  style={{
+                    fontWeight: "500",
+                    backgroundColor: "RGBA(255,255,255,0)",
+                    border: "none",
+                  }}
+                >
+                  <img
+                    className="image-navbar"
+                    src={
+                      userProfile && userProfile.images !== "0"
+                        ? userProfile.images
+                        : img
+                    }
+                    alt=""
+                  />
+                  {/* <span>{userProfile && userProfile.name}</span> */}
+                </DropdownToggle>
+                <DropdownMenu>
+                  {/* <DropdownItem header>Header</DropdownItem> */}
+                  <DropdownItem onClick={handleProfile}>Profile</DropdownItem>
+                  <DropdownItem onClick={handleHistory}>
+                    History Workout
+                  </DropdownItem>
+                  <DropdownItem onClick={() => history.push("/bookmark")}>
+                    Favorite Workout
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem onClick={handleSignOut}>Sign Out</DropdownItem>
+                </DropdownMenu>
+              </ButtonDropdown>
             </div>
           ) : (
-            // <div>
-            // 	<p className='layout__button'>Welcome {decoded.name}!</p>
-            // </div>
             <button onClick={handleSignIn} className="layout__button">
               Login
             </button>
@@ -95,70 +155,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-// const Navbar = () => {
-// 	const [scrollY, setScrollY] = useState(0);
-// 	useEffect(() => {
-// 		window.addEventListener('scroll', handleScroll);
-// 	});
-
-// 	const handleScroll = () => {
-// 		setScrollY(window.scrollY);
-// 	};
-
-// 	const history = useHistory();
-// 	const page = window.location.pathname.substring(1);
-// 	console.log(page);
-
-// 	const handleHome = () => {
-// 		history.push('/');
-// 	};
-
-// 	const handleSignIn = () => {
-// 		history.push('/login');
-// 	};
-
-// 	const handleFeature = () => {
-// 		history.push('/feature');
-// 	};
-
-// 	const handleAbout = () => {
-// 		history.push('/about');
-// 	};
-
-// 	const handleSignOut = () => {
-// 		localStorage.removeItem('token');
-// 		history.push('/');
-// 	};
-// 	const token = localStorage.getItem('token');
-
-// 	return (
-// 		<>
-// 			<nav className={`layout ${scrollY > 230 ? 'layout--orange' : ''}`}>
-// 				<div className='layout__logo'>
-// 					<img src={logo} onClick={handleHome} alt='logo' className='layout__img' />
-
-// 					<input type='checkbox' className='menu-btn' id='menu-btn' />
-// 					<label htmlFor='menu-btn' className='menu-icon'>
-// 						<span className='menu-icon__line'></span>
-// 					</label>
-// 					<ul className='layout__list'>
-// 						<li onClick={handleFeature}>Feature</li>
-// 						<li onClick={handleAbout}>About</li>
-// 					</ul>
-// 				</div>
-// 				{token ? (
-// 					<button onClick={handleSignOut} className='layout__button'>
-// 						Sign Out
-// 					</button>
-// 				) : (
-// 					<button onClick={handleSignIn} className='layout__button'>
-// 						Ready To Sweat?
-// 					</button>
-// 				)}
-// 			</nav>
-// 		</>
-// 	);
-// };
-
-// export default Navbar;

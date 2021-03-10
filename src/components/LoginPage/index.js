@@ -13,7 +13,6 @@ import jwt_decode from "jwt-decode";
 
 const LoginPage = () => {
   useEffect(() => {
-    // Update the document title using the browser API
     document.title = `Login`;
   });
 
@@ -21,6 +20,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.users.signIn);
   const status = useSelector((state) => state.users.status);
+  const message = useSelector((state) => state.users.message);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -36,12 +36,24 @@ const LoginPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // console.log("Submit login");
+    NotificationManager.info("Loading", "", 3000);
     dispatch(postSignIn(userData));
-    if (_.isEmpty(data)) {
-      NotificationManager.info("Loading", "", 1000);
-    }
+    // .then((res) => {
+    // if (!res) {
+    //   NotificationManager.info("Email/Password is wrong", "", 1000);
+    // }
+    // });
   };
+
+  useEffect(() => {
+    if (message.status === 404) {
+      NotificationManager.error(message.data.message, "", 2000);
+    } else if (message.status === 400) {
+      NotificationManager.error(message.data.message, "", 2000);
+    }
+  }, [message]);
+
+  // console.log("message =>", message);
 
   const handleChange = (e) => {
     setUserData({
@@ -50,14 +62,6 @@ const LoginPage = () => {
     });
   };
 
-  // useEffect(() => {
-  // 	if (token && !_.isEmpty(token)) return token;
-  // }, [token]);
-
-  // const token =
-  // 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDMzMjk3ZTA4ZmNlYTAwMjIxYjEyMjkiLCJuYW1lIjoiUGFsZXBhbGUiLCJnZW5kZXIiOiIwIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MTM5NjU3NDF9.J8iXpCRFpxCc2PsUXMfG5wH2c55DIS1ul66Un2DgC5M';
-  // const token = localStorage.getItem('token');
-  // const decoded = jwtDecode(token);
   const token = localStorage.getItem("token");
 
   let decoded;
@@ -71,9 +75,6 @@ const LoginPage = () => {
       window.location.reload(true);
     }
   }, [status, history]);
-
-  console.log("status =>", status);
-  console.log("data =>", data);
 
   return (
     <>
@@ -93,12 +94,6 @@ const LoginPage = () => {
                 <span onClick={handleHome}>Click here</span> to redirect to
                 Homepage
               </p>
-              {/* {setTimeout(
-								() => (
-									<Redirect to='/' />
-								),
-								5000
-							)} */}
             </div>
           ) : (
             <>
@@ -112,7 +107,7 @@ const LoginPage = () => {
                   required
                   onChange={handleChange}
                 />
-                <label for="email" className="form__label">
+                <label htmlFor="email" className="form__label">
                   Email
                 </label>
               </div>
@@ -127,7 +122,7 @@ const LoginPage = () => {
                   required
                   onChange={handleChange}
                 />
-                <label for="password" className="form__label">
+                <label htmlFor="password" className="form__label">
                   Password
                 </label>
               </div>
@@ -138,7 +133,6 @@ const LoginPage = () => {
               <div className="redirect">
                 Don't have an account?
                 <span onClick={handleSignUp}> Register here</span>
-                <p>Logged in as: {data.name}</p>
                 <NotificationContainer />
               </div>
             </>
