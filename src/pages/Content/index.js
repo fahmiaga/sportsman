@@ -141,7 +141,12 @@ const Content = () => {
               onClick={() => {
                 toggle("1");
               }}
-              style={{ cursor: "pointer", color: "black" }}
+              style={{
+                cursor: "pointer",
+                color: "black",
+                fontWeight: activeTab === "1" ? "700" : "500",
+                fontSize: activeTab === "1" ? "17px" : "16px",
+              }}
             >
               All
             </NavLink>
@@ -152,7 +157,12 @@ const Content = () => {
               onClick={() => {
                 toggle("2");
               }}
-              style={{ cursor: "pointer", color: "black" }}
+              style={{
+                cursor: "pointer",
+                color: "black",
+                fontWeight: activeTab === "2" ? "700" : "500",
+                fontSize: activeTab === "2" ? "17px" : "16px",
+              }}
             >
               Female
             </NavLink>
@@ -163,7 +173,12 @@ const Content = () => {
               onClick={() => {
                 toggle("3");
               }}
-              style={{ cursor: "pointer", color: "black" }}
+              style={{
+                cursor: "pointer",
+                color: "black",
+                fontWeight: activeTab === "3" ? "700" : "500",
+                fontSize: activeTab === "3" ? "17px" : "16px",
+              }}
             >
               Male
             </NavLink>
