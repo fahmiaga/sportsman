@@ -74,7 +74,9 @@ const userReducer = (state = initialState, action) => {
     case PUT_USERDATA:
       return {
         ...state,
-        userProfile: action.payload,
+        // userProfile: action.payload.user,
+        userProfile: action.payload.user,
+        message: action.payload.message,
       };
     case GET_USERDATA:
       return {
