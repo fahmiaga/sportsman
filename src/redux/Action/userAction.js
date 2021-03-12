@@ -64,10 +64,10 @@ export const postSignIn = (body) => (dispatch) => {
       console.log("ini res =>", res);
       const decoded = jwt_decode(res.data.data.token);
       dispatch(signIn(res.data.data));
-      localStorage.setItem('userData', JSON.stringify(decoded));
+      localStorage.setItem("userData", JSON.stringify(decoded));
       dispatch(setToken(res.data.data.token));
       localStorage.setItem("token", res.data.data.token);
-      return true
+      return true;
     })
     .catch((err) => {
       // console.log("error ==>", err.response);
@@ -75,7 +75,7 @@ export const postSignIn = (body) => (dispatch) => {
         type: MESSAGE_ERROR,
         payload: err.response,
       });
-      return false
+      return false;
     });
 };
 
@@ -163,10 +163,15 @@ export const putUserData = (userData) => (dispatch) => {
       }
       dispatch({
         type: PUT_USERDATA,
-        payload: decoded,
+        // payload: decoded,
+
+        payload: {
+          user: decoded,
+          message: res,
+        },
       });
-      alert("Update Data Success");
-      window.location.reload(true);
+      // alert("Update Data Success");
+      // window.location.reload(true);
     })
     .catch((err) => {
       console.log(err);
@@ -190,7 +195,7 @@ export const postContact = (body) => (dispatch) => {
     });
 };
 
-export const deleteAccount = () => async (dispatch) => {
+export const deleteAccount = () => (dispatch) => {
   const config = {
     headers: { Authorization: localStorage.getItem("token") },
   };
