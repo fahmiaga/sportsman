@@ -10,6 +10,10 @@ import {
 import profile from "../../../assets/img/anonymous.jpg";
 
 const DetailProfile = () => {
+  useEffect(() => {
+    document.title = "profile";
+  }, []);
+
   const message = useSelector((state) => state.users.message);
   const userProfile = useSelector((state) => state.users.userProfile);
 
@@ -75,7 +79,7 @@ const DetailProfile = () => {
                     setImageURL(URL.createObjectURL(event.target.files[0]));
                   }}
                 />
-                <label for="upload" className="profile__picture">
+                <label htmlFor="upload" className="profile__picture">
                   {userProfile && userProfile.images !== "0" ? (
                     <img src={userProfile.images} alt="upload"></img>
                   ) : (
