@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import _ from "lodash";
 import { NavLink, Switch, Route } from "react-router-dom";
 
@@ -8,6 +8,9 @@ import DetailSubscription from "./DetailProfile/DetailSubscription";
 import Navbar from "../../components/Navbar2";
 
 const Profile = () => {
+  useEffect(() => {
+    document.title = "Profile";
+  }, []);
   return (
     <>
       <div className="pr__container">
