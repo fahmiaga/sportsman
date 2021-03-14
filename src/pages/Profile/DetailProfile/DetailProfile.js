@@ -16,17 +16,24 @@ import { Button } from "reactstrap";
 import profile from "../../../assets/img/anonymous.jpg";
 
 const DetailProfile = () => {
+  const userProfile = useSelector((state) => state.users.userProfile);
   const [imageData, setImageData] = useState(null);
   const [imageURL, setImageURL] = useState(null);
-  const [userData, setUserData] = useState({
-    name: "",
-  });
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    if (userProfile !== null) {
+      const name = userProfile.name;
+      setUserData({
+        name: name,
+      });
+    }
+  }, [userProfile]);
+
   const [gender, setGender] = useState("");
 
   const dispatch = useDispatch();
-  const userProfile = useSelector((state) => state.users.userProfile);
   const message = useSelector((state) => state.users.message);
-
   const handleChange = (event) => {
     setUserData({
       ...userData,
@@ -47,7 +54,7 @@ const DetailProfile = () => {
 
   useEffect((res) => {
     dispatch(getUserData());
-    console.log("ini userProfile", userProfile);
+
     if (userProfile && userProfile.status === 200) {
       localStorage.setItem("token", res.data.data);
     }
@@ -66,6 +73,8 @@ const DetailProfile = () => {
     handleUploadImage();
     handleuserData();
   };
+  console.log("ini userProfile", userProfile);
+  console.log("user Data =>", userData);
 
   return (
     <>
@@ -114,7 +123,7 @@ const DetailProfile = () => {
                 name="name"
                 className="pr__input"
                 placeholder="Full Name"
-                value={userData !== null ? userData.name : ""}
+                value={userData.name}
               />
             </td>
           </tr>

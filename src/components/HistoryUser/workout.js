@@ -40,7 +40,7 @@ const Workout = () => {
                       {exercise.created_at}
                       <CardHeader>{exercise.content}</CardHeader>
                       <CardBody>
-                        <CardTitle >{exercise.video}</CardTitle>
+                        <CardTitle>{exercise.video}</CardTitle>
                       </CardBody>
                       <CardFooter>{exercise.times}</CardFooter>
                     </Card>             
