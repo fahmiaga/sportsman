@@ -158,7 +158,7 @@ const Navbars = () => {
                       <img
                         className="image-navbar"
                         src={
-                          userProfile && userProfile.images
+                          userProfile && userProfile.images !== "0"
                             ? userProfile.images
                             : { img }
                         }
