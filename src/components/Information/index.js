@@ -12,21 +12,21 @@ function information() {
 				<div className="information__left">
 					<div className="information__left__uppictcontainer">
 						<img
-							className="left-up-pict"
+							className="information__left__uppictcontainer__left-up-pict"
 							src={cycling}
 							alt=""
 						/>
 					</div>
 					<div className="information__left__downpictcontainer">
 						<img
-							className="left-down-pict"
+							className="information__left__downpictcontainer__left-down-pict"
 							src={jog}
 							alt=""
 						/>
 					</div>
 				</div>
-				<div className="information__right">
-					<div className="information__right__text">
+				<div className="information__middle">
+					<div className="information__middle__text">
 						<h1>Various Workout Mode</h1>
 						<p>
 							What is Lorem Ipsum Lorem Ipsum is
@@ -36,9 +36,11 @@ function information() {
 							text.
 						</p>
 					</div>
+				</div>
+				<div className="information__right">
 					<div className="information__right__pictcontainer">
 						<img
-							className="right-pict"
+							className="information__right__pictcontainer__right-pict"
 							src={gym}
 							alt=""
 						/>

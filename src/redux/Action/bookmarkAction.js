@@ -44,12 +44,12 @@ export const getBookmarkVideo = (token) => (dispatch) => {
 	const config = {
 		headers: { Authorization: token },
 	};
-	axios.get(`api/favourite/all`, config)
+	axios.get(`api/favourite`, config)
 		.then((res) => {
 			console.log("test-favourite-all", res);
 			dispatch({
 				type: GET_BOOKMARK_VIDEO,
-				payload: res.data.filter((item) => {
+				payload: res.data.data.filter((item) => {
 					return item.user_id === userData.userId;
 				}),
 			});
