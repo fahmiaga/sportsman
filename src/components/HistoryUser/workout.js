@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import {
-  Container,
   Row,
   Col,
   Card,
@@ -8,7 +7,6 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  CardGroup,
 } from "reactstrap";
 // import pictbottom from "../../assets/img/feature/jogging.jpg";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,7 +25,7 @@ const Workout = () => {
 
   return (
     <>
-        <div className="workout__content__bottom">
+        {/* <div className="workout__content__bottom"> */}
           <div className="workout__content__bottom__text">
             <h2>Recent Record</h2>
             
@@ -38,18 +36,14 @@ const Workout = () => {
                 <>
                   {exercises.map((exercise, i) => (
                   <Col>
-
-
-                   
                     <Card className="card2" key={i}>
                       {exercise.created_at}
                       <CardHeader>{exercise.content}</CardHeader>
                       <CardBody>
                         <CardTitle >{exercise.video}</CardTitle>
                       </CardBody>
-                      <CardFooter><p>{exercise.times}</p></CardFooter>
-                    </Card>
-                  
+                      <CardFooter>{exercise.times}</CardFooter>
+                    </Card>             
                   </Col>
                   ))}
                 </>
@@ -57,7 +51,7 @@ const Workout = () => {
             </Row>
 
           </div>
-        </div>
+        {/* </div> */}
     </>
   );
 };
