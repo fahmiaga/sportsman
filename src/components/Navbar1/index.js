@@ -128,6 +128,16 @@ const Navbars = () => {
                   <span className="nav-span">Contact Us</span>
                 </NavLink>
               </NavItem>
+
+              {userProfile === null ? (
+                ""
+              ) : userProfile.roles === "admin" ? (
+                <NavLink onClick={() => history.push("/admin-dashboard")}>
+                  <span className="nav-span">Admin Page</span>
+                </NavLink>
+              ) : (
+                ""
+              )}
             </Nav>
             <NavItem>
               {userProfile ? (
@@ -148,7 +158,7 @@ const Navbars = () => {
                       <img
                         className="image-navbar"
                         src={
-                          userProfile && userProfile.images
+                          userProfile && userProfile.images !== "0"
                             ? userProfile.images
                             : { img }
                         }
