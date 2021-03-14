@@ -36,6 +36,8 @@ const Tracking = () => {
     setEnd(end);
   };
 
+  console.log("tracking =>", tracking);
+
   return (
     <>
       <MapContainer center={start} zoom={9} scrollWheelZoom={true}>
@@ -43,12 +45,18 @@ const Tracking = () => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={start} icon={markerIconStart}>
-          <Popup>Start Point</Popup>
-        </Marker>
-        <Marker position={end} icon={markerIconEnd}>
-          <Popup>End Point</Popup>
-        </Marker>
+        {tracking.length === 0 ? (
+          ""
+        ) : (
+          <>
+            <Marker position={start} icon={markerIconStart}>
+              <Popup>Start Point</Popup>
+            </Marker>
+            <Marker position={end} icon={markerIconEnd}>
+              <Popup>End Point</Popup>
+            </Marker>
+          </>
+        )}
       </MapContainer>
 
       <div className="history-tracking-data-container">
