@@ -88,7 +88,7 @@ const Navbars = () => {
 
   useEffect((res) => {
     dispatch(getUserData());
-    // console.log("ini userProfile", userProfile);
+    console.log("ini userProfile", userProfile);
     if (userProfile && userProfile.status === 200) {
       localStorage.setItem("token", res.data.data);
     }
@@ -155,15 +155,19 @@ const Navbars = () => {
                         border: "none",
                       }}
                     >
-                      <img
-                        className="image-navbar"
-                        src={
-                          userProfile && userProfile.images !== "0"
-                            ? userProfile.images
-                            : { img }
-                        }
-                        alt=""
-                      />
+                      {userProfile && userProfile.images !== "0" ? (
+                        <img
+                          src={userProfile.images}
+                          alt="upload"
+                          className="image-navbar"
+                        ></img>
+                      ) : (
+                        <img
+                          src={img}
+                          alt="upload"
+                          className="image-navbar"
+                        ></img>
+                      )}
                       {/* <span>{userProfile && userProfile.name}</span> */}
                     </DropdownToggle>
                     <DropdownMenu right>
