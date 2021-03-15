@@ -11,6 +11,7 @@ const Tracking = () => {
   const tracking = useSelector((state) => state.content.tracking);
   const [start, setStart] = useState([-6.17782, 106.84658]);
   const [end, setEnd] = useState([-6.173179, 106.829289]);
+  const defaultPoint = [-0.789275, 113.921326];
   const markerIconStart = new L.icon({
     iconUrl:
       "https://ghybs.github.io/leaflet-defaulticon-compatibility/built/assets/401d815dc206b8dc1b17cd0e37695975.png",
@@ -40,7 +41,11 @@ const Tracking = () => {
 
   return (
     <>
-      <MapContainer center={start} zoom={9} scrollWheelZoom={true}>
+      <MapContainer
+        center={tracking.length === 0 ? defaultPoint : start}
+        zoom={5}
+        scrollWheelZoom={true}
+      >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

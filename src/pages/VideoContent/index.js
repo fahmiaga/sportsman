@@ -74,7 +74,7 @@ const VideoContent = () => {
                     <h6
                       onClick={() =>
                         history.push({
-                          pathname: `video/${item.videoUrl}`,
+                          pathname: `/video/${item.videoUrl}`,
                           title: videos.title,
                         })
                       }
