@@ -37,8 +37,6 @@ const Tracking = () => {
     setEnd(end);
   };
 
-  console.log("tracking =>", tracking);
-
   return (
     <>
       <MapContainer

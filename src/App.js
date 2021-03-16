@@ -39,7 +39,7 @@ function App() {
                 />
               ))}
 
-          {/* <Route path="/workout-video/:id" component={VideoContent} /> */}
+          <Route path="/videos-content/:id" component={VideoContent} />
           <Route path="/content" component={Content} />
           <Route path="/profile" component={Profile} />
           <Route path="/admin-content" component={AdminContent} />
@@ -49,6 +49,7 @@ function App() {
           <Route path="/update-content/:id" component={UpdateContent} />
           <Route path="/add-content" component={AddContent} />
           <Route path="/bookmark" component={BookmarkVideo} />
+          {/* <Route path="/workout-video/:id" component={VideoContent} /> */}
         </Switch>
       </BrowserRouter>
       <Footer />

@@ -3,7 +3,6 @@ import { getContentById } from "../../redux/Action/contentAction";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/Navbar1";
-// import { postFavorite } from "../../redux/Action/userAction";
 import { bookmarkVideo } from "../../redux/Action/bookmarkAction";
 import {
   NotificationContainer,
@@ -18,7 +17,8 @@ const VideoContent = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const videos = useSelector((state) => state.content.video);
-  const message = useSelector((state) => state.bookmark.message);
+  // const message = useSelector((state) => state.bookmark.message);
+  const status = useSelector((state) => state.content.message);
   const token = localStorage.getItem("token");
   const history = useHistory();
 
@@ -32,16 +32,10 @@ const VideoContent = () => {
       tittle: title,
     };
     dispatch(bookmarkVideo(token, body));
+    if (status.status === 200) {
+      NotificationManager.success("Bookmark success");
+    }
   };
-
-  // useEffect(() => {
-  //   if (message.status === 200) {
-  //     NotificationManager.success(message.data.message, "", 3000);
-  //   }
-  // }, [message]);
-
-  console.log("ini video =>", videos);
-  console.log("message =>", message);
 
   return (
     <>
@@ -81,16 +75,6 @@ const VideoContent = () => {
                     >
                       Play
                     </h6>
-                    {/* <button
-											onClick={() =>
-												handleBookmark(
-													video._id
-												)
-											}
-										>
-											{" "}
-											Bookmark Video
-										</button> */}
                   </div>
                 </div>
               </div>
