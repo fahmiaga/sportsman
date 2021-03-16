@@ -56,7 +56,7 @@ export const setToken = (token) => {
 
 export const postSignIn = (body) => (dispatch) => {
   return axios
-    .post(`https://sportsmanapp.herokuapp.com/login`, body)
+    .post(`api/login`, body)
     .then((res) => {
       const decoded = jwt_decode(res.data.data.token);
       dispatch(signIn(res.data.data));
