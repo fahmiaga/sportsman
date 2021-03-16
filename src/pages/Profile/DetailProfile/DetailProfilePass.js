@@ -47,9 +47,9 @@ const DetailProfilePass = (props) => {
   };
 
   const handleuserData = () => {
-    if (userData.password == "") {
+    if (userData.password === "") {
       alert("Please Enter Password!");
-    } else if (userData.confirmPassword == "") {
+    } else if (userData.confirmPassword === "") {
       alert("Please enter confirm password");
     } else if (userData.password !== userData.confirmPassword) {
       alert("Password didn't match! Please try again");
@@ -59,12 +59,15 @@ const DetailProfilePass = (props) => {
     }
   };
 
-  useEffect((res) => {
-    dispatch(getUserData());
-    if (userProfile && userProfile.status === 200) {
-      localStorage.setItem("token", res.data.data);
-    }
-  }, []);
+  useEffect(
+    (res) => {
+      dispatch(getUserData());
+      if (userProfile && userProfile.status === 200) {
+        localStorage.setItem("token", res.data.data);
+      }
+    },
+    [userProfile, dispatch]
+  );
 
   useEffect(() => {}, [userProfile]);
 
