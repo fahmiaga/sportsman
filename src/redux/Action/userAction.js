@@ -28,7 +28,7 @@ export const signUp = (payload, res) => {
 
 export const postSignUp = (body) => (dispatch) => {
   axios
-    .post(`api/register`, body)
+    .post(`https://sportsmanapp.herokuapp.com/register`, body)
     .then((res) => {
       dispatch(signUp(res));
     })
@@ -56,7 +56,7 @@ export const setToken = (token) => {
 
 export const postSignIn = (body) => (dispatch) => {
   return axios
-    .post(`api/login`, body)
+    .post(`https://sportsmanapp.herokuapp.com/login`, body)
     .then((res) => {
       const decoded = jwt_decode(res.data.data.token);
       dispatch(signIn(res.data.data));
@@ -76,7 +76,7 @@ export const postSignIn = (body) => (dispatch) => {
 
 export const googleSignin = () => (dispatch) => {
   axios
-    .get(`api/google`)
+    .get(`https://sportsmanapp.herokuapp.com/google`)
     .then((res) => {
       dispatch({
         type: GOOGLE_AUTH,
@@ -100,7 +100,7 @@ export const putBoardingData = (body) => async (dispatch) => {
     headers: { Authorization: localStorage.getItem("token") },
   };
   axios
-    .put(`api/login/update`, body, config)
+    .put(`https://sportsmanapp.herokuapp.com/login/update`, body, config)
     .then((res) => {
       dispatch(onBoardingData(res));
     })
@@ -124,7 +124,7 @@ export const uploadImage = (body) => (dispatch) => {
     },
   };
   axios
-    .post(`/api/upload`, body, config)
+    .post(`https://sportsmanapp.herokuapp.com/upload`, body, config)
     .then((res) => {
       dispatch({
         type: UPLOAD_IMAGE,
@@ -141,7 +141,7 @@ export const putUserData = (userData) => (dispatch) => {
     headers: { Authorization: localStorage.getItem("token") },
   };
   axios
-    .put(`/api/update`, userData, config)
+    .put(`https://sportsmanapp.herokuapp.com/update`, userData, config)
     .then((res) => {
       localStorage.setItem("token", res.data.data[0]);
       let decoded;
@@ -167,7 +167,7 @@ export const putUserPassword = (userData) => (dispatch) => {
     headers: { Authorization: localStorage.getItem("token") },
   };
   axios
-    .put(`/api/update`, userData, config)
+    .put(`https://sportsmanapp.herokuapp.com/update`, userData, config)
     .then((res) => {
       localStorage.setItem("token", res.data.data[0]);
       let decoded;
@@ -193,7 +193,7 @@ export const postContact = (body) => (dispatch) => {
     headers: { Authorization: localStorage.getItem("token") },
   };
   axios
-    .post(`api/contact-us`, body, config)
+    .post(`https://sportsmanapp.herokuapp.com/contact-us`, body, config)
     .then((res) => {
       dispatch({
         type: POST_CONTACT,
@@ -209,12 +209,14 @@ export const deleteAccount = () => (dispatch) => {
   const config = {
     headers: { Authorization: localStorage.getItem("token") },
   };
-  axios.delete(`api/users/delete`, config).then((res) => {
-    dispatch({
-      type: DELETE_ACCOUNT,
-      payload: res.data.message,
+  axios
+    .delete(`https://sportsmanapp.herokuapp.com/users/delete`, config)
+    .then((res) => {
+      dispatch({
+        type: DELETE_ACCOUNT,
+        payload: res.data.message,
+      });
     });
-  });
 };
 
 export const getUserData = () => (dispatch) => {
@@ -222,7 +224,7 @@ export const getUserData = () => (dispatch) => {
     headers: { Authorization: localStorage.getItem("token") },
   };
   axios
-    .get(`/api/get`, config)
+    .get(`https://sportsmanapp.herokuapp.com/get`, config)
     .then((res) => {
       dispatch({
         type: GET_USERDATA,
@@ -238,7 +240,7 @@ export const getExercise = () => (dispatch) => {
     headers: { Authorization: localStorage.getItem("token") },
   };
   axios
-    .get(`/api/history`, config)
+    .get(`https://sportsmanapp.herokuapp.com/history`, config)
     .then((res) => {
       console.log("ini exercise =>", res);
       if (res.status === 200) {
@@ -257,7 +259,7 @@ export const postExercise = (body) => (dispatch) => {
     headers: { Authorization: localStorage.getItem("token") },
   };
   axios
-    .post(`/api/history`, body, config)
+    .post(`https://sportsmanapp.herokuapp.com/history`, body, config)
     .then((res) => {
       if (res.status === 200) {
         dispatch({

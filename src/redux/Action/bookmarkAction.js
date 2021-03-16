@@ -10,7 +10,7 @@ export const bookmarkVideo = (token, body) => (dispatch) => {
     headers: { Authorization: token },
   };
   axios
-    .post(`/api/favourite`, body, config)
+    .post(`https://sportsmanapp.herokuapp.com/favourite`, body, config)
     .then((res) => {
       dispatch({
         type: BOOKMARK_VIDEO,
@@ -26,7 +26,7 @@ export const deleteBookmark = (token, id) => (dispatch) => {
     headers: { Authorization: token },
   };
   axios
-    .delete(`/api/favourite/${id}`, config)
+    .delete(`https://sportsmanapp.herokuapp.com/favourite/${id}`, config)
     .then((res) => {
       dispatch({
         type: DELETE_BOOKMARK_VIDEO,
@@ -43,7 +43,7 @@ export const getBookmarkVideo = (token) => (dispatch) => {
     headers: { Authorization: token },
   };
   axios
-    .get(`api/favourite`, config)
+    .get(`https://sportsmanapp.herokuapp.com/favourite`, config)
     .then((res) => {
       dispatch({
         type: GET_BOOKMARK_VIDEO,

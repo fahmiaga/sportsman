@@ -13,7 +13,7 @@ export const getContent = (token) => (dispatch) => {
     headers: { Authorization: token },
   };
   axios
-    .get(`api/content/all`, config)
+    .get(`https://sportsmanapp.herokuapp.com/content/all`, config)
     .then((res) => {
       dispatch({
         type: GET_CONTENT,
@@ -29,7 +29,7 @@ export const getContentById = (token, id) => (dispatch) => {
     headers: { Authorization: token },
   };
   axios
-    .get(`/api/content/${id}`, config)
+    .get(`https://sportsmanapp.herokuapp.com/content/${id}`, config)
     .then((res) => {
       dispatch({
         type: GET_CONTENT_BY_ID,
@@ -49,7 +49,7 @@ export const postContent = (token, input) => (dispatch) => {
     headers: { Authorization: token },
   };
   axios
-    .post(`api/admin/content`, input, config)
+    .post(`https://sportsmanapp.herokuapp.com/admin/content`, input, config)
     .then((res) => {
       dispatch({
         type: POST_CONTENT,
@@ -66,7 +66,11 @@ export const putContent = (token, input, id) => (dispatch) => {
     headers: { Authorization: token },
   };
   axios
-    .put(`/api/admin/content/${id}`, input, config)
+    .put(
+      `https://sportsmanapp.herokuapp.com/admin/content/${id}`,
+      input,
+      config
+    )
     .then((res) => {
       dispatch({
         type: PUT_CONTENT,
@@ -83,7 +87,7 @@ export const deleteContent = (token, id) => (dispatch) => {
     headers: { Authorization: token },
   };
   axios
-    .delete(`api/admin/content/${id}`, config)
+    .delete(`https://sportsmanapp.herokuapp.com/admin/content/${id}`, config)
     .then((res) => {
       dispatch({
         type: DELETE_CONTENT,
@@ -99,7 +103,7 @@ export const getTracking = () => (dispatch) => {
     headers: { Authorization: localStorage.getItem("token") },
   };
   axios
-    .get(`/api/tracking`, config)
+    .get(`https://sportsmanapp.herokuapp.com/tracking`, config)
     .then((res) => {
       dispatch({
         type: GET_HISTORY_TRACKING,
