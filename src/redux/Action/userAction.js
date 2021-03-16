@@ -28,7 +28,7 @@ export const signUp = (payload, res) => {
 
 export const postSignUp = (body) => (dispatch) => {
   axios
-    .post(`/api/register`, body)
+    .post(`api/register`, body)
     .then((res) => {
       dispatch(signUp(res));
     })
@@ -56,7 +56,7 @@ export const setToken = (token) => {
 
 export const postSignIn = (body) => (dispatch) => {
   return axios
-    .post(`/api/login`, body)
+    .post(`api/login`, body)
     .then((res) => {
       const decoded = jwt_decode(res.data.data.token);
       dispatch(signIn(res.data.data));
