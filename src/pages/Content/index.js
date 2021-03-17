@@ -28,15 +28,7 @@ const Content = () => {
       </div>
       <div className="writer-content">
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam
-          consequatur similique saepe error odit deserunt adipisci repellat
-          molestiae, quos eveniet magnam neque. Facere inventore excepturi eos
-          aliquam maxime esse molestiae ut libero harum, amet corporis. Possimus
-          commodi doloribus nostrum distinctio eligendi, iure quisquam
-          consectetur molestias ex temporibus corporis assumenda, doloremque
-          consequatur aperiam natus delectus recusandae, placeat neque beatae
-          reiciendis iste minus porro. modi architecto accusantium tenetur nisi
-          consectetur facilis rerum earum.
+          No matter your age or athletic ability, strength training is the key to flexibility, mobility, improved performance and lower injury risk. Anyone, at any fitness level, can and should strength train. And it doesn't have to take hours at the gym to see results. We’ll teach you the basics of strength training in the comfort of your own home. It’ll take only nine minutes of exertion to complete a full-body strength-building workout. Grab a towel and get ready to feel strong.
         </p>
       </div>
       <div className="jumbotron-tips">
